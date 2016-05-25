@@ -1,0 +1,10 @@
+# NPM
+node_modules
+npm-debug.log
+
+# Build Generated Files
+splitBills-client/app/**/*.js
+splitBills-client/app/**/*.js.map
+
+# Type definitions we mirror from github
+splitBills-client/typings
