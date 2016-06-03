@@ -1,0 +1,10 @@
+<h2>{{title}}</h2>
+<ul class="friends">
+    <li *ngFor="let friend of friends"
+        [class.selected]="friend === selectedFriend" 
+        (click)="onSelect(friend)">
+        <span class="badge">{{friend.id}}</span> {{friend.name}}
+    </li>
+</ul>
+
+<expencies-friend-detail [friend]="selectedFriend"></expencies-friend-detail>
