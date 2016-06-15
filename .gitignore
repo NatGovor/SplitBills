@@ -5,6 +5,9 @@ npm-debug.log
 # Build Generated Files
 splitBills-client/app/**/*.js
 splitBills-client/app/**/*.js.map
+angular2-tour-of-heroes/app/**/*.js
+angular2-tour-of-heroes/app/**/*.js.map
 
 # Type definitions we mirror from github
 splitBills-client/typings
+angular2-tour-of-heroes/typings
