@@ -15,6 +15,7 @@ export class FriendsComponent implements OnInit {
     title = 'Friends';
     friends: Friend[];
     selectedFriend: Friend;
+    error: any;
     
     constructor(private friendService: FriendService) { }
     
@@ -27,4 +28,14 @@ export class FriendsComponent implements OnInit {
     }
     
     onSelect(friend: Friend) { this.selectedFriend = friend; }
+    
+    delete(friend: Friend, event: any) {
+        event.stopPropagation();
+        this.friendService.delete(friend)
+            .then(res => {
+                this.friends = this.friends.filter(f => f !== friend);
+                if (this.selectedFriend === friend) { this.selectedFriend = null };
+            })
+            .catch(error => this.error = error);
+    }
 }

@@ -4,7 +4,13 @@
         [class.selected]="friend === selectedFriend" 
         (click)="onSelect(friend)">
         <span class="badge">{{friend.id}}</span> {{friend.name}}
+        <button class="delete-button" (click)="delete(friend, $event)">Delete</button>
     </li>
 </ul>
+
+<!--<button (click)="addFriend()">Add New Friend</button>
+<div *ngIf="addingHero">
+    
+</div>-->
 
 <expencies-friend-detail [friend]="selectedFriend"></expencies-friend-detail>
