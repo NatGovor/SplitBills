@@ -9,8 +9,14 @@ export class GroupService {
         return Promise.resolve(GROUPS);
     }
 
-    /*getUserGroups(userId: number): Promise<Group[]> {
-        return this.getGroups()
-                    .then(groups => groups.find(group => group.users));
-    }*/
+    getUserGroups(userId: number): Promise<Group[]> {
+        return this.getGroups().then(groups => groups.filter(
+            function (group) {
+                for (let i=0; i < group.friends.length; i++) {
+                    if (group.friends[i].userId === userId) {
+                        return true;
+                    }
+                }
+            }));
+    }
 }
