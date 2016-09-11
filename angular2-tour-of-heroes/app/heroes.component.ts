@@ -1,54 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Component, OnInit }   from '@angular/core';
+import { Router }              from '@angular/router';
 
-import { Hero } from './hero';
+import { Hero }        from './hero';
 import { HeroService } from './hero.service';
-import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
     selector: 'my-heroes',
     templateUrl: 'app/heroes.component.html',
-    styleUrls: ['app/heroes.component.css'],
-    directives: [HeroDetailComponent]
+    styleUrls: ['app/heroes.component.css']
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent implements OnInit { 
     title = 'Tour of Heroes';
     heroes: Hero[];
     selectedHero: Hero;
-    addingHero = false;
-    error: any;
-    
+
     constructor(
         private router: Router,
         private heroService: HeroService) { }
-    
-    ngOnInit() {
-        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+
+    onSelect(hero: Hero): void {
+        this.selectedHero = hero;
     }
-    
-    onSelect(hero: Hero) { this.selectedHero = hero; }
-       
-    gotoDetail() {
-        this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
+
+    getHeroes(): void {
+         this.heroService.getHeroes().then(heroes => this.heroes = heroes);
     }
-    
-    addHero() {
-        this.addingHero = true;
-        this.selectedHero = null;
+
+    ngOnInit(): void {
+        this.getHeroes();
     }
-    
-    close(savedHero: Hero) {
-        this.addingHero = false;
-        if (savedHero) { this.heroService.getHeroes(); }
+
+    gotoDetail(): void {
+        this.router.navigate(['/detail', this.selectedHero.id]);
     }
-    
-    delete(hero: Hero, event: any) {
-        event.stopPropagation();
-        this.heroService.delete(hero)
-            .then(res => {
+
+    add(name: string): void {
+        name = name.trim();
+        if (!name) { return; }
+        this.heroService.create(name)
+            .then(hero => {
+                this.heroes.push(hero);
+                this.selectedHero = null;
+            });
+    }
+
+    delete(hero: Hero): void {
+        this.heroService
+            .delete(hero.id)
+            .then(() => {
                 this.heroes = this.heroes.filter(h => h !== hero);
-                if (this.selectedHero === hero) { this.selectedHero = null; }
-            })
-            .catch(error => this.error = error);
+                if (this.selectedHero === hero) {
+                    this.selectedHero = null;
+                }
+            });
     }
- }
+}

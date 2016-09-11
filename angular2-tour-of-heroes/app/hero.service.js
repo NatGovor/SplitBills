@@ -14,7 +14,8 @@ require('rxjs/add/operator/toPromise');
 var HeroService = (function () {
     function HeroService(http) {
         this.http = http;
-        this.heroesUrl = 'app/heroes';
+        this.heroesUrl = 'app/heroes'; // URL to web api
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     HeroService.prototype.getHeroes = function () {
         return this.http.get(this.heroesUrl)
@@ -22,49 +23,40 @@ var HeroService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
+    HeroService.prototype.getHeroesSlowly = function () {
+        var _this = this;
+        return new Promise(function (resolve) { return setTimeout(resolve, 2000); })
+            .then(function () { return _this.getHeroes(); });
+    };
     HeroService.prototype.getHero = function (id) {
         return this.getHeroes()
-            .then(function (heroes) { return heroes.filter(function (hero) { return hero.id === id; })[0]; });
+            .then(function (heroes) { return heroes.find(function (hero) { return hero.id === id; }); });
     };
-    HeroService.prototype.save = function (hero) {
-        if (hero.id) {
-            return this.put(hero);
-        }
-        return this.post(hero);
-    };
-    // Add new Hero  
-    HeroService.prototype.post = function (hero) {
-        var headers = new http_1.Headers({
-            'Content-Type': 'application/json'
-        });
-        return this.http
-            .post(this.heroesUrl, JSON.stringify(hero), { headers: headers })
-            .toPromise()
-            .then(function (res) { return res.json().data; })
-            .catch(this.handleError);
-    };
-    // Update existing Hero
-    HeroService.prototype.put = function (hero) {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
+    HeroService.prototype.update = function (hero) {
         var url = this.heroesUrl + "/" + hero.id;
         return this.http
-            .put(url, JSON.stringify(hero), { headers: headers })
+            .put(url, JSON.stringify(hero), { headers: this.headers })
             .toPromise()
             .then(function () { return hero; })
             .catch(this.handleError);
     };
-    HeroService.prototype.delete = function (hero) {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
-        var url = this.heroesUrl + "/" + hero.id;
+    HeroService.prototype.create = function (name) {
         return this.http
-            .delete(url, { headers: headers })
+            .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
             .toPromise()
+            .then(function (res) { return res.json().data; })
+            .catch(this.handleError);
+    };
+    HeroService.prototype.delete = function (id) {
+        var url = this.heroesUrl + "/" + id;
+        return this.http
+            .delete(url, { headers: this.headers })
+            .toPromise()
+            .then(function () { return null; })
             .catch(this.handleError);
     };
     HeroService.prototype.handleError = function (error) {
-        console.error('An error occurred', error);
+        console.error('An error occured', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
     HeroService = __decorate([
