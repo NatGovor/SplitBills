@@ -5,17 +5,26 @@ import { AppComponent } from './app.component';
 import { AccountComponent } from './account.component';
 import { FriendsComponent } from './friends.component';
 import { GroupsComponent } from './groups.component';
+import { GroupDetailComponent } from './group-detail.component';
+import { DashboardComponent } from './dashboard.component';
 
 import { UserService } from './user.service';
 import { GroupService } from './group.service';
 
+import { routing } from './app.routing';
+
 @NgModule({
-    imports: [ BrowserModule ],
+    imports: [ 
+        BrowserModule,
+        routing
+    ],
     declarations: [
         AppComponent,
         AccountComponent,
         FriendsComponent,
-        GroupsComponent
+        GroupsComponent,
+        GroupDetailComponent,
+        DashboardComponent
     ],
     providers: [
         UserService,

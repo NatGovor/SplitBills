@@ -4,7 +4,7 @@ export const GROUPS: Group[] = [
     {
         id: 1,
         name: 'Belgium trip',
-        users: [
+        friends: [
             {
                 userId: 1,
                 name: 'Nata'
@@ -22,7 +22,7 @@ export const GROUPS: Group[] = [
     {
         id: 2,
         name: 'Vilnius trip',
-        users: [
+        friends: [
             {
                 userId: 1,
                 name: 'Nata'
@@ -36,7 +36,7 @@ export const GROUPS: Group[] = [
     {
         id: 3,
         name: 'Italy trip',
-        users: [
+        friends: [
             {
                 userId: 1,
                 name: 'Nata'
