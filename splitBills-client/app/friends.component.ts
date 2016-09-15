@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Friend } from './friend';
+import { Friend } from './models/friend';
 
 @Component({
     selector: 'friends',

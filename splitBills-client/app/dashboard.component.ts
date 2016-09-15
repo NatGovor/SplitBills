@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './user';
-import { Group } from './group';
-import { UserService } from './user.service';
-import { GroupService } from './group.service';
+import { User } from './models/user';
+import { Group } from './models/group';
+import { UserService } from './services/user.service';
+import { GroupService } from './services/group.service';
 
 @Component({
     selector: 'dashboard',
