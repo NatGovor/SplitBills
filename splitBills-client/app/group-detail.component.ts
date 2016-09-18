@@ -20,7 +20,7 @@ export class GroupDetailComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.groupService.getGroup(id).then(group => this.group = group);
-        })
+        });
     }
 
     goBack(): void {

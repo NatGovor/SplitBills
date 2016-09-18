@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GroupDetailComponent } from './group-detail.component';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
+import { NewGroupComponent } from './new-group.component';
 
 const appRoutes: Routes = [
     {
@@ -18,6 +19,10 @@ const appRoutes: Routes = [
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full'
+    },
+    {
+        path: 'groups/new/:userId',
+        component: NewGroupComponent
     }
 ]
 

@@ -117,6 +117,9 @@ export class InMemoryDataService implements InMemoryDbService {
                     {
                         userId: 4,
                         name: 'Igor'
+                    },
+                    {
+                        name: 'Test'
                     }
                 ]
             },

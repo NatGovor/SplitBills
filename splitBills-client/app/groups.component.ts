@@ -27,24 +27,7 @@ export class GroupsComponent {
         this.router.navigate(['/groups', this.selectedGroup.id]);
     }
 
-    add(name: string): void {
-        name = name.trim();
-        if (!name) { return; }
-        
-        let newGroup: Group = {
-            id: null,
-            name: name,
-            friends: [
-                {
-                    userId: this.currentUser.id,
-                    name: this.currentUser.name
-                }
-            ]
-        };
-        this.groupService.create(newGroup)
-            .then(group => {
-                this.groups.push(group);
-                this.selectedGroup = null;
-            });
+    add(): void {
+        this.router.navigate(['/groups/new', this.currentUser.id]);
     }
 }

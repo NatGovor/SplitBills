@@ -1,0 +1,11 @@
+<div class="container">
+    <h4>Start a new group</h4>
+
+    <div>
+        <label for="name">Name</label>
+        <input type="text" #groupName />
+    </div>
+
+    <button (click)="add(groupName.value); groupName.value=''">Submit</button>
+
+</div>

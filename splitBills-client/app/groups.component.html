@@ -1,10 +1,4 @@
 <h4>Groups:</h4>
-<div>
-    <label>Group name:</label><input #groupName />
-    <button (click)="add(groupName.value); groupName.value=''">
-        Add
-    </button>
-</div>
 <ul>
     <li *ngFor="let group of groups"
         (click)="onSelect(group); gotoDetail();">
@@ -12,3 +6,4 @@
         {{group.name}}
     </li>
 </ul>
+<button (click)="add();">Add Group</button>
