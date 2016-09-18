@@ -35,9 +35,9 @@ export class GroupService {
             .then(groups => groups.find(group => group.id === id));
     }
 
-    create(name: string): Promise<Group> {
+    create(group: Group): Promise<Group> {
         return this.http
-            .post(this.groupsUrl, JSON.stringify({name: name, friends: []}), {headers: this.headers})
+            .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);

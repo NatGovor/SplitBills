@@ -1,5 +1,5 @@
 <div *ngIf="currentUser">
     <account [user]="currentUser"></account>
     <friends [friends]="currentUser.friends"></friends>
-    <groups [groups]="groups"></groups>
+    <groups [groups]="groups" [currentUser]="currentUser"></groups>
 </div>
