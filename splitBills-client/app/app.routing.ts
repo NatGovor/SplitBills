@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { NewGroupComponent } from './new-group.component';
 
+import { loginRoutes,
+         authProviders } from './login.routing';
+
 const appRoutes: Routes = [
     {
         path: 'groups/:id',

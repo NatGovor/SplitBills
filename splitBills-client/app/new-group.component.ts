@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { Group } from './models/group';
-import { Group } from './models/user';
+import { User } from './models/user';
 import { GroupService } from './services/group.service';
 import { UserService } from './services/user.service';
 
