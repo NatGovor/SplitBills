@@ -6,20 +6,17 @@ import './rxjs-extensions';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account.component';
 import { FriendsComponent } from './friends.component';
-import { GroupsComponent } from './groups.component';
-import { GroupDetailComponent } from './group-detail.component';
 import { DashboardComponent } from './dashboard.component';
-import { NewGroupComponent } from './new-group.component';
+import { LoginComponent } from './login.component';
 
-import { UserService } from './services/user.service';
-import { GroupService } from './services/group.service';
+import { UserService } from './user.service';
 
-import { routing } from './app.routing';
+import { routing, appRoutingProviders } from './app.routing';
 
 @NgModule({
     imports: [ 
@@ -33,14 +30,12 @@ import { routing } from './app.routing';
         AppComponent,
         AccountComponent,
         FriendsComponent,
-        GroupsComponent,
-        GroupDetailComponent,
         DashboardComponent,
-        NewGroupComponent
+        LoginComponent
     ],
     providers: [
         UserService,
-        GroupService
+        appRoutingProviders
     ],
     bootstrap: [ AppComponent ]
 })

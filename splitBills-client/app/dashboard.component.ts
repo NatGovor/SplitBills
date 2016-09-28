@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './models/user';
-import { Group } from './models/group';
-import { UserService } from './services/user.service';
-import { GroupService } from './services/group.service';
+import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
     selector: 'dashboard',
@@ -11,18 +9,16 @@ import { GroupService } from './services/group.service';
 })
 export class DashboardComponent {
     currentUser: User;
-    groups: Group[];
     
     constructor(
-        private userService: UserService,
-        private groupService: GroupService) {}
+        private userService: UserService) {}
 
     getUser(id: number): void {
         this.userService.getUser(id).then(user => this.currentUser = user);
     }
 
     getUserGroups(id: number): void {
-        this.groupService.getUserGroups(id).then(groups => this.groups = groups);
+        //this.groupService.getUserGroups(id).then(groups => this.groups = groups);
     }
 
     ngOnInit(): void {

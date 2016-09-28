@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Group } from './models/group';
-import { GroupService } from './services/group.service';
-import { User } from './models/user';
+import { Group } from './group';
+import { GroupService } from './group.service';
+import { User } from './user';
 
 @Component({
     selector: 'groups',

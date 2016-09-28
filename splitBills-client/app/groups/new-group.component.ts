@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
-import { Group } from './models/group';
-import { User } from './models/user';
-import { GroupService } from './services/group.service';
-import { UserService } from './services/user.service';
+import { Group } from './group';
+import { User } from './user';
+import { GroupService } from './group.service';
+import { UserService } from './user.service';
 
 @Component({
     selector: 'new-group',

@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Group } from '../models/group';
+import { Group } from './group';
 
 @Injectable()
 export class GroupService {

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { User } from './models/user';
-import { UserSearchService } from './services/user-search.service';
+import { User } from './user';
+import { UserSearchService } from './user-search.service';
 
 @Component({
     selector: 'user-search',
