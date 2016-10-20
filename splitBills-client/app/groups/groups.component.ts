@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 
 import { Group } from './group';
 import { GroupService } from './group.service';
-import { User } from './user';
+import { User } from '../user';
 
 @Component({
     selector: 'groups',
-    templateUrl: 'app/groups.component.html'
+    templateUrl: 'app/groups/groups.component.html'
 })
 export class GroupsComponent {
     @Input() groups: Group[];

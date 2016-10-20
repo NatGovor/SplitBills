@@ -10,9 +10,10 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account.component';
-import { FriendsComponent } from './friends.component';
-import { DashboardComponent } from './dashboard.component';
+import { FriendsComponent } from './friends/friends.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login.component';
+import { HomeComponent } from './home.component';
 
 import { UserService } from './user.service';
 
@@ -31,7 +32,8 @@ import { routing, appRoutingProviders } from './app.routing';
         AccountComponent,
         FriendsComponent,
         DashboardComponent,
-        LoginComponent
+        LoginComponent,
+        HomeComponent
     ],
     providers: [
         UserService,

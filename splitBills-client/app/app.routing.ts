@@ -2,7 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard.component';
+import { HomeComponent } from './home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { loginRoutes,
          authProviders } from './login.routing';
@@ -16,13 +17,17 @@ const appRoutes: Routes = [
         component: GroupDetailComponent
     },*/
     {
-        path: 'dashboard',
-        component: DashboardComponent
+        path: 'home',
+        component: HomeComponent
     },
     {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/home',
         pathMatch: 'full'
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
     }/*,
     {
         path: 'groups/new/:userId',

@@ -6,7 +6,7 @@ import { GroupService } from './group.service';
 
 @Component({
     selector: 'group-detail',
-    templateUrl: 'app/group-detail.component.html'
+    templateUrl: 'app/groups/group-detail.component.html'
 })
 export class GroupDetailComponent implements OnInit {
     group: Group;

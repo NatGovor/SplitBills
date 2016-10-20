@@ -4,7 +4,7 @@ import { Friend } from './friend';
 
 @Component({
     selector: 'friends',
-    templateUrl: 'app/friends.component.html'
+    templateUrl: 'app/friends/friends.component.html'
 })
 export class FriendsComponent {
     @Input()

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './user';
-import { UserService } from './user.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
     selector: 'dashboard',
-    templateUrl: 'app/dashboard.component.html'
+    templateUrl: 'app/dashboard/dashboard.component.html'
 })
 export class DashboardComponent {
     currentUser: User;

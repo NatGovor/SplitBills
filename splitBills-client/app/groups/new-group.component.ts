@@ -3,13 +3,13 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { Group } from './group';
-import { User } from './user';
+import { User } from '../user';
 import { GroupService } from './group.service';
-import { UserService } from './user.service';
+import { UserService } from '../user.service';
 
 @Component({
     selector: 'new-group',
-    templateUrl: 'app/new-group.component.html'
+    templateUrl: 'app/groups/new-group.component.html'
 })
 export class NewGroupComponent implements OnInit {
     user: User;
