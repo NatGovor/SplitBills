@@ -7,6 +7,5 @@ import { Friend } from './friend';
     templateUrl: 'app/friends/friends.component.html'
 })
 export class FriendsComponent {
-    @Input()
     friends: Friend[];
 }

@@ -9,13 +9,13 @@ import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account.component';
-import { FriendsComponent } from './friends/friends.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login.component';
 import { HomeComponent } from './home.component';
 
-import { UserService } from './user.service';
+import { FriendsModule } from './friends/friends.module';
+import { GroupsModule } from './groups/groups.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { UsersModule } from './users/users.module';
 
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -25,18 +25,18 @@ import { routing, appRoutingProviders } from './app.routing';
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
         routing,
-        FormsModule
+        FormsModule,
+        FriendsModule,
+        GroupsModule,
+        DashboardModule,
+        UsersModule
     ],
     declarations: [
         AppComponent,
-        AccountComponent,
-        FriendsComponent,
-        DashboardComponent,
         LoginComponent,
         HomeComponent
     ],
     providers: [
-        UserService,
         appRoutingProviders
     ],
     bootstrap: [ AppComponent ]

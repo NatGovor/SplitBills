@@ -1,4 +1,4 @@
-import { Friend } from './friend';
+import { Friend } from '../friends/friend';
 
 export class User {
     id: number;

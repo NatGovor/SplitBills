@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Group } from './group';
 import { GroupService } from './group.service';
-import { User } from '../user';
+import { User } from '../users/user';
 
 @Component({
     selector: 'groups',

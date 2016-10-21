@@ -4,7 +4,7 @@ import { User } from './user';
 
 @Component({
     selector: 'account',
-    templateUrl: 'app/account.component.html'
+    templateUrl: 'app/users/account.component.html'
 })
 export class AccountComponent {
     @Input()
