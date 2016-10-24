@@ -9,8 +9,11 @@ angular2-tour-of-heroes/app/**/*.js
 angular2-tour-of-heroes/app/**/*.js.map
 angular2-quickstart/app/**/*.js
 angular2-quickstart/app/**/*.js.map
+split-bills-client/app/**/*.js
+split-bills-client/app/**/*.js.map
 
 # Type definitions we mirror from github
 splitBills-client/typings
 angular2-tour-of-heroes/typings
 angular2-quickstart/typings
+split-bills-client/typings
