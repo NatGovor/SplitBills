@@ -14,11 +14,6 @@ import { CrisisDetailResolve } from './crisis-detail-resolve.service';
         RouterModule.forChild([
             {
                 path: '',
-                redirectTo: '/crisis-center',
-                pathMatch: 'full'
-            },
-            {
-                path: 'crisis-center',
                 component: CrisisCenterComponent,
                 children: [
                     {
