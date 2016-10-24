@@ -4,13 +4,13 @@ import { RouterModule } from '@angular/router';
 import { FriendsComponent } from './friends.component';
 
 @NgModule({
-    imports: [
+    /*imports: [
         RouterModule.forChild([
             { path: 'friends', component: FriendsComponent }
         ])
     ],
     exports: [
         RouterModule
-    ]
+    ]*/
 })
 export class FriendsRoutingModule {}

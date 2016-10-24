@@ -6,7 +6,7 @@ import { GroupDetailComponent } from './group-detail.component';
 import { NewGroupComponent } from './new-group.component';
 
 @NgModule({
-    imports: [
+    /*imports: [
         RouterModule.forChild([
             { path: 'groups', component: GroupsComponent },
             { path: 'groups/:id', component: GroupDetailComponent },
@@ -15,6 +15,6 @@ import { NewGroupComponent } from './new-group.component';
     ],
     exports: [
         RouterModule
-    ]
+    ]*/
 })
 export class GroupsRoutingModule {}
