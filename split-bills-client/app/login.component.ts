@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 @Component({
     template: `
         <p>
-            <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
-            <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+            Enter Credentials to login:
+            <button (click)="login()">Login</button>
         </p>
     `
 })

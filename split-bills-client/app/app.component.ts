@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './auth.service';
+
 @Component({
     selector: 'my-app',
     template: `
         <h1>{{title}}</h1>
-        <nav>
-            <a routerLink="/">Home</a>
-            <a routerLink="/dashboard">Dashboard</a>
-            <a routerLink="/login">Login</a>
-        </nav>
+        <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
         <router-outlet></router-outlet>
     `
 })
 export class AppComponent {
     title = "My Split bills";
+
+    constructor(public authService: AuthService) {}
+
+    logout() {
+        this.authService.logout();
+    }
 }
