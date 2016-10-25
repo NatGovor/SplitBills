@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { SecureAppComponent } from './secure-app.component';
 import { DashboardComponent } from './dashboard.component';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent }   from './profile.component';
+import { FriendsComponent }   from './friends/friends.component';
 
 import { AuthGuard } from '../auth-guard.service';
 
@@ -19,7 +20,8 @@ import { AuthGuard } from '../auth-guard.service';
                         path: '',
                         canActivateChild: [AuthGuard],
                         children: [
-                            { path: 'profile', component: ProfileComponent },                            
+                            { path: 'profile', component: ProfileComponent },
+                            { path: 'friends', component: FriendsComponent },                            
                             { path: 'dashboard', component: DashboardComponent }
                         ]
                     }

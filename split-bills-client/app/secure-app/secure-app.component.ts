@@ -7,6 +7,7 @@ import { Router }    from '@angular/router';
         <nav>
             <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
             <a routerLink="/profile" routerLinkActive="active">Profile</a>
+            <a routerLink="/friends" routerLinkActive="active">Friends</a>
         </nav>
         <router-outlet></router-outlet>
     `
