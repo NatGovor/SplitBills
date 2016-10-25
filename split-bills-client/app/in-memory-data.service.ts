@@ -10,23 +10,23 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 2,
+                        userId: 2,
                         name: 'Alex'
                     },
                     {
-                        //userId: 3,
+                        userId: 3,
                         name: 'Alexandra'
                     },
                     {
-                        //userId: 4,
+                        userId: 4,
                         name: 'Igor'
                     },
                     {
-                        //userId: 6,
+                        userId: 6,
                         name: 'Dima'
                     },
                     {
-                        //userId: 7,
+                        userId: 7,
                         name: 'Alexnekot'
                     }
                 ]
@@ -38,7 +38,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 1,
+                        userId: 1,
                         name: 'Nata'
                     }
                 ]
@@ -50,11 +50,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 1,
+                        userId: 1,
                         name: 'Nata'
                     },
                     {
-                        //userId: 4,
+                        userId: 4,
                         name: 'Igor'
                     }
                 ]
@@ -66,11 +66,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 1,
+                        userId: 1,
                         name: 'Nata'
                     },
                     {
-                        //userId: 3,
+                        userId: 3,
                         name: 'Alexandra'
                     }
                 ]
@@ -89,7 +89,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 1,
+                        userId: 1,
                         name: 'Nata'
                     }
                 ]
@@ -101,13 +101,75 @@ export class InMemoryDataService implements InMemoryDbService {
                 password: 'testpwd1',
                 friends: [
                     {
-                        //userId: 1,
+                        userId: 1,
                         name: 'Nata'
                     }
                 ]
             }
         ];
 
-        return {users};
+        let groups = [
+            {
+                id: 1,
+                name: 'Belgium trip',
+                friends: [
+                    {
+                        userId: 1,
+                        name: 'Nata'
+                    },
+                    {
+                        userId: 3,
+                        name: 'Alexandra' 
+                    },
+                    {
+                        userId: 4,
+                        name: 'Igor'
+                    },
+                    {
+                        name: 'Test'
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Vilnius trip',
+                friends: [
+                    {
+                        userId: 1,
+                        name: 'Nata'
+                    },
+                    {
+                        userId: 2,
+                        name: 'Alex'
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: 'Italy trip',
+                friends: [
+                    {
+                        userId: 1,
+                        name: 'Nata'
+                    },
+                    {
+                        userId: 7,
+                        name: 'Alexnekot'
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Unkown trip',
+                friends: [
+                    {
+                        userId: 7,
+                        name: 'Alexnekot'
+                    }
+                ]
+            }
+        ];
+
+        return {users, groups};
     }
 }

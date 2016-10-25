@@ -9,7 +9,7 @@ import { FriendService } from './friend.service';
         <p>Friends: </p>
         <ul>
             <li *ngFor="let friend of friends">
-                <span>{{friend.id}}</span>
+                <span>{{friend.userId}}</span>
                 {{friend.name}}
             </li>
         </ul>
