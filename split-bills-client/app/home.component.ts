@@ -3,10 +3,8 @@ import { Router }    from '@angular/router';
 
 @Component({
     template: `
-        <nav>
-            <a routerLink="/login">Login</a>
-        </nav>
         <h2>Home</h2>
+        <p>Split Bills together with your friends!</p>
     `
 })
 export class HomeComponent { }

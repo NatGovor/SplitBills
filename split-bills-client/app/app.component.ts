@@ -8,6 +8,9 @@ import { AuthService } from './auth.service';
     template: `
         <h1>{{title}}</h1>
         <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+        <nav>
+            <a *ngIf="!authService.isLoggedIn" routerLink="/login">Login</a>
+        </nav>
         <router-outlet></router-outlet>
     `
 })

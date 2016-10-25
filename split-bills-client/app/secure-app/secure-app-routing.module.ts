@@ -17,6 +17,7 @@ import { AuthGuard } from '../auth-guard.service';
                 children: [
                     {
                         path: '',
+                        canActivateChild: [AuthGuard],
                         children: [
                             { path: 'profile', component: ProfileComponent },                            
                             { path: 'dashboard', component: DashboardComponent }

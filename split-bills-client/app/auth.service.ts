@@ -13,13 +13,16 @@ export class AuthService {
     // store the URL so we can redirect after logging in
     redirectUrl: string;
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) {
+        this.isLoggedIn = !!localStorage.getItem('auth_token');
+    }
 
     login(email: string, password: string): Promise<boolean> {
         return this.userService.getUsers()
             .then(users => users.find(user => user.email === email && user.password === password))
             .then((user) => {
                 if (user) {
+                    localStorage.setItem('auth_token', '12345678')
                     this.isLoggedIn = true;
                     return true;
                 }
@@ -27,6 +30,7 @@ export class AuthService {
     }
 
     logout(): void {
+        localStorage.removeItem('auth_token')
         this.isLoggedIn = false;
     }
 }
