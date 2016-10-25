@@ -21,6 +21,7 @@ export class AuthService {
             .then((user) => {
                 if (user) {
                     this.isLoggedIn = true;
+                    return true;
                 }
             });
     }

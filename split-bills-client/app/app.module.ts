@@ -10,7 +10,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { AppComponent }     from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { DashboardModule }    from './dashboard/dashboard.module';
+import { SecureAppModule }    from './secure-app/secure-app.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent }     from './login.component';
 import { HomeComponent }      from './home.component';
@@ -23,7 +23,7 @@ import { UserService } from './user.service';
         FormsModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
-        DashboardModule,
+        SecureAppModule,
         LoginRoutingModule,
         AppRoutingModule
     ],
