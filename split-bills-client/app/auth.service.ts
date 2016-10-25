@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -12,8 +13,16 @@ export class AuthService {
     // store the URL so we can redirect after logging in
     redirectUrl: string;
 
-    login(): Observable<boolean> {
-        return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+    constructor(private userService: UserService) {}
+
+    login(email: string, password: string): Promise<boolean> {
+        return this.userService.getUsers()
+            .then(users => users.find(user => user.email === email && user.password === password))
+            .then((user) => {
+                if (user) {
+                    this.isLoggedIn = true;
+                }
+            });
     }
 
     logout(): void {
