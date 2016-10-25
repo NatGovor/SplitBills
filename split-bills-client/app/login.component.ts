@@ -25,7 +25,11 @@ export class LoginComponent {
     email: string;
     password: string;
 
-    constructor(public authService: AuthService, public router: Router) {}
+    constructor(public authService: AuthService, public router: Router) {
+        if (this.authService.isLoggedIn) {
+            this.router.navigate(['/dashboard']);
+        }
+    }
 
     login() {
         this.authService.login(this.email, this.password).then(() => {
