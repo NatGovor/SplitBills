@@ -23,6 +23,11 @@ export class UserService {
                     .then(users => users.find(user => user.id === id));
     }
 
+    getUserByEmail(email: string): Promise<User> {
+        return this.getUsers()
+                    .then(users => users.find(user => user.email === email));
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

@@ -30,6 +30,7 @@ export class LoginComponent {
     login() {
         this.authService.login(this.email, this.password).then(() => {
             if (this.authService.isLoggedIn) {
+                localStorage.setItem('userEmail', this.email);
                 let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
                 this.router.navigate([redirect]);

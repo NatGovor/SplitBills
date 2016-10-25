@@ -3,7 +3,7 @@ import { Router }    from '@angular/router';
 
 @Component({
     template: `
-        <h2>Hello, user!</h2>
+        <h2>Hello, {{userEmail}}!</h2>
         <nav>
             <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
             <a routerLink="/profile" routerLinkActive="active">Profile</a>
@@ -11,4 +11,10 @@ import { Router }    from '@angular/router';
         <router-outlet></router-outlet>
     `
 })
-export class SecureAppComponent {}
+export class SecureAppComponent {
+    userEmail: string;
+
+    constructor() {
+        this.userEmail = localStorage.getItem('userEmail');
+    }
+}
