@@ -2,6 +2,7 @@ import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GroupsComponent }   from './groups.component';
+import { GroupDetailComponent }   from './group-detail.component';
 
 import { GroupService } from './group.service';
 
@@ -10,7 +11,8 @@ import { GroupService } from './group.service';
         CommonModule
     ],
     declarations: [
-        GroupsComponent
+        GroupsComponent,
+        GroupDetailComponent
     ],
     providers: [
         GroupService

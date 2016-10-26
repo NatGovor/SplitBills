@@ -3,7 +3,7 @@ import { Router }    from '@angular/router';
 
 @Component({
     template: `
-        <h2>Hello, {{userEmail}}!</h2>
+        <h4>Hello, {{userEmail}}!</h4>
         <nav>
             <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
             <a routerLink="/profile" routerLinkActive="active">Profile</a>

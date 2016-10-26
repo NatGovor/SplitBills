@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ProfileComponent }   from './profile.component';
 import { FriendsComponent }   from './friends/friends.component';
 import { GroupsComponent }    from './groups/groups.component';
+import { GroupDetailComponent }    from './groups/group-detail.component';
 
 import { AuthGuard } from '../auth-guard.service';
 
@@ -24,7 +25,8 @@ import { AuthGuard } from '../auth-guard.service';
                             { path: 'profile', component: ProfileComponent },
                             { path: 'friends', component: FriendsComponent },                            
                             { path: 'dashboard', component: DashboardComponent },
-                            { path: 'groups', component: GroupsComponent }
+                            { path: 'groups', component: GroupsComponent },
+                            { path: 'groups/:id', component: GroupDetailComponent }
                         ]
                     }
                 ]
