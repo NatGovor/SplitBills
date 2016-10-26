@@ -1,8 +1,9 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GroupsComponent }   from './groups.component';
-import { GroupDetailComponent }   from './group-detail.component';
+import { GroupsComponent }      from './groups.component';
+import { GroupDetailComponent } from './group-detail.component';
+import { NewGroupComponent }    from './new-group.component';
 
 import { GroupService } from './group.service';
 
@@ -12,7 +13,8 @@ import { GroupService } from './group.service';
     ],
     declarations: [
         GroupsComponent,
-        GroupDetailComponent
+        GroupDetailComponent,
+        NewGroupComponent
     ],
     providers: [
         GroupService

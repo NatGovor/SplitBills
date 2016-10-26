@@ -9,6 +9,7 @@ import { GroupService } from './group.service';
 @Component({
     template: `
         <h2>Groups:</h2>
+        <button (click)="addNew();">Add new</button>
         <ul class="items">
             <li *ngFor="let group of groups"
                 (click)="gotoDetail(group);">
@@ -33,5 +34,9 @@ export class GroupsComponent implements OnInit {
 
     gotoDetail(group: Group): void {
         this.router.navigate([group.id], { relativeTo: this.route});
+    }
+
+    addNew() {
+        this.router.navigate(['new'], { relativeTo: this.route});
     }
 }
