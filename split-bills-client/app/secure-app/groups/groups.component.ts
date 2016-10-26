@@ -6,11 +6,10 @@ import { GroupService } from './group.service';
 
 @Component({
     template: `
-        <p>Groups:</p>
-        <ul>
-            <li *ngFor="let group of groups"
-                (click)="onSelect(group); gotoDetail();">
-                <span>{{group.id}}</span>
+        <h2>Groups:</h2>
+        <ul class="items">
+            <li *ngFor="let group of groups">
+                <span class="badge">{{group.id}}</span>
                 {{group.name}}
             </li>
         </ul>

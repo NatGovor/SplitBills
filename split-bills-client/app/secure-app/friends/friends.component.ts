@@ -6,10 +6,10 @@ import { FriendService } from './friend.service';
 
 @Component({
     template: `
-        <p>Friends: </p>
-        <ul>
+        <h2>Friends: </h2>
+        <ul class="items">
             <li *ngFor="let friend of friends">
-                <span>{{friend.userId}}</span>
+                <span class="badge">{{friend.userId}}</span>
                 {{friend.name}}
             </li>
         </ul>

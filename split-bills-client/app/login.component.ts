@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 
 @Component({
     template: `
-        <div>
+        <div class="col-sm-4">
             <p>Enter Credentials to login:</p>
             <div class="form-group">
                 <label>Email: </label>

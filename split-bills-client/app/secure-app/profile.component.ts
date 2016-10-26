@@ -6,7 +6,7 @@ import { UserService } from '../user.service';
 
 @Component({
     template: `
-        <p>Profile</p>
+        <h2>Profile</h2>
         <div *ngIf="user">
             <div>
                 <span>id: </span>{{user.id}}
