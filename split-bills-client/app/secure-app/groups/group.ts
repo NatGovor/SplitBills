@@ -1,7 +1,9 @@
 import { Friend } from '../friends/friend';
 
 export class Group {
-    id: number;
-    name: string;
-    friends: Friend[];
+    constructor(
+        public id: number,
+        public name: string,
+        public friends: Friend[]
+    ) {}
 }
