@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router }    from '@angular/router';
 
+import { User } from '../user';
+
 @Component({
     template: `
-        <h4>Hello, {{userEmail}}!</h4>
+        <h4>Hello, {{user.name}}!</h4>
         <nav>
             <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
             <a routerLink="/profile" routerLinkActive="active">Profile</a>
@@ -14,9 +16,9 @@ import { Router }    from '@angular/router';
     `
 })
 export class SecureAppComponent {
-    userEmail: string;
+    user: User;
 
     constructor() {
-        this.userEmail = localStorage.getItem('userEmail');
+        this.user = JSON.parse(localStorage.getItem('user'));
     }
 }

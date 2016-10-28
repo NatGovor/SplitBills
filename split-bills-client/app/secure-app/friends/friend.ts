@@ -1,4 +1,6 @@
 export class Friend {
-    name: string;
-    userId?: number;
+    constructor(
+        public name: string,
+        public userId?: number
+    ) {}
 }

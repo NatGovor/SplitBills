@@ -1,7 +1,8 @@
 import { Component }                 from '@angular/core';
 import { Router, ActivatedRoute }    from '@angular/router';
 
-import { Group } from './group';
+import { Group }  from './group';
+import { Friend } from '../friends/friend';
 
 import { GroupService } from './group.service';
 
@@ -23,6 +24,7 @@ import { GroupService } from './group.service';
     `
 })
 export class NewGroupComponent {
+
     model = new Group(0, '', []);
 
     constructor(
@@ -31,7 +33,12 @@ export class NewGroupComponent {
         private route: ActivatedRoute) {}
 
     onSubmit() {
-        console.log(this.model);  
+        let owner = JSON.parse(localStorage.getItem('user'));
+
+        this.model.friends.push(
+            new Friend(owner.name, owner.id)
+        );
+
         this.service.create(this.model)
             .then(group => {
                 this.router.navigate(['..', { relativeTo: this.route }]);

@@ -22,7 +22,8 @@ export class AuthService {
             .then(users => users.find(user => user.email === email && user.password === password))
             .then((user) => {
                 if (user) {
-                    localStorage.setItem('authToken', '12345678')
+                    localStorage.setItem('authToken', '12345678');
+                    localStorage.setItem('user', JSON.stringify(user));
                     this.isLoggedIn = true;
                     return true;
                 }
@@ -30,6 +31,7 @@ export class AuthService {
     }
 
     logout(): void {
+        localStorage.removeItem('user');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('authToken')
         this.isLoggedIn = false;
