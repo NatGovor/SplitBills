@@ -20,6 +20,17 @@ import { Helpers }      from '../../helpers';
                         [(ngModel)]="model.name" name="name">
                 </div>
 
+                <div>
+                    <label>Group Members</label>
+                    <div *ngFor="let friend of model.friends; let i = index" class="form-group">
+                        <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
+                        <input *ngIf="i > 0" type="text" class="form-control" placeholder="Friend name"
+                            [(ngModel)]="friend.name" name="friendName">
+                    </div>
+                    <button (click)="addPerson()" type="button" class="btn btn-sm">Add a person</button>
+                </div>
+                
+                <br/>
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
             </form>
         </div>
@@ -27,7 +38,15 @@ import { Helpers }      from '../../helpers';
 })
 export class NewGroupComponent {
 
-    model = new Group(0, '', []);
+    owner = this.helpers.getStorageProperty("user") as User;
+
+    model = new Group(0, '', 
+    [
+        new Friend(this.owner.name, this.owner.id),
+        new Friend(''),
+        new Friend(''),
+        new Friend('')
+    ]);
 
     constructor(
         private service: GroupService,
@@ -36,15 +55,15 @@ export class NewGroupComponent {
         private helpers: Helpers) {}
 
     onSubmit() {
-        let owner = this.helpers.getStorageProperty("user") as User;
-
-        this.model.friends.push(
-            new Friend(owner.name, owner.id)
-        );
+        this.model.friends = this.model.friends.filter(friend => friend.name != "");
 
         this.service.create(this.model)
             .then(group => {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
+    }
+
+    addPerson() {
+        this.model.friends.push(new Friend(''));
     } 
 }
