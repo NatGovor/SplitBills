@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Friend } from './friend';
+import { User }   from '../../user';
 
 import { FriendService } from './friend.service';
+import { Helpers }       from '../../helpers';
 
 @Component({
     template: `
@@ -18,10 +20,12 @@ import { FriendService } from './friend.service';
 export class FriendsComponent implements OnInit {
     friends: Friend[];
 
-    constructor(private service: FriendService) {}
+    constructor(
+        private service: FriendService,
+        private helpers: Helpers) {}
 
     ngOnInit() {
-        this.service.getFriends(JSON.parse(localStorage.getItem('user')).id)
+        this.service.getFriends((this.helpers.getStorageProperty("user") as User).id)
             .then(friends => this.friends = friends);
     }
 }

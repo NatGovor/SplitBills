@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 
 import { UserService } from '../user.service';
+import { Helpers }     from '../helpers';
 
 @Component({
     template: `
@@ -23,9 +24,12 @@ import { UserService } from '../user.service';
 export class ProfileComponent implements OnInit {
     user: User;
 
-    constructor(private service: UserService) {}
+    constructor(
+        private service: UserService,
+        private helpers: Helpers) {}
 
     ngOnInit() {
-        this.service.getUser(JSON.parse(localStorage.getItem('user')).id).then(user => this.user = user);
+        this.service.getUser((this.helpers.getStorageProperty("user") as User).id)
+            .then(user => this.user = user);
     }
 }

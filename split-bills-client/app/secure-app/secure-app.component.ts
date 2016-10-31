@@ -3,6 +3,8 @@ import { Router }    from '@angular/router';
 
 import { User } from '../user';
 
+import { Helpers } from '../helpers';
+
 @Component({
     template: `
         <h4>Hello, {{user.name}}!</h4>
@@ -18,7 +20,7 @@ import { User } from '../user';
 export class SecureAppComponent {
     user: User;
 
-    constructor() {
-        this.user = JSON.parse(localStorage.getItem('user'));
+    constructor(private helpers: Helpers) {
+        this.user = this.helpers.getStorageProperty("user") as User;
     }
 }

@@ -3,8 +3,10 @@ import { Router, ActivatedRoute }    from '@angular/router';
 
 import { Group }  from './group';
 import { Friend } from '../friends/friend';
+import { User }   from '../../user';
 
 import { GroupService } from './group.service';
+import { Helpers }      from '../../helpers';
 
 @Component({
     template: `
@@ -30,10 +32,11 @@ export class NewGroupComponent {
     constructor(
         private service: GroupService,
         private router: Router,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute,
+        private helpers: Helpers) {}
 
     onSubmit() {
-        let owner = JSON.parse(localStorage.getItem('user'));
+        let owner = this.helpers.getStorageProperty("user") as User;
 
         this.model.friends.push(
             new Friend(owner.name, owner.id)

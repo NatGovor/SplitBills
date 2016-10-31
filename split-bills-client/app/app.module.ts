@@ -16,6 +16,7 @@ import { LoginComponent }     from './login.component';
 import { HomeComponent }      from './home.component';
 
 import { UserService } from './user.service';
+import { Helpers }     from './helpers';
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import { UserService } from './user.service';
         LoginComponent
     ],
     providers: [
-        UserService
+        UserService,
+        Helpers
     ],
     bootstrap: [ AppComponent ]
 })

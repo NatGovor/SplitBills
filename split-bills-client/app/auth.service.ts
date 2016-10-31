@@ -5,6 +5,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
 import { UserService } from './user.service';
+import { Helpers }     from './helpers';
 
 @Injectable()
 export class AuthService {
@@ -13,8 +14,10 @@ export class AuthService {
     // store the URL so we can redirect after logging in
     redirectUrl: string;
 
-    constructor(private userService: UserService) {
-        this.isLoggedIn = !!localStorage.getItem('authToken');
+    constructor(
+        private userService: UserService,
+        private helpers: Helpers) {
+        this.isLoggedIn = !!this.helpers.getStorageProperty('authToken');
     }
 
     login(email: string, password: string): Promise<boolean> {
@@ -22,8 +25,8 @@ export class AuthService {
             .then(users => users.find(user => user.email === email && user.password === password))
             .then((user) => {
                 if (user) {
-                    localStorage.setItem('authToken', '12345678');
-                    localStorage.setItem('user', JSON.stringify(user));
+                    this.helpers.setStorageProperty('authToken', '12345678');
+                    this.helpers.setStorageProperty('user', user);
                     this.isLoggedIn = true;
                     return true;
                 }
@@ -31,8 +34,8 @@ export class AuthService {
     }
 
     logout(): void {
-        localStorage.removeItem('user');
-        localStorage.removeItem('authToken')
+        this.helpers.setStorageProperty('user', null);
+        this.helpers.setStorageProperty('authToken', null);
         this.isLoggedIn = false;
     }
 }
