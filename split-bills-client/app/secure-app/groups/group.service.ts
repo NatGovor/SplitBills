@@ -21,8 +21,8 @@ export class GroupService {
                     .catch(this.handleError);
     }
 
-    getUserGroups(email: string): Promise<Group[]> {
-        return this.userService.getUserByEmail(email)
+    getUserGroups(userId: number): Promise<Group[]> {
+        return this.userService.getUser(userId)
                 .then(user => this.getGroups().then(groups => groups.filter(
                     group => {
                         for (let i=0; i < group.friends.length; i++) {

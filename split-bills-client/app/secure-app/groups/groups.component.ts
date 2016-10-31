@@ -28,7 +28,7 @@ export class GroupsComponent implements OnInit {
         private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.service.getUserGroups(localStorage.getItem("userEmail"))
+        this.service.getUserGroups(JSON.parse(localStorage.getItem("user")).id)
             .then(groups => this.groups = groups);
     }
 

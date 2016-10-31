@@ -26,6 +26,6 @@ export class ProfileComponent implements OnInit {
     constructor(private service: UserService) {}
 
     ngOnInit() {
-        this.service.getUserByEmail(localStorage.getItem('userEmail')).then(user => this.user = user);
+        this.service.getUser(JSON.parse(localStorage.getItem('user')).id).then(user => this.user = user);
     }
 }

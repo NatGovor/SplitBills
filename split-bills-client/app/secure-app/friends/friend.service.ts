@@ -12,11 +12,11 @@ export class FriendService {
 
     constructor(private http: Http) { }
 
-    getFriends(userEmail: string): Promise<Friend[]> {
+    getFriends(userId: number): Promise<Friend[]> {
         return this.http.get(this.usersUrl)
                     .toPromise()
                     .then(response => response.json().data as User[])
-                    .then (users => users.find(user => user.email === userEmail))
+                    .then (users => users.find(user => user.id === userId))
                     .then (user => user.friends)
                     .catch(this.handleError);
     }

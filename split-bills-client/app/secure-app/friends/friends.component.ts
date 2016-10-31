@@ -21,7 +21,7 @@ export class FriendsComponent implements OnInit {
     constructor(private service: FriendService) {}
 
     ngOnInit() {
-        this.service.getFriends(localStorage.getItem('userEmail'))
+        this.service.getFriends(JSON.parse(localStorage.getItem('user')).id)
             .then(friends => this.friends = friends);
     }
 }
