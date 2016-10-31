@@ -25,7 +25,7 @@ import { Helpers }      from '../../helpers';
                     <div *ngFor="let friend of model.friends; let i = index" class="form-group">
                         <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
                         <input *ngIf="i > 0" type="text" class="form-control" placeholder="Friend name"
-                            [(ngModel)]="friend.name" name="friendName">
+                            [(ngModel)]="friend.name" name="friendName{{i}}">
                     </div>
                     <button (click)="addPerson()" type="button" class="btn btn-sm">Add a person</button>
                 </div>
@@ -65,5 +65,5 @@ export class NewGroupComponent {
 
     addPerson() {
         this.model.friends.push(new Friend(''));
-    } 
+    }
 }
