@@ -1,9 +1,0 @@
-<h4>Groups:</h4>
-<ul>
-    <li *ngFor="let group of groups"
-        (click)="onSelect(group); gotoDetail();">
-        <span>{{group.id}}</span>
-        {{group.name}}
-    </li>
-</ul>
-<button (click)="add();">Add Group</button>
