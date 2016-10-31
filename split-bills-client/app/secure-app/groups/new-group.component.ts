@@ -32,6 +32,7 @@ import { Helpers }      from '../../helpers';
                 
                 <br/>
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
+                <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
             </form>
         </div>
     `
@@ -65,5 +66,9 @@ export class NewGroupComponent {
 
     addPerson() {
         this.model.friends.push(new Friend(''));
+    }
+
+    goBack() {
+        this.router.navigate(['../'], { relativeTo: this.route });
     }
 }

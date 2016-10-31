@@ -11,6 +11,8 @@ import { NewGroupComponent }    from './groups/new-group.component';
 
 import { AuthGuard } from '../auth-guard.service';
 
+import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+
 @NgModule({
     imports: [
         RouterModule.forChild([
