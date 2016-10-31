@@ -41,7 +41,7 @@ export class NewGroupComponent {
 
         this.service.create(this.model)
             .then(group => {
-                this.router.navigate(['..', { relativeTo: this.route }]);
+                this.router.navigate(['../'], { relativeTo: this.route });
             });
     } 
 }

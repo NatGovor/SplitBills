@@ -32,7 +32,6 @@ export class AuthService {
 
     logout(): void {
         localStorage.removeItem('user');
-        localStorage.removeItem('userEmail');
         localStorage.removeItem('authToken')
         this.isLoggedIn = false;
     }
