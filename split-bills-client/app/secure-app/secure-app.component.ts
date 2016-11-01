@@ -3,7 +3,7 @@ import { Router }    from '@angular/router';
 
 import { User } from '../user';
 
-import { Helpers } from '../helpers';
+import { HelpersService } from '../helpers.service';
 
 @Component({
     template: `
@@ -20,7 +20,7 @@ import { Helpers } from '../helpers';
 export class SecureAppComponent {
     user: User;
 
-    constructor(private helpers: Helpers) {
+    constructor(private helpers: HelpersService) {
         this.user = this.helpers.getStorageProperty("user") as User;
     }
 }

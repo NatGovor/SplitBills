@@ -29,7 +29,7 @@ import { CanDeactivateGuard } from '../can-deactivate-guard.service';
                             { path: 'friends', component: FriendsComponent },                            
                             { path: 'dashboard', component: DashboardComponent },
                             { path: 'groups', component: GroupsComponent },                            
-                            { path: 'groups/new', component: NewGroupComponent },
+                            { path: 'groups/new', component: NewGroupComponent, canDeactivate: [CanDeactivateGuard] },
                             { path: 'groups/:id', component: GroupDetailComponent }
                         ]
                     }

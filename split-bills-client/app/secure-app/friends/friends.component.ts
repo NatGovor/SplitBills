@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Friend } from './friend';
 import { User }   from '../../user';
 
-import { FriendService } from './friend.service';
-import { Helpers }       from '../../helpers';
+import { FriendService }  from './friend.service';
+import { HelpersService } from '../../helpers.service';
 
 @Component({
     template: `
@@ -21,11 +21,11 @@ export class FriendsComponent implements OnInit {
     friends: Friend[];
 
     constructor(
-        private service: FriendService,
-        private helpers: Helpers) {}
+        private friendService: FriendService,
+        private helpers: HelpersService) {}
 
     ngOnInit() {
-        this.service.getFriends((this.helpers.getStorageProperty("user") as User).id)
+        this.friendService.getFriends((this.helpers.getStorageProperty("user") as User).id)
             .then(friends => this.friends = friends);
     }
 }

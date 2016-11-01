@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
-import { UserService } from './user.service';
-import { Helpers }     from './helpers';
+import { UserService }    from './user.service';
+import { HelpersService } from './helpers.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
 
     constructor(
         private userService: UserService,
-        private helpers: Helpers) {
+        private helpers: HelpersService) {
         this.isLoggedIn = !!this.helpers.getStorageProperty('authToken');
     }
 

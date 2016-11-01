@@ -15,8 +15,9 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent }     from './login.component';
 import { HomeComponent }      from './home.component';
 
-import { UserService } from './user.service';
-import { Helpers }     from './helpers';
+import { UserService }    from './user.service';
+import { HelpersService } from './helpers.service';
+import { DialogService }  from './dialog.service';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { Helpers }     from './helpers';
     ],
     providers: [
         UserService,
-        Helpers
+        HelpersService,
+        DialogService
     ],
     bootstrap: [ AppComponent ]
 })

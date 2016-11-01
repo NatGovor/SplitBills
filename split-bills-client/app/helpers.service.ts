@@ -3,7 +3,7 @@ import { Injectable }    from '@angular/core';
 import { User } from './user';
 
 @Injectable()
-export class Helpers {
+export class HelpersService {
     getStorageProperty(name): Object {
         if (localStorage.getItem(name) != null) {
             let value = localStorage.getItem(name);

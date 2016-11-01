@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../user';
 
-import { UserService } from '../user.service';
-import { Helpers }     from '../helpers';
+import { UserService }    from '../user.service';
+import { HelpersService } from '../helpers.service';
 
 @Component({
     template: `
@@ -25,11 +25,11 @@ export class ProfileComponent implements OnInit {
     user: User;
 
     constructor(
-        private service: UserService,
-        private helpers: Helpers) {}
+        private userService: UserService,
+        private helpers: HelpersService) {}
 
     ngOnInit() {
-        this.service.getUser((this.helpers.getStorageProperty("user") as User).id)
+        this.userService.getUser((this.helpers.getStorageProperty("user") as User).id)
             .then(user => this.user = user);
     }
 }

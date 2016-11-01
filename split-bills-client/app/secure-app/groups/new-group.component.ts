@@ -5,8 +5,9 @@ import { Group }  from './group';
 import { Friend } from '../friends/friend';
 import { User }   from '../../user';
 
-import { GroupService } from './group.service';
-import { Helpers }      from '../../helpers';
+import { GroupService }   from './group.service';
+import { HelpersService } from '../../helpers.service';
+import { DialogService }  from '../../dialog.service';
 
 @Component({
     template: `
@@ -50,18 +51,23 @@ export class NewGroupComponent {
     ]);
 
     constructor(
-        private service: GroupService,
+        private groupService: GroupService,
         private router: Router,
         private route: ActivatedRoute,
-        private helpers: Helpers) {}
+        private helpers: HelpersService,
+        private dialogService: DialogService) {}
 
     onSubmit() {
         this.model.friends = this.model.friends.filter(friend => friend.name != "");
 
-        this.service.create(this.model)
+        this.groupService.create(this.model)
             .then(group => {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
+    }
+
+    canDeactivate(): Promise<boolean> | boolean {
+        return this.dialogService.confirm('Discard creating new group?')
     }
 
     addPerson() {
