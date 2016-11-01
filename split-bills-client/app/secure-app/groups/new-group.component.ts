@@ -1,4 +1,4 @@
-import { Component }                 from '@angular/core';
+import { Component, OnInit }         from '@angular/core';
 import { Router, ActivatedRoute }    from '@angular/router';
 
 import { Group }  from './group';
@@ -8,6 +8,7 @@ import { User }   from '../../user';
 import { GroupService }   from './group.service';
 import { HelpersService } from '../../helpers.service';
 import { DialogService }  from '../../dialog.service';
+import { UserService }    from '../../user.service';
 
 @Component({
     template: `
@@ -38,10 +39,10 @@ import { DialogService }  from '../../dialog.service';
         </div>
     `
 })
-export class NewGroupComponent {
-
+export class NewGroupComponent implements OnInit {
+    submitted = false;
+    currentUser: User;
     owner = this.helpers.getStorageProperty("user") as User;
-
     model = new Group(0, '', 
     [
         new Friend(this.owner.name, this.owner.id),
@@ -55,10 +56,26 @@ export class NewGroupComponent {
         private router: Router,
         private route: ActivatedRoute,
         private helpers: HelpersService,
-        private dialogService: DialogService) {}
+        private dialogService: DialogService,
+        private userService: UserService) {}
+
+    ngOnInit() {
+        this.userService.getUser(this.owner.id)
+            .then(user => this.currentUser = user);
+    }
 
     onSubmit() {
+        this.submitted = true;
+
         this.model.friends = this.model.friends.filter(friend => friend.name != "");
+
+        // find friends that are associated with users
+        this.model.friends.forEach(friend => {
+            let existFriend = this.currentUser.friends.find(f => f.name == friend.name);
+            if (existFriend) {
+                friend.userId = existFriend.userId;
+            }
+        });
 
         this.groupService.create(this.model)
             .then(group => {
@@ -67,6 +84,10 @@ export class NewGroupComponent {
     }
 
     canDeactivate(): Promise<boolean> | boolean {
+        if (this.submitted) {
+            return true;
+        }
+
         return this.dialogService.confirm('Discard creating new group?')
     }
 
