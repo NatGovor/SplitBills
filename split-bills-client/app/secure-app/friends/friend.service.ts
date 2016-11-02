@@ -38,9 +38,15 @@ export class FriendService {
                         user.friends.push(friend);
                     }
                 });
-                console.log(user);
-            });
-
+                
+                return user;
+            })
+            .then(user => {
+                if (user.id) {
+                    this.userService.update(user);
+                }
+            })
+            .catch(this.handleError);
         return null;
     }
 
