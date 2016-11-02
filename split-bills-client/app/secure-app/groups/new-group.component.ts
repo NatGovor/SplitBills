@@ -9,6 +9,7 @@ import { GroupService }   from './group.service';
 import { HelpersService } from '../../helpers.service';
 import { DialogService }  from '../../dialog.service';
 import { UserService }    from '../../user.service';
+import { FriendService }  from '../friends/friend.service';
 
 @Component({
     template: `
@@ -57,7 +58,8 @@ export class NewGroupComponent implements OnInit {
         private route: ActivatedRoute,
         private helpers: HelpersService,
         private dialogService: DialogService,
-        private userService: UserService) {}
+        private userService: UserService,
+        private friendService: FriendService) {}
 
     ngOnInit() {
         this.userService.getUser(this.owner.id)
@@ -76,6 +78,12 @@ export class NewGroupComponent implements OnInit {
                 friend.userId = existFriend.userId;
             }
         });
+
+        this.model.friends.forEach(friend => {
+            if (friend.userId) {
+                this.friendService.addFriends(friend.userId, this.model.friends.filter(f => f.userId != friend.userId));
+            }
+        });     
 
         this.groupService.create(this.model)
             .then(group => {

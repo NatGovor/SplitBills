@@ -6,11 +6,13 @@ import 'rxjs/add/operator/toPromise';
 import { Friend } from './friend';
 import { User }  from '../../user';
 
+import { UserService } from '../../user.service';
+
 @Injectable()
 export class FriendService {
     private usersUrl = 'app/users'; // URL to web api
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private userService: UserService) { }
 
     getFriends(userId: number): Promise<Friend[]> {
         return this.http.get(this.usersUrl)
@@ -19,6 +21,27 @@ export class FriendService {
                     .then (users => users.find(user => user.id === userId))
                     .then (user => user.friends)
                     .catch(this.handleError);
+    }
+
+    addFriends(userId: number, friends: Friend[]): Promise<any> {
+        this.userService.getUser(userId)
+            .then(user => {
+                friends.forEach(friend => {
+                    let exist = false;
+                    user.friends.forEach(userFriend => {
+                        if (userFriend.userId === friend.userId) {
+                           exist = true; 
+                        }
+                    });
+
+                    if (!exist) {
+                        user.friends.push(friend);
+                    }
+                });
+                console.log(user);
+            });
+
+        return null;
     }
 
     private handleError(error: any): Promise<any> {
