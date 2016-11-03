@@ -5,14 +5,18 @@ import 'rxjs/add/operator/toPromise';
 
 import { Group } from './group';
 
-import { UserService } from '../../user.service';
+import { UserService }   from '../../user.service';
+import { FriendService } from '../friends/friend.service';
 
 @Injectable()
 export class GroupService {
     private groupsUrl = 'app/groups'; // URL to web api
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private http: Http, private userService: UserService) { }
+    constructor(
+        private http: Http, 
+        private userService: UserService,
+        private friendService: FriendService) { }
 
     getGroups(): Promise<Group[]> {
         return this.http.get(this.groupsUrl)
@@ -40,6 +44,12 @@ export class GroupService {
     }
 
     create(group: Group): Promise<Group> {
+        group.friends.forEach(friend => {
+            if (friend.userId) {
+                this.friendService.addFriends(friend.userId, group.friends.filter(f => f.userId != friend.userId));
+            }
+        });
+
         return this.http
             .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
             .toPromise()
