@@ -44,6 +44,7 @@ export class GroupService {
     }
 
     create(group: Group): Promise<Group> {
+        // TODO: remove this code when backend is ready
         group.friends.forEach(friend => {
             if (friend.userId) {
                 this.friendService.addFriends(friend.userId, group.friends.filter(f => f.userId != friend.userId));

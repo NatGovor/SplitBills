@@ -47,6 +47,8 @@ export class FriendService {
                 }
             })
             .catch(this.handleError);
+        
+        // TODO: add returning some Promise
         return null;
     }
 
