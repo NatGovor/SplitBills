@@ -34,9 +34,7 @@ export class UserService {
         return this.http
             .put(url, JSON.stringify(user), {headers: this.headers})
             .toPromise()
-            .then(res => {
-                return res.json().data;
-            })
+            .then(() => user)
             .catch(this.handleError);
     }
 
