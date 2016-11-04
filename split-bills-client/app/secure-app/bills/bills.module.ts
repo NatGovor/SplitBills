@@ -1,22 +1,22 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BillsRoutingModule } from './bills-routing.module';
-
 import { BillsComponent } from './bills.component';
 
 import { BillService } from './bill.service';
 
 @NgModule({
     imports: [
-        CommonModule,
-        BillsRoutingModule
+        CommonModule
     ],
     declarations: [
         BillsComponent
     ],
     providers: [
         BillService
+    ],
+    exports: [
+        BillsComponent
     ]
 })
 export class BillsModule { }

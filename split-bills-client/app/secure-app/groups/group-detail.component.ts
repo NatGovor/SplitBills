@@ -24,6 +24,7 @@ import { GroupService } from './group.service';
                         </li>
                     </ul>
                 </div>
+                <bills-list [group]="group"></bills-list>
                 <button (click)="goBack()">Back</button>
             </div>
         </div>

@@ -12,10 +12,11 @@ export class BillService {
 
     constructor(private http: Http) { }
 
-    getBills(): Promise<Bill[]> {
+    getBills(groupId: number): Promise<Bill[]> {
         return this.http.get(this.billsUrl)
                     .toPromise()
                     .then(response => response.json().data as Bill[])
+                    .then(bills => bills.filter(bill => bill.groupId === groupId))
                     .catch(this.handleError);
     }
 
