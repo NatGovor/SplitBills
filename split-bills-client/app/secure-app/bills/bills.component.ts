@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Bill } from './bill';
+import { Bill }  from './bill';
 import { Group } from '../groups/group';
+import { User }  from '../../user';
 
-import { BillService } from './bill.service';
+import { BillService }    from './bill.service';
+import { HelpersService } from '../../helpers.service';
 
 @Component({
     selector: 'bills-list',
@@ -12,11 +14,9 @@ import { BillService } from './bill.service';
 
         <ul>
             <li *ngFor="let bill of bills">
-                {{ bill.id }}
                 {{ bill.description }}
                 {{ bill.amount | currency:'USD':true }}
-                {{ bill.paidBy }}
-                {{ bill.splitType }}
+                Paid by {{ bill.paidBy === currentUser.id ? 'you' : bill.paidBy }}
             </li>
         </ul>
     `
@@ -24,9 +24,15 @@ import { BillService } from './bill.service';
 export class BillsComponent implements OnInit {
     @Input()
     group: Group;
-    bills: Bill[];
 
-    constructor(private billService: BillService) {}
+    bills: Bill[];
+    currentUser: User;
+
+    constructor(
+        private billService: BillService,
+        private helpers: HelpersService) {
+        this.currentUser = this.helpers.getStorageProperty("user") as User;
+    }
     
     ngOnInit() {
         this.billService.getBills(this.group.id)
