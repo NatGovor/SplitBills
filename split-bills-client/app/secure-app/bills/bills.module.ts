@@ -5,6 +5,8 @@ import { BillsRoutingModule } from './bills-routing.module';
 
 import { BillsComponent } from './bills.component';
 
+import { BillService } from './bill.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -12,6 +14,9 @@ import { BillsComponent } from './bills.component';
     ],
     declarations: [
         BillsComponent
+    ],
+    providers: [
+        BillService
     ]
 })
 export class BillsModule { }
