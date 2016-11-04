@@ -11,6 +11,9 @@ import { Component } from '@angular/core';
             <a routerLink="/login" routerLinkActive="active">Login</a>
         </nav>
         <router-outlet></router-outlet>
+        <hero-birthday></hero-birthday>
+        <power-boost-calculator></power-boost-calculator>
+        <hero-message></hero-message>
     `
 })
 export class AppComponent { }

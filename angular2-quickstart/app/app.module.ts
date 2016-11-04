@@ -9,6 +9,11 @@ import { HeroesModule } from './heroes/heroes.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
+import { HeroBirthdayComponent } from './pipes/hero-birthday1.component';
+import { ExponentialStrengthPipe } from './pipes/exponential-strength.pipe';
+import { PowerBoostCalculatorComponent } from './pipes/power-boost-calculator.component';
+import { HeroAsyncMessageComponent } from './pipes/hero-async-message.component';
+
 import { DialogService } from './dialog.service';
 
 @NgModule({
@@ -21,7 +26,11 @@ import { DialogService } from './dialog.service';
   ],
   declarations: [ 
       AppComponent,
-      LoginComponent
+      LoginComponent,
+      HeroBirthdayComponent,
+      ExponentialStrengthPipe,
+      PowerBoostCalculatorComponent,
+      HeroAsyncMessageComponent
   ],
   providers: [
       DialogService
