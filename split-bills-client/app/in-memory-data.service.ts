@@ -10,6 +10,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Nata', 
                 email: 'nata@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: [
                     {
                         userId: 2,
@@ -32,6 +33,7 @@ export class InMemoryDataService implements InMemoryDbService {
                         name: 'Alexnekot'
                     },
                     {
+                        userId: 8,
                         name: 'Test'
                     }
                 ]
@@ -41,6 +43,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Alex',
                 email: 'alex@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: [
                     {
                         userId: 1,
@@ -53,6 +56,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Alexandra',
                 email: 'alexandra@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: [
                     {
                         userId: 1,
@@ -69,6 +73,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Igor',
                 email: 'igor@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: [
                     {
                         userId: 1,
@@ -85,6 +90,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'John',
                 email: 'john@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: []
             },
             { 
@@ -92,6 +98,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Dima',
                 email: 'dima@test.com',
                 password: 'testpwd1',
+                isReal: true,
                 friends: [
                     {
                         userId: 1,
@@ -104,6 +111,20 @@ export class InMemoryDataService implements InMemoryDbService {
                 name: 'Alexnekot',
                 email: 'alexnekot@test.com',
                 password: 'testpwd1',
+                isReal: true,
+                friends: [
+                    {
+                        userId: 1,
+                        name: 'Nata'
+                    }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Test',
+                email: '',
+                password: '',
+                isReal: false,
                 friends: [
                     {
                         userId: 1,
@@ -131,6 +152,7 @@ export class InMemoryDataService implements InMemoryDbService {
                         name: 'Igor'
                     },
                     {
+                        userId: 8,
                         name: 'Test'
                     }
                 ]

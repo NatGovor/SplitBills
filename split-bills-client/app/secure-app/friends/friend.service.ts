@@ -23,33 +23,18 @@ export class FriendService {
                     .catch(this.handleError);
     }
 
-    addFriends(userId: number, friends: Friend[]): Promise<any> {
-        this.userService.getUser(userId)
+    addFriends(userId: number, friends: Friend[]): Promise<User> {
+        return Promise.resolve(this.userService.getUser(userId)
             .then(user => {
+                let userFriendsIds = user.friends.map(f => f.userId);
                 friends.forEach(friend => {
-                    let exist = false;
-                    user.friends.forEach(userFriend => {
-                        if (userFriend.userId === friend.userId) {
-                           exist = true; 
-                        }
-                    });
-
-                    if (!exist) {
+                    if (user.id !== friend.userId && !userFriendsIds.includes(friend.userId)) {
                         user.friends.push(friend);
                     }
                 });
-                
                 return user;
             })
-            .then(user => {
-                if (user.id) {
-                    this.userService.update(user);
-                }
-            })
-            .catch(this.handleError);
-        
-        // TODO: add returning some Promise
-        return null;
+            .then(user => this.userService.update(user)));
     }
 
     private handleError(error: any): Promise<any> {

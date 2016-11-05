@@ -3,7 +3,9 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Group } from './group';
+import { Group }  from './group';
+import { User }   from '../../user';
+import { Friend } from '../friends/friend';
 
 import { UserService }   from '../../user.service';
 import { FriendService } from '../friends/friend.service';
@@ -44,18 +46,32 @@ export class GroupService {
     }
 
     create(group: Group): Promise<Group> {
-        // TODO: remove this code when backend is ready
-        group.friends.forEach(friend => {
-            if (friend.userId) {
-                this.friendService.addFriends(friend.userId, group.friends.filter(f => f.userId != friend.userId));
-            }
-        });
+        let self = this;
 
-        return this.http
-            .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
-            .toPromise()
-            .then(res => res.json().data)
-            .catch(this.handleError);
+        let createUserFromFriend = function (friend: Friend): Promise<Friend> {
+            if (friend.userId) {
+                return Promise.resolve(friend);
+            }
+
+            return Promise.resolve(
+                self.userService.create(new User(0, friend.name, '', '', false, []))
+                    .then(user => {
+                        friend.userId = user.id;
+                        return friend;
+                    }));
+        };      
+
+        return Promise.resolve(Promise.all(group.friends.map(createUserFromFriend))
+            .then(friends => {
+                group.friends.forEach(friend => this.friendService.addFriends(friend.userId, group.friends));
+            })
+            .then(() => {
+                return this.http
+                   .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
+                   .toPromise()
+                   .then(res => res.json().data)
+                   .catch(this.handleError);
+            }));
     }
 
     private handleError(error: any): Promise<any> {

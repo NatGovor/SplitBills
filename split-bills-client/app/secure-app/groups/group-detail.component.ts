@@ -19,8 +19,8 @@ import { GroupService } from './group.service';
                 <div>
                     <span>Members: </span>
                     <ul>
-                        <li *ngFor="let user of group.friends">
-                            <span>{{user.id}}</span>{{user.name}}
+                        <li *ngFor="let friend of group.friends">
+                            <span>{{friend.userId}}</span>{{friend.name}}
                         </li>
                     </ul>
                 </div>
