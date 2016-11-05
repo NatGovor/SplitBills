@@ -4,9 +4,9 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Friend } from './friend';
-import { User }  from '../../user';
+import { User }   from '../../user';
 
-import { UserService } from '../../user.service';
+import { UserService } from '../../user.service'; 
 
 @Injectable()
 export class FriendService {
@@ -23,18 +23,17 @@ export class FriendService {
                     .catch(this.handleError);
     }
 
-    addFriends(userId: number, friends: Friend[]): Promise<User> {
-        return Promise.resolve(this.userService.getUser(userId)
-            .then(user => {
-                let userFriendsIds = user.friends.map(f => f.userId);
-                friends.forEach(friend => {
-                    if (user.id !== friend.userId && !userFriendsIds.includes(friend.userId)) {
-                        user.friends.push(friend);
-                    }
-                });
-                return user;
+    addFriends(userId: number, potentialFriends: Friend[]): Promise<User> {
+        return Promise.resolve(this.getFriends(userId)
+            .then(friends => {
+                let userFriendsIds = friends.map(f => f.userId);
+                return potentialFriends.filter(friend => userId !== friend.userId && !userFriendsIds.includes(friend.userId));
             })
-            .then(user => this.userService.update(user)));
+            .then(newFriends => this.userService.getUser(userId)
+                .then(user => {
+                    user.friends = user.friends.concat(newFriends);
+                    return this.userService.update(user);
+                })));
     }
 
     private handleError(error: any): Promise<any> {

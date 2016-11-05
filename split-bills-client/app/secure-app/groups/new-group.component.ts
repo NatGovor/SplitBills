@@ -8,7 +8,7 @@ import { User }   from '../../user';
 import { GroupService }   from './group.service';
 import { HelpersService } from '../../helpers.service';
 import { DialogService }  from '../../dialog.service';
-import { UserService }    from '../../user.service';
+import { FriendService }    from '../friends/friend.service';
 
 @Component({
     template: `
@@ -41,7 +41,7 @@ import { UserService }    from '../../user.service';
 })
 export class NewGroupComponent implements OnInit {
     submitted = false;
-    currentUser: User;
+    currentUserFriends: Friend[];
     owner = this.helpers.getStorageProperty("user") as User;
     model = new Group(0, '', 
     [
@@ -57,11 +57,11 @@ export class NewGroupComponent implements OnInit {
         private route: ActivatedRoute,
         private helpers: HelpersService,
         private dialogService: DialogService,
-        private userService: UserService) {}
+        private friendService: FriendService) {}
 
     ngOnInit() {
-        this.userService.getUser(this.owner.id)
-            .then(user => this.currentUser = user);
+        this.friendService.getFriends(this.owner.id)
+            .then(friends => this.currentUserFriends = friends);
     }
 
     onSubmit() {
@@ -71,7 +71,7 @@ export class NewGroupComponent implements OnInit {
 
         // find friends that are associated with users
         this.model.friends.forEach(friend => {
-            let existFriend = this.currentUser.friends.find(f => f.name == friend.name);
+            let existFriend = this.currentUserFriends.find(f => f.name == friend.name);
             if (existFriend) {
                 friend.userId = existFriend.userId;
             }

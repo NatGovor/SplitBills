@@ -28,16 +28,14 @@ export class GroupService {
     }
 
     getUserGroups(userId: number): Promise<Group[]> {
-        return this.userService.getUser(userId)
-                .then(user => this.getGroups().then(groups => groups.filter(
+        return this.getGroups().then(groups => groups.filter(
                     group => {
                         for (let i=0; i < group.friends.length; i++) {
-                            if (group.friends[i].userId === user.id) {
+                            if (group.friends[i].userId === userId) {
                                 return true;
                             }
                         }
-                    }
-                )));
+                    }));
     }
 
     getGroup(id: number): Promise<Group> {
@@ -61,17 +59,17 @@ export class GroupService {
                     }));
         };      
 
-        return Promise.resolve(Promise.all(group.friends.map(createUserFromFriend))
-            .then(friends => {
-                group.friends.forEach(friend => this.friendService.addFriends(friend.userId, group.friends));
-            })
-            .then(() => {
-                return this.http
-                   .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
-                   .toPromise()
-                   .then(res => res.json().data)
-                   .catch(this.handleError);
-            }));
+        return Promise.all(group.friends.map(createUserFromFriend))
+                    .then(friends => {
+                        group.friends.forEach(friend => this.friendService.addFriends(friend.userId, group.friends));
+                    })
+                    .then(() => {
+                        return this.http
+                            .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
+                            .toPromise()
+                            .then(res => res.json().data)
+                            .catch(this.handleError);
+                    });
     }
 
     private handleError(error: any): Promise<any> {
