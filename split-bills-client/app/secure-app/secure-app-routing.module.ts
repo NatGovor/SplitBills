@@ -8,6 +8,7 @@ import { FriendsComponent }     from './friends/friends.component';
 import { GroupsComponent }      from './groups/groups.component';
 import { GroupDetailComponent } from './groups/group-detail.component';
 import { NewGroupComponent }    from './groups/new-group.component';
+import { NewBillComponent }     from './bills/new-bill.component';
 
 import { AuthGuard } from '../auth-guard.service';
 
@@ -30,7 +31,8 @@ import { CanDeactivateGuard } from '../can-deactivate-guard.service';
                             { path: 'dashboard', component: DashboardComponent },
                             { path: 'groups', component: GroupsComponent },                            
                             { path: 'groups/new', component: NewGroupComponent, canDeactivate: [CanDeactivateGuard] },
-                            { path: 'groups/:id', component: GroupDetailComponent }
+                            { path: 'groups/:id', component: GroupDetailComponent },
+                            { path: 'groups/bill/new', component: NewBillComponent }
                         ]
                     }
                 ]

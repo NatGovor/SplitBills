@@ -1,3 +1,5 @@
 export enum SplitType {
-    Equal
+    Equal,
+    Unequal,
+    Percent
 }

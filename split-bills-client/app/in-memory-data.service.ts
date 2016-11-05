@@ -204,7 +204,17 @@ export class InMemoryDataService implements InMemoryDbService {
                 amount: '100',
                 groupId: 3,
                 paidBy: 1,
-                splitType: SplitType.Equal
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 50
+                    },
+                    {
+                        userId: 7,
+                        amount: 50
+                    }
+                ]
             },
             {
                 id: 2,
@@ -212,7 +222,17 @@ export class InMemoryDataService implements InMemoryDbService {
                 amount: '50',
                 groupId: 3,
                 paidBy:7,
-                splitType: SplitType.Equal
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 25
+                    },
+                    {
+                        userId: 7,
+                        amount: 25
+                    }
+                ]
             }
         ];
 
