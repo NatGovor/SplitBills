@@ -1,18 +1,25 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule }  from '@angular/forms';
 
 import { BillsComponent }   from './bills.component';
 import { NewBillComponent } from './new-bill.component';
 
 import { BillService } from './bill.service';
 
+import { SplitTypePipe } from './split-type.pipe';
+import { PaidByPipe }    from './paid-by.pipe';
+
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     declarations: [
         BillsComponent,
-        NewBillComponent
+        NewBillComponent,
+        SplitTypePipe,
+        PaidByPipe
     ],
     providers: [
         BillService

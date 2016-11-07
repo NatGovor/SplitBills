@@ -6,10 +6,10 @@ import { Router,
 import { Bill }       from './bill';
 import { ClientBill } from './client-bill';
 import { Group }      from '../groups/group';
-import { User }       from '../../user';
 
-import { BillService }    from './bill.service';
-import { HelpersService } from '../../helpers.service';
+import { BillService } from './bill.service';
+
+import { PaidByPipe } from './paid-by.pipe';
 
 @Component({
     selector: 'bills-list',
@@ -18,10 +18,10 @@ import { HelpersService } from '../../helpers.service';
         <button (click)="addNew();">Add new</button>
 
         <ul *ngIf="bills">
-            <li *ngFor="let bill of clientBills">
+            <li *ngFor="let bill of bills">
                 {{ bill.description }}
                 {{ bill.amount | currency:'USD':true }}
-                Paid by {{ bill.paidByName }}
+                Paid by {{ bill.paidBy | paidByName:group.friends }}
             </li>
         </ul>
     `
@@ -31,21 +31,11 @@ export class BillsComponent implements OnInit {
     group: Group;
 
     bills: Bill[];
-    currentUser: User;
 
     constructor(
         private billService: BillService,
-        private helpers: HelpersService,
         private router: Router,
         private route: ActivatedRoute) {
-        this.currentUser = this.helpers.getStorageProperty("user") as User;
-    }
-
-    get clientBills(): ClientBill[] {
-        return this.bills.map(bill => {
-            let payer = this.group.friends.find(f => f.userId === bill.paidBy);
-            return new ClientBill(bill.id, bill.description, bill.amount, payer.userId === this.currentUser.id ? 'you' : payer.name);
-        });
     }
     
     ngOnInit() {
@@ -54,6 +44,6 @@ export class BillsComponent implements OnInit {
     }
 
     addNew() {
-        this.router.navigate(['../bill/new'], { relativeTo: this.route});
+        this.router.navigate(['../bill/new', { groupId: this.group.id }], { relativeTo: this.route});
     }
 }

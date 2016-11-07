@@ -20,6 +20,14 @@ export class BillService {
                     .catch(this.handleError);
     }
 
+    create(bill: Bill): Promise<Bill> {
+        return this.http
+                .post(this.billsUrl, JSON.stringify(bill), {headers: this.headers})
+                .toPromise()
+                .then(res => res.json().data)
+                .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
