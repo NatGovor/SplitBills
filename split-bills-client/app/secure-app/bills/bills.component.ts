@@ -18,14 +18,27 @@ import { PaidByPipe } from './pipes/paid-by.pipe';
         <h4>Bills list</h4>
         <button (click)="addNew();">Add new</button>
 
-        <ul *ngIf="bills">
-            <li *ngFor="let bill of bills">
-                {{ bill.description }}
-                {{ bill.amount | currency:'USD':true }}
-                Paid by {{ bill.paidBy | paidByName:group.friends }}
-            </li>
-        </ul>
-    `
+        <table *ngIf="bills" class="table table-hover">
+            <tr *ngFor="let bill of bills">
+                <td>
+                    <strong>{{ bill.description }}</strong>
+                </td>
+                <td>
+                    <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} paid</div>
+                    <div><strong>{{ bill.amount | currency:'USD':true }}</strong></div>
+                </td>
+                <td>
+                    <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} lent</div>
+                    <div><strong>$0.0</strong></div>
+                </td>
+            </tr>
+        </table>
+    `,
+    styles: [`
+        .sub-info {
+            font-size: 10px;
+        }
+    `]
 })
 export class BillsComponent implements OnInit {
     @Input()

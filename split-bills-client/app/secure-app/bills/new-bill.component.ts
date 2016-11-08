@@ -5,6 +5,7 @@ import { Router, ActivatedRoute,
 import { Bill }      from './bill';
 import { SplitType } from './split-type';
 import { Friend }    from '../friends/friend';
+import { Debtor }    from './debtor';
 
 import { BillService }  from './bill.service';
 import { GroupService } from '../groups/group.service';
@@ -75,6 +76,19 @@ export class NewBillComponent implements OnInit {
     onSubmit() {
         this.model.paidBy = +this.model.paidBy;
         this.model.splitType = +this.model.splitType;
+
+        switch(this.model.splitType) {
+            case SplitType.Equal:
+                this.friends.forEach(friend => {
+                    this.model.debtors.push(new Debtor(friend.userId, this.model.amount / this.friends.length));
+                });
+                break;
+            case SplitType.Unequal:
+                break;
+            case SplitType.Percent:
+                break;
+        }
+
         console.log(this.model);
 
         this.billService.create(this.model)
