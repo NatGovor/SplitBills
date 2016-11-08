@@ -9,8 +9,8 @@ import { Friend }    from '../friends/friend';
 import { BillService }  from './bill.service';
 import { GroupService } from '../groups/group.service';
 
-import { SplitTypePipe } from './split-type.pipe';
-import { PaidByPipe }    from './paid-by.pipe';
+import { SplitTypePipe } from './pipes/split-type.pipe';
+import { PaidByPipe }    from './pipes/paid-by.pipe';
 
 @Component({
     template: `
@@ -52,7 +52,7 @@ import { PaidByPipe }    from './paid-by.pipe';
     `
 })
 export class NewBillComponent implements OnInit {
-    model = new Bill(0, '', null, 0, 1, 0);
+    model = new Bill(0, '', null, 0, 1, 0, []);
     splitTypes: SplitType[] = [0];
     friends: Friend[] = [];
 

@@ -7,8 +7,8 @@ import { NewBillComponent } from './new-bill.component';
 
 import { BillService } from './bill.service';
 
-import { SplitTypePipe } from './split-type.pipe';
-import { PaidByPipe }    from './paid-by.pipe';
+import { SplitTypePipe } from './pipes/split-type.pipe';
+import { PaidByPipe }    from './pipes/paid-by.pipe';
 
 @NgModule({
     imports: [

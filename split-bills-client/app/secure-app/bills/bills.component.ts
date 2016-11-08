@@ -6,10 +6,11 @@ import { Router,
 import { Bill }       from './bill';
 import { ClientBill } from './client-bill';
 import { Group }      from '../groups/group';
+import { Debtor }     from './debtor';
 
 import { BillService } from './bill.service';
 
-import { PaidByPipe } from './paid-by.pipe';
+import { PaidByPipe } from './pipes/paid-by.pipe';
 
 @Component({
     selector: 'bills-list',

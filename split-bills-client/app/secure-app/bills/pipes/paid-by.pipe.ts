@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Friend } from '../friends/friend';
-import { User }   from '../../user';
+import { Friend } from '../../friends/friend';
+import { User }   from '../../../user';
 
-import { HelpersService } from '../../helpers.service';
+import { HelpersService } from '../../../helpers.service';
 
 @Pipe({name: 'paidByName'})
 export class PaidByPipe implements PipeTransform {
