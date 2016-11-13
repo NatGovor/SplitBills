@@ -89,8 +89,6 @@ export class NewBillComponent implements OnInit {
                 break;
         }
 
-        console.log(this.model);
-
         this.billService.create(this.model)
             .then(group => {
                 this.router.navigate(['/groups', this.model.groupId]);

@@ -13,8 +13,12 @@ export class PaidByPipe implements PipeTransform {
         this.currentUser = this.helpers.getStorageProperty("user") as User;
     }
 
-    transform(payerId: number, friends: Friend[]): string {
+    transform(payerId: number, friends: Friend[], additionalText: boolean): string {
         let payer = friends.find(f => f.userId === payerId);
-        return payer.userId === this.currentUser.id ? 'you' : payer.name;
+        if (!additionalText) {
+            return payer.userId === this.currentUser.id ? 'you' : payer.name;
+        } else {
+            return payer.userId === this.currentUser.id ? 'you lent' : payer.name + ' lent you';
+        }
     }
 }

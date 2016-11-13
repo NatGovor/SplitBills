@@ -10,8 +10,6 @@ import { Debtor }     from './debtor';
 
 import { BillService } from './bill.service';
 
-import { PaidByPipe } from './pipes/paid-by.pipe';
-
 @Component({
     selector: 'bills-list',
     template: `
@@ -28,8 +26,8 @@ import { PaidByPipe } from './pipes/paid-by.pipe';
                     <div><strong>{{ bill.amount | currency:'USD':true }}</strong></div>
                 </td>
                 <td>
-                    <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} lent</div>
-                    <div><strong>$0.0</strong></div>
+                    <div class="sub-info">{{ bill.paidBy | paidByName:group.friends:true }}</div>
+                    <div><strong>{{ bill.paidBy | lentAmount:bill.debtors | currency:'USD':true }}</strong></div>
                 </td>
             </tr>
         </table>
