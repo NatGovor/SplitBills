@@ -3,12 +3,14 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Group }  from './group';
-import { User }   from '../../user';
-import { Friend } from '../friends/friend';
+import { Group }   from './group';
+import { User }    from '../../user';
+import { Friend }  from '../friends/friend';
+import { Balance } from './balance';
 
 import { UserService }   from '../../user.service';
 import { FriendService } from '../friends/friend.service';
+import { BillService }   from '../bills/bill.service';
 
 @Injectable()
 export class GroupService {
@@ -18,7 +20,8 @@ export class GroupService {
     constructor(
         private http: Http, 
         private userService: UserService,
-        private friendService: FriendService) { }
+        private friendService: FriendService,
+        private billService: BillService) { }
 
     getGroups(): Promise<Group[]> {
         return this.http.get(this.groupsUrl)
@@ -70,6 +73,40 @@ export class GroupService {
                             .then(res => res.json().data)
                             .catch(this.handleError);
                     });
+    }
+
+    getBalances(groupId: number): Promise<Balance[]> {
+        let balances: Balance[] = [];
+        Promise.resolve(this.getGroup(groupId).then(group => {
+            group.friends.forEach(friend => {
+                balances.push(new Balance(friend, 0));
+            });
+        }));
+
+        return this.billService.getBills(groupId)
+            .then(bills => {
+                balances.forEach(balance => {
+                    var sum = 0;
+                    bills.forEach(bill => {
+                        if (bill.paidBy === balance.friend.userId) {
+                            bill.debtors.forEach(debtor => {
+                                if (debtor.userId != balance.friend.userId) {
+                                    sum += debtor.amount;
+                                }
+                            });
+                        } else {
+                            bill.debtors.forEach(debtor => {
+                                if (debtor.userId === balance.friend.userId) {
+                                    sum -= debtor.amount;
+                                }
+                            });
+                        }
+                    });
+                    balance.amount = sum;
+                });
+                console.log(balances);
+                return balances;
+            });
     }
 
     private handleError(error: any): Promise<any> {

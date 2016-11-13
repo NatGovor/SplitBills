@@ -9,24 +9,29 @@ import { GroupService } from './group.service';
     template: `
         <div *ngIf="group">
             <h4>{{group.name}} details</h4>
-            <div>
-                <div>
-                    <span>id: </span>{{group.id}}
+            <div class="row">
+                <div class="col-xs-6">
+                    <div>
+                        <span>id: </span>{{group.id}}
+                    </div>
+                    <div>
+                        <span>name: </span>{{group.name}}
+                    </div>
+                    <div>
+                        <span>Members: </span>
+                        <ul>
+                            <li *ngFor="let friend of group.friends">
+                                {{friend.name}}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <span>name: </span>{{group.name}}
+                <div class="col-xs-6">
+                    <group-balances [group]="group"></group-balances>
                 </div>
-                <div>
-                    <span>Members: </span>
-                    <ul>
-                        <li *ngFor="let friend of group.friends">
-                            {{friend.name}}
-                        </li>
-                    </ul>
-                </div>
-                <bills-list [group]="group"></bills-list>
-                <button (click)="goBack()">Back</button>
             </div>
+            <bills-list [group]="group"></bills-list>
+            <button (click)="goBack()">Back</button>
         </div>
     `
 })
