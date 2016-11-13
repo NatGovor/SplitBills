@@ -7,8 +7,10 @@ import { Bill }       from './bill';
 import { ClientBill } from './client-bill';
 import { Group }      from '../groups/group';
 import { Debtor }     from './debtor';
+import { User }       from '../../user';
 
-import { BillService } from './bill.service';
+import { BillService }    from './bill.service';
+import { HelpersService } from '../../helpers.service';     
 
 @Component({
     selector: 'bills-list',
@@ -27,7 +29,9 @@ import { BillService } from './bill.service';
                 </td>
                 <td>
                     <div class="sub-info">{{ bill.paidBy | paidByName:group.friends:true }}</div>
-                    <div><strong>{{ bill.paidBy | lentAmount:bill.debtors | currency:'USD':true }}</strong></div>
+                    <div [ngClass]="addClass(bill.paidBy)">
+                        <strong>{{ bill.paidBy | lentAmount:bill.debtors | currency:'USD':true }}</strong>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -35,6 +39,12 @@ import { BillService } from './bill.service';
     styles: [`
         .sub-info {
             font-size: 10px;
+        }
+        .positive {
+            color: #50c797;
+        }
+        .negative {
+            color: #de3838;
         }
     `]
 })
@@ -44,10 +54,14 @@ export class BillsComponent implements OnInit {
 
     bills: Bill[];
 
+    currentUser: User;
+
     constructor(
         private billService: BillService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private helpers: HelpersService) {
+        this.currentUser = this.helpers.getStorageProperty("user") as User;
     }
     
     ngOnInit() {
@@ -57,5 +71,13 @@ export class BillsComponent implements OnInit {
 
     addNew() {
         this.router.navigate(['../bill/new', { groupId: this.group.id }], { relativeTo: this.route});
+    }
+
+    addClass(payerId: number): string {
+        if (payerId === this.currentUser.id) {
+            return 'positive';
+        } else {
+            return 'negative';
+        }
     }
 }
