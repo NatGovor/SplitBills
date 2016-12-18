@@ -330,19 +330,19 @@ export class InMemoryDataService implements InMemoryDbService {
                 debtors: [
                     {
                         userId: 1,
-                        amount: 8
+                        amount: 10
                     },
                     {
                         userId: 3,
-                        amount: 8
+                        amount: 10
                     },
                     {
                         userId: 4,
-                        amount: 8
+                        amount: 10
                     },
                     {
                         userId: 8,
-                        amount: 8
+                        amount: 10
                     }
                 ]
             },

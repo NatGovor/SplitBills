@@ -104,7 +104,20 @@ export class GroupService {
                     });
                     balance.amount = sum;
                 });
-                console.log(balances);
+
+                // sort balances from positive to negative
+                balances.sort(function(b1, b2) {
+                    if (b1.amount < b2.amount) {
+                        return 1;
+                    }
+
+                    if (b1.amount > b2.amount) {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+
                 return balances;
             });
     }

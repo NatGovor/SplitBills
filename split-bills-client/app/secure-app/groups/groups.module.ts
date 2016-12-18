@@ -11,6 +11,8 @@ import { GroupBalancesComponent } from './group-balances.component';
 
 import { GroupService } from './group.service';
 
+import { MakePositivePipe } from '../../pipes/make-positive.pipe';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +23,8 @@ import { GroupService } from './group.service';
         GroupsComponent,
         GroupDetailComponent,
         NewGroupComponent,
-        GroupBalancesComponent
+        GroupBalancesComponent,
+        MakePositivePipe
     ],
     providers: [
         GroupService

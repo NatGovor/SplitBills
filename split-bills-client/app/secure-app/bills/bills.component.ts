@@ -40,12 +40,6 @@ import { HelpersService } from '../../helpers.service';
         .sub-info {
             font-size: 10px;
         }
-        .positive {
-            color: #50c797;
-        }
-        .negative {
-            color: #de3838;
-        }
     `]
 })
 export class BillsComponent implements OnInit {
