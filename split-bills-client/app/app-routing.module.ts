@@ -7,7 +7,7 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
 
 @NgModule({
     imports: [
-        RouterModule.forRoot([
+        RouterModule.forRoot([   
             {
                 path: '',
                 component: HomeComponent

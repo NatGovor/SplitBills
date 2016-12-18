@@ -46,9 +46,9 @@ export class NewGroupComponent implements OnInit {
     model = new Group(0, '', 
     [
         new Friend(this.owner.name, this.owner.id),
-        new Friend(''),
-        new Friend(''),
-        new Friend('')
+        new Friend('', 0),
+        new Friend('', 0),
+        new Friend('', 0)
     ]);
 
     constructor(
@@ -92,7 +92,7 @@ export class NewGroupComponent implements OnInit {
     }
 
     addPerson() {
-        this.model.friends.push(new Friend(''));
+        this.model.friends.push(new Friend('', 0));
     }
 
     goBack() {

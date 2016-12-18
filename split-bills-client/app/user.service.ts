@@ -40,7 +40,9 @@ export class UserService {
 
     create(user: User): Promise<User> {
         return this.http
-            .post(this.usersUrl, JSON.stringify(user), {headers: this.headers})
+            .post(this.usersUrl, 
+                  JSON.stringify({name: user.name, email: user.email, password: user.password, isReal: user.isReal, friends: user.friends}), 
+                  {headers: this.headers})
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);

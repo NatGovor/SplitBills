@@ -68,7 +68,7 @@ export class GroupService {
                     })
                     .then(() => {
                         return this.http
-                            .post(this.groupsUrl, JSON.stringify(group), {headers: this.headers})
+                            .post(this.groupsUrl, JSON.stringify({name: group.name, friends: group.friends}), {headers: this.headers})
                             .toPromise()
                             .then(res => res.json().data)
                             .catch(this.handleError);

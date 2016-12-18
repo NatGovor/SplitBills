@@ -25,9 +25,9 @@ import { DialogService }  from './dialog.service';
         FormsModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
-        SecureAppModule,
         LoginRoutingModule,
-        AppRoutingModule
+        AppRoutingModule,
+        SecureAppModule
     ],
     declarations: [
         AppComponent,

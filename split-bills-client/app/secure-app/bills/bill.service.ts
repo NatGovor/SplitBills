@@ -22,7 +22,9 @@ export class BillService {
 
     create(bill: Bill): Promise<Bill> {
         return this.http
-                .post(this.billsUrl, JSON.stringify(bill), {headers: this.headers})
+                .post(this.billsUrl, 
+                      JSON.stringify({description: bill.description, amount: bill.amount, groupId: bill.groupId, paidBy: bill.paidBy, splitType: bill.splitType, debtors: bill.debtors}), 
+                      {headers: this.headers})
                 .toPromise()
                 .then(res => res.json().data)
                 .catch(this.handleError);
