@@ -129,6 +129,14 @@ export class InMemoryDataService implements InMemoryDbService {
                     {
                         userId: 1,
                         name: 'Nata'
+                    },
+                    {
+                        userId: 3,
+                        name: 'Alexandra'
+                    },
+                    {
+                        userId: 4,
+                        name: 'Igor'
                     }
                 ]
             }
@@ -201,7 +209,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 1,
                 description: 'Apartments',
-                amount: '100',
+                amount: 100,
                 groupId: 3,
                 paidBy: 1,
                 splitType: SplitType.Equal,
@@ -219,7 +227,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 2,
                 description: 'Train',
-                amount: '50',
+                amount: 50,
                 groupId: 3,
                 paidBy:7,
                 splitType: SplitType.Equal,
@@ -231,6 +239,162 @@ export class InMemoryDataService implements InMemoryDbService {
                     {
                         userId: 7,
                         amount: 25
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Hostel Brussels',
+                amount: 184,
+                groupId: 1,
+                paidBy:3,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 46
+                    },
+                    {
+                        userId: 3,
+                        amount: 46
+                    },
+                    {
+                        userId: 4,
+                        amount: 46
+                    },
+                    {
+                        userId: 8,
+                        amount: 46
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Bars',
+                amount: 15,
+                groupId: 1,
+                paidBy: 8,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 3.75
+                    },
+                    {
+                        userId: 3,
+                        amount: 3.75
+                    },
+                    {
+                        userId: 4,
+                        amount: 3.75
+                    },
+                    {
+                        userId: 8,
+                        amount: 3.75
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Lunch',
+                amount: 20,
+                groupId: 1,
+                paidBy: 1,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 5
+                    },
+                    {
+                        userId: 3,
+                        amount: 5
+                    },
+                    {
+                        userId: 4,
+                        amount: 5
+                    },
+                    {
+                        userId: 8,
+                        amount: 5
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Dinner',
+                amount: 40,
+                groupId: 1,
+                paidBy: 4,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 8
+                    },
+                    {
+                        userId: 3,
+                        amount: 8
+                    },
+                    {
+                        userId: 4,
+                        amount: 8
+                    },
+                    {
+                        userId: 8,
+                        amount: 8
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Beer museum',
+                amount: 20,
+                groupId: 1,
+                paidBy: 4,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 5
+                    },
+                    {
+                        userId: 3,
+                        amount: 5
+                    },
+                    {
+                        userId: 4,
+                        amount: 5
+                    },
+                    {
+                        userId: 8,
+                        amount: 5
+                    }
+                ]
+            },
+            {
+                id: 3,
+                description: 'Hostel Brugge',
+                amount: 84,
+                groupId: 1,
+                paidBy: 3,
+                splitType: SplitType.Equal,
+                debtors: [
+                    {
+                        userId: 1,
+                        amount: 21
+                    },
+                    {
+                        userId: 3,
+                        amount: 21
+                    },
+                    {
+                        userId: 4,
+                        amount: 21
+                    },
+                    {
+                        userId: 8,
+                        amount: 21
                     }
                 ]
             }
