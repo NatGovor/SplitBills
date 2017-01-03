@@ -14,8 +14,12 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
         <ul>
             <li *ngFor="let balance of balances">
                 <div>{{balance.friend.name}}</div>
-                <div [ngClass]="addClass(balance.amount)">
-                    <span *ngIf="balance.amount >= 0">gets back </span>
+                <div *ngIf="balance.amount == 0">
+                    <span>settled up</span>
+                </div>
+                <div *ngIf="balance.amount != 0"
+                     [ngClass]="addClass(balance.amount)">
+                    <span *ngIf="balance.amount > 0">gets back </span>
                     <span *ngIf="balance.amount < 0">owes </span>
                     {{balance.amount | makePositive }}
                 </div>
