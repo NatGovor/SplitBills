@@ -6,6 +6,7 @@ import { Bill }      from './bill';
 import { SplitType } from './split-type';
 import { Friend }    from '../friends/friend';
 import { Debtor }    from './debtor';
+import { FriendDebtor } from './friend-debtor';
 
 import { BillService }  from './bill.service';
 import { GroupService } from '../groups/group.service';
@@ -46,6 +47,19 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                         <option *ngFor="let f of friends" [value]="f.userId">{{f.userId | paidByName:friends}}</option>
                     </select>
                 </div>
+                <div *ngIf="model.splitType == 0">
+                    <div *ngFor="let f of friendDebtors" class="form-group">
+                        <input type="checkbox" checked="checked">
+                        <label>{{f.name}}</label>
+                        {{ model.amount / friendDebtors.length }}
+                    </div>
+                </div>
+                <div *ngIf="model.splitType == 1">
+                    <div *ngFor="let f of friendDebtors" class="form-group">
+                        <label>{{f.name}}</label>
+                        <input type="number" class="form-control" >
+                    </div>
+                </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
             </form>
@@ -54,8 +68,9 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
 })
 export class NewBillComponent implements OnInit {
     model = new Bill(0, '', null, 0, 1, 0, []);
-    splitTypes: SplitType[] = [0];
+    splitTypes: SplitType[] = [0, 1];
     friends: Friend[] = [];
+    friendDebtors: FriendDebtor[] = [];
 
     constructor(
         private router: Router,
@@ -70,7 +85,10 @@ export class NewBillComponent implements OnInit {
         });
 
         this.groupService.getGroup(this.model.groupId)
-            .then(group => this.friends = group.friends);
+            .then(group => {
+                this.friends = group.friends;
+                this.friendDebtors = this.friends.map(f => new FriendDebtor(f.userId, f.name, true, 0));
+            });
     }
 
     onSubmit() {
