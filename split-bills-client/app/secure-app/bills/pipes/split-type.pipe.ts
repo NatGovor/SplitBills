@@ -8,10 +8,10 @@ export class SplitTypePipe implements PipeTransform {
         switch (value) {
             case SplitType.Equal:
                 return 'Equal';
-            case SplitType.Unequal:
-                return 'Unequal';
-            case SplitType.Percent:
-                return 'Percent';
+            case SplitType.ExactAmounts:
+                return 'Exact Amounts';
+            case SplitType.Percentage:
+                return 'Percentage';
             default:
                 console.log('Error in parsing SplitType: ', value);
         }

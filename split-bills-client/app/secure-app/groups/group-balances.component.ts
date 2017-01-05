@@ -38,7 +38,6 @@ export class GroupBalancesComponent implements OnInit {
     ngOnInit() {
         this.groupService.getBalances(this.group.id).then(balances => {
             this.balances = balances;
-            console.log(this.balances);
         });
     }
 
