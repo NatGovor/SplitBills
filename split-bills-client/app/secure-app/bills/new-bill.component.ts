@@ -47,7 +47,10 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                         <option *ngFor="let type of splitTypes" [value]="type">{{type | splitTypeName }}</option>
                     </select>
                 </div>
+
+                <h5>Choose split options</h5>
                 <div *ngIf="model.splitType == 0">
+                    <div>Split equally</div>
                     <div *ngFor="let f of friendDebtors" class="form-group">
                         <input type="checkbox" [(ngModel)]="f.isActive" name="checkbox_{{f.name}}_{{f.userId}}">
                         <label>{{f.name}}</label>
@@ -55,6 +58,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     </div>
                 </div>
                 <div *ngIf="model.splitType == 1">
+                    <div>Split by exact amounts</div>
                     <div *ngFor="let f of friendDebtors" class="form-group">
                         <label>{{f.name}}</label>
                         <div class="input-group">
@@ -64,6 +68,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     </div>
                 </div>
                 <div *ngIf="model.splitType == 2">
+                    <div>Split by percentages</div>
                     <div *ngFor="let f of friendDebtors" class="form-group">
                         <label>{{f.name}}</label>
                         <div class="input-group">
@@ -71,6 +76,10 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
+                </div>
+                <div *ngIf="model.splitType != 0">
+                    <div><span>TOTAL </span>{{ calculateTotal() | currency:'USD':true }}</div>
+                    <div>{{ calculateLeft() | currency:'USD':true }} left</div>
                 </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
@@ -133,5 +142,15 @@ export class NewBillComponent implements OnInit {
         }
 
         return friendDebtor.amount;
+    }
+
+    calculateTotal() {
+        return this.friendDebtors.reduce(function (sum, friendDebtor) {
+            return sum + friendDebtor.amount; 
+        }, 0);
+    }
+
+    calculateLeft() {
+        return this.model.amount - this.calculateTotal();
     }
 }
