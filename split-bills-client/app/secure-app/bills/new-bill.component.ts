@@ -63,7 +63,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                         <label>{{f.name}}</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [(ngModel)]="f.amount">
+                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [(ngModel)]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
                         </div>
                     </div>
                 </div>
@@ -78,8 +78,8 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     </div>
                 </div>
                 <div *ngIf="model.splitType != 0">
-                    <div><span>TOTAL </span>{{ calculateTotal() | currency:'USD':true }}</div>
-                    <div>{{ calculateLeft() | currency:'USD':true }} left</div>
+                    <div><span>TOTAL </span>{{ total | currency:'USD':true }}</div>
+                    <div>{{ left | currency:'USD':true }} left</div>
                 </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
@@ -92,6 +92,8 @@ export class NewBillComponent implements OnInit {
     splitTypes: SplitType[] = [0, 1, 2];
     friends: Friend[] = [];
     friendDebtors: FriendDebtor[] = [];
+    total = 0;
+    left = 0;
 
     constructor(
         private router: Router,
@@ -145,12 +147,9 @@ export class NewBillComponent implements OnInit {
     }
 
     calculateTotal() {
-        return this.friendDebtors.reduce(function (sum, friendDebtor) {
+        this.total = this.friendDebtors.reduce(function (sum, friendDebtor) {
             return sum + friendDebtor.amount; 
         }, 0);
-    }
-
-    calculateLeft() {
-        return this.model.amount - this.calculateTotal();
+        this.left = this.model.amount - this.total;
     }
 }
