@@ -7,4 +7,8 @@ export class DialogService {
             return resolve(window.confirm(message || 'Is it OK?'));
         });
     }
+
+    alert(message: string) {
+        window.alert(message);
+    }
 }

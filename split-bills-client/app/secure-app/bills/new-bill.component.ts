@@ -55,7 +55,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     <div *ngFor="let f of friendDebtors" class="form-group">
                         <input type="checkbox" [(ngModel)]="f.isActive" name="checkbox_{{f.name}}_{{f.userId}}">
                         <label>{{f.name}}</label>
-                        <span>{{ calculateDebtorAmount(f) }}</span>
+                        <span>{{ calculateEqualDebtorAmount(f) }}</span>
                     </div>
                 </div>
                 <div *ngIf="model.splitType == 1">
@@ -94,6 +94,7 @@ export class NewBillComponent implements OnInit {
     splitTypes: SplitType[] = [0, 1, 2];
     friends: Friend[] = [];
     friendDebtors: FriendDebtor[] = [];
+    // values for unequal splitting
     total = 0;
     left = 0;
 
@@ -126,6 +127,12 @@ export class NewBillComponent implements OnInit {
     }
 
     onSubmit() {
+        // validation
+        if (this.total != this.model.amount && this.left != 0) {
+            this.dialogService.alert("The following errors occurred:\nThe total of everyone's owed shares is different than the total cost.");
+            return;
+        }
+
         this.submitted = true;
 
         this.model.paidBy = +this.model.paidBy;
@@ -148,7 +155,7 @@ export class NewBillComponent implements OnInit {
             });
     }
 
-    calculateDebtorAmount(friendDebtor: FriendDebtor) {
+    calculateEqualDebtorAmount(friendDebtor: FriendDebtor) {
         if (!friendDebtor.isActive) {
             friendDebtor.amount = 0;
         } else {
@@ -158,6 +165,7 @@ export class NewBillComponent implements OnInit {
         return friendDebtor.amount;
     }
 
+    // in unequal splitting user enters amounts manually, so we need to calculate and display tips to him
     calculateTotal() {
         this.total = this.friendDebtors.reduce(function (sum, friendDebtor) {
             return sum + friendDebtor.amount; 
