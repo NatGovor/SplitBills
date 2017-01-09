@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, 
          Params }            from '@angular/router';
 
-import { Bill }      from './bill';
-import { SplitType } from './split-type';
-import { Friend }    from '../friends/friend';
-import { Debtor }    from './debtor';
+import { Bill }         from './bill';
+import { SplitType }    from './split-type';
+import { Friend }       from '../friends/friend';
+import { Debtor }       from './debtor';
 import { FriendDebtor } from './friend-debtor';
 
-import { BillService }  from './bill.service';
-import { GroupService } from '../groups/group.service';
+import { BillService }   from './bill.service';
+import { GroupService }  from '../groups/group.service';
+import { DialogService } from '../../dialog.service';
 
 import { SplitTypePipe } from './pipes/split-type.pipe';
 import { PaidByPipe }    from './pipes/paid-by.pipe';
@@ -88,6 +89,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
     `
 })
 export class NewBillComponent implements OnInit {
+    submitted = false;
     model = new Bill(0, '', null, 0, 1, 0, []);
     splitTypes: SplitType[] = [0, 1, 2];
     friends: Friend[] = [];
@@ -99,7 +101,8 @@ export class NewBillComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private billService: BillService,
-        private groupService: GroupService
+        private groupService: GroupService,
+        private dialogService: DialogService
     ) {}
 
     ngOnInit() {
@@ -114,12 +117,21 @@ export class NewBillComponent implements OnInit {
             });
     }
 
+    canDeactivate(): Promise<boolean> | boolean {
+        if (this.submitted) {
+            return true;
+        }
+
+        return this.dialogService.confirm('Discard creating new bill?')
+    }
+
     onSubmit() {
-        console.log(this.friendDebtors);
+        this.submitted = true;
+
         this.model.paidBy = +this.model.paidBy;
         this.model.splitType = +this.model.splitType;
 
-            switch(this.model.splitType) {
+        switch(this.model.splitType) {
             case SplitType.Equal:
             case SplitType.ExactAmounts:
                 this.friendDebtors.forEach(friend => {
