@@ -86,6 +86,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                 </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
+                <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
             </form>
         </div>
     `
@@ -129,6 +130,10 @@ export class NewBillComponent implements OnInit {
         return this.dialogService.confirm('Discard creating new bill?')
     }
 
+    goBack() {
+        this.router.navigate(['../../', this.model.groupId], { relativeTo: this.route });
+    }
+
     onSubmit() {
         // validation
         if (this.total != this.model.amount && this.left != 0) {
@@ -150,7 +155,6 @@ export class NewBillComponent implements OnInit {
                 break;
             case SplitType.Percentage:
                 this.friendDebtors.forEach(friend => {
-                    // add evenly divider
                     this.model.debtors.push(new Debtor(friend.userId, this.model.amount * friend.amount / 100));
                 });
                 break;
