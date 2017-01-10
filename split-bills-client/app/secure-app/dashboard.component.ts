@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { GroupService }   from './groups/group.service';
+import { HelpersService } from '../helpers.service';
+
+import { Balance } from './groups/balance';
+import { User }    from '../user';
 
 @Component({
     template: `
@@ -18,4 +24,34 @@ import { Component } from '@angular/core';
         }
     `]
 })
-export class DashboardComponent {}
+export class DashboardComponent implements OnInit {
+    balances: Balance[] = [];
+
+    constructor(
+        private groupService: GroupService,
+        private helpers: HelpersService
+    ) {}
+
+     ngOnInit() {
+         this.groupService.getUserGroups((this.helpers.getStorageProperty("user") as User).id)
+            .then(groups => {
+                groups.forEach(group => {
+                   this.groupService.getBalances(group.id).then(balances => {
+                        balances.forEach(balance => {
+                            var totalBalance = this.balances.find(function (element, index, array) {
+                                if (element.friend.userId === balance.friend.userId) {
+                                    return true;
+                                }
+                            });
+                            if (totalBalance) {
+                                totalBalance.amount += balance.amount;
+                            } else {
+                                this.balances.push(balance);
+                            }
+                        });
+                        console.log(this.balances);
+                    });
+                });
+            });
+     }
+}
