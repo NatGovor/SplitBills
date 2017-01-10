@@ -21,7 +21,7 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
                      [ngClass]="addClass(balance.amount)">
                     <span *ngIf="balance.amount > 0">gets back </span>
                     <span *ngIf="balance.amount < 0">owes </span>
-                    {{balance.amount | makePositive }}
+                    {{balance.amount | makePositive | currency:'USD':true:'1.2-2' }}
                 </div>
             </li>
         </ul>

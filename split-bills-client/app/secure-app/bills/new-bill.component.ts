@@ -11,6 +11,7 @@ import { FriendDebtor } from './friend-debtor';
 import { BillService }   from './bill.service';
 import { GroupService }  from '../groups/group.service';
 import { DialogService } from '../../dialog.service';
+import { HelpersService } from '../../helpers.service';
 
 import { SplitTypePipe } from './pipes/split-type.pipe';
 import { PaidByPipe }    from './pipes/paid-by.pipe';
@@ -30,7 +31,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     <label>Amount ($)</label>
                     <input type="number" class="form-control" id="amount"
                         required
-                        [(ngModel)]="model.amount" name="amount">
+                        [ngModel]="model.amount" (ngModelChange)="model.amount=$event; calculateTotal();" name="amount">
                 </div>
                 <div class="form-group">
                     <label>Paid By</label>
@@ -53,34 +54,35 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                 <div *ngIf="model.splitType == 0">
                     <div>Split equally</div>
                     <div *ngFor="let f of friendDebtors" class="form-group">
-                        <input type="checkbox" [(ngModel)]="f.isActive" name="checkbox_{{f.name}}_{{f.userId}}">
+                        <input type="checkbox" [ngModel]="f.isActive" (ngModelChange)="f.isActive=$event; calculateTotal();" name="checkbox_{{f.name}}_{{f.userId}}">
                         <label>{{f.name}}</label>
-                        <span>{{ calculateEqualDebtorAmount(f) }}</span>
+                        <span>{{ f.amount | currency:'USD':true:'1.2-2' }}</span>
                     </div>
                 </div>
-                <div *ngIf="model.splitType == 1">
+                <div *ngIf="model.splitType != 0">
                     <div>Split by exact amounts</div>
-                    <div *ngFor="let f of friendDebtors" class="form-group">
-                        <label>{{f.name}}</label>
-                        <div class="input-group">
+                    <div *ngFor="let f of friendDebtors" class="form-group row">
+                        <div class="col-xs-8"><label>{{f.name}}</label></div>
+                        <div *ngIf="model.splitType == 1" class="input-group col-xs-4">
                             <span class="input-group-addon">$</span>
-                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [(ngModel)]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
+                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="model.splitType == 2">
-                    <div>Split by percentages</div>
-                    <div *ngFor="let f of friendDebtors" class="form-group">
-                        <label>{{f.name}}</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [(ngModel)]="f.amount">
+                        <div *ngIf="model.splitType == 2" class="input-group col-xs-4">
+                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="model.splitType != 0">
-                    <div><span>TOTAL </span>{{ total | currency:'USD':true }}</div>
-                    <div>{{ left | currency:'USD':true }} left</div>
+                <div *ngIf="model.splitType != 0" class="row">
+                    <div class="col-xs-8"><b>TOTAL </b></div>
+                    <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
+                        <div><b>{{ total | currency:'USD':true }}</b></div>
+                        <div>{{ left | currency:'USD':true }} left</div>
+                    </div>
+                    <div class="col-xs-4 text-right" *ngIf="model.splitType == 2">
+                        <div><b>{{ total }}%</b></div>
+                        <div>{{ left }}% left</div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
@@ -103,7 +105,8 @@ export class NewBillComponent implements OnInit {
         private route: ActivatedRoute,
         private billService: BillService,
         private groupService: GroupService,
-        private dialogService: DialogService
+        private dialogService: DialogService,
+        private helpersService: HelpersService
     ) {}
 
     ngOnInit() {
@@ -146,6 +149,10 @@ export class NewBillComponent implements OnInit {
                 });
                 break;
             case SplitType.Percentage:
+                this.friendDebtors.forEach(friend => {
+                    // add evenly divider
+                    this.model.debtors.push(new Debtor(friend.userId, this.model.amount * friend.amount / 100));
+                });
                 break;
         }
 
@@ -155,18 +162,19 @@ export class NewBillComponent implements OnInit {
             });
     }
 
-    calculateEqualDebtorAmount(friendDebtor: FriendDebtor) {
-        if (!friendDebtor.isActive) {
-            friendDebtor.amount = 0;
-        } else {
-            friendDebtor.amount = this.model.amount / this.friendDebtors.filter(x => x.isActive).length;
-        }
-
-        return friendDebtor.amount;
-    }
-
     // in unequal splitting user enters amounts manually, so we need to calculate and display tips to him
     calculateTotal() {
+        if (this.model.splitType == 0) {
+            var res = this.helpersService.divideNumbersEvenly(this.model.amount, this.friendDebtors.filter(x => x.isActive).length, 2);
+            this.friendDebtors.forEach(f => {
+                if (f.isActive) {
+                    f.amount = res.shift();
+                } else {
+                    f.amount = 0;
+                }
+            })
+        }
+
         this.total = this.friendDebtors.reduce(function (sum, friendDebtor) {
             return sum + friendDebtor.amount; 
         }, 0);

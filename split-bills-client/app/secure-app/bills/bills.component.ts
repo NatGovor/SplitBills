@@ -25,12 +25,12 @@ import { HelpersService } from '../../helpers.service';
                 </td>
                 <td>
                     <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} paid</div>
-                    <div><strong>{{ bill.amount | currency:'USD':true }}</strong></div>
+                    <div><strong>{{ bill.amount | currency:'USD':true:'1.2-2' }}</strong></div>
                 </td>
                 <td>
                     <div class="sub-info">{{ bill.paidBy | paidByName:group.friends:true }}</div>
                     <div [ngClass]="addClass(bill.paidBy)">
-                        <strong>{{ bill.paidBy | lentAmount:bill.debtors | currency:'USD':true }}</strong>
+                        <strong>{{ bill.paidBy | lentAmount:bill.debtors | currency:'USD':true:'1.2-2' }}</strong>
                     </div>
                 </td>
             </tr>
