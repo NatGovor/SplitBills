@@ -74,7 +74,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     </div>
                 </div>
                 <div *ngIf="model.splitType != 0" class="row">
-                    <div class="col-xs-8"><b>TOTAL </b></div>
+                    <div class="col-xs-8 text-uppercase"><b>Total </b></div>
                     <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
                         <div><b>{{ total | currency:'USD':true }}</b></div>
                         <div>{{ left | currency:'USD':true }} left</div>
