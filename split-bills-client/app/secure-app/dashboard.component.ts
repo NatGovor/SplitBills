@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { GroupService }   from './groups/group.service';
 import { HelpersService } from '../helpers.service';
+import { BillService }    from './bills/bill.service';
 
-import { Balance } from './groups/balance';
+import { Bill } from './bills/bill';
 import { User }    from '../user';
+import { Group }   from './groups/group';
 
 @Component({
     template: `
@@ -17,6 +19,10 @@ import { User }    from '../user';
                 <div class="text-uppercase text-right"><b>You are owed</b></div>
             </div>
         </div>
+
+        <ul>
+            <li *ngFor="let bill of bills">{{ diagnostic(bill) }}</li>
+        </ul>
     `,
     styles: [`
         .negatives {
@@ -25,33 +31,48 @@ import { User }    from '../user';
     `]
 })
 export class DashboardComponent implements OnInit {
-    balances: Balance[] = [];
+    groups: Group[] = [];
+    bills: Bill[] = [];
+    currentUser: User;
 
     constructor(
         private groupService: GroupService,
-        private helpers: HelpersService
-    ) {}
+        private helpers: HelpersService,
+        private billService: BillService
+    ) {
+        this.currentUser = this.helpers.getStorageProperty("user") as User;
+    }
 
      ngOnInit() {
-         this.groupService.getUserGroups((this.helpers.getStorageProperty("user") as User).id)
+         var self = this;
+
+         this.groupService.getUserGroups(this.currentUser.id)
             .then(groups => {
                 groups.forEach(group => {
                    this.groupService.getBalances(group.id).then(balances => {
-                        balances.forEach(balance => {
-                            var totalBalance = this.balances.find(function (element, index, array) {
-                                if (element.friend.userId === balance.friend.userId) {
-                                    return true;
-                                }
-                            });
-                            if (totalBalance) {
-                                totalBalance.amount += balance.amount;
-                            } else {
-                                this.balances.push(balance);
-                            }
-                        });
-                        console.log(this.balances);
+                       var userBalance = balances.find(function(value, index, arr) {
+                           if (value.friend.userId === self.currentUser.id) {
+                               return true;
+                           }
+                       })
+
+                       if (userBalance.amount !== 0) { // look into only unsettled groups
+                           this.groups.push(group);
+
+                           this.billService.getBills(group.id)
+                                .then(bills => {
+                                    bills.forEach(bill => {
+                                        if (bill.paidBy === self.currentUser.id) {
+                                            self.bills.push(bill);
+                                        }
+                                        // add bills where currentUser is involved
+                                    });
+                                });
+                       }
                     });
                 });
             });
      }
+
+     diagnostic(x) { return JSON.stringify(x); }
 }
