@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, trigger, state, style,
+         transition,  animate } from '@angular/core';
 import { Router, ActivatedRoute, 
          Params }            from '@angular/router';
 
@@ -50,39 +51,45 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                     </select>
                 </div>
 
-                <h5 (click)="showSplitOptions = !showSplitOptions;">Extended split options</h5>
-                <div [hidden]="!showSplitOptions">
-                    <div *ngIf="model.splitType == 0">
-                        <div>Split equally</div>
-                        <div *ngFor="let f of friendDebtors" class="form-group">
-                            <input type="checkbox" [ngModel]="f.isActive" (ngModelChange)="f.isActive=$event; calculateTotal();" name="checkbox_{{f.name}}_{{f.userId}}">
-                            <label>{{f.name}}</label>
-                            <span>{{ f.amount | currency:'USD':true:'1.2-2' }}</span>
-                        </div>
+                <div class="form-group">
+                    <div (click)="showSplitOptions = !showSplitOptions;" class="btn btn-default">
+                        Extended split options <span *ngIf="!showSplitOptions" class="glyphicon glyphicon-menu-down"></span>
+                        <span *ngIf="showSplitOptions" class="glyphicon glyphicon-menu-up"></span>
                     </div>
-                    <div *ngIf="model.splitType != 0">
-                        <div>Split by exact amounts</div>
-                        <div *ngFor="let f of friendDebtors" class="form-group row">
-                            <div class="col-xs-8"><label>{{f.name}}</label></div>
-                            <div *ngIf="model.splitType == 1" class="input-group col-xs-4">
-                                <span class="input-group-addon">$</span>
-                                <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
-                            </div>
-                            <div *ngIf="model.splitType == 2" class="input-group col-xs-4">
-                                <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
-                                <span class="input-group-addon">%</span>
+
+                    <div *ngIf="showSplitOptions" [@animateSplitOptions]="showSplitOptions">
+                        <div *ngIf="model.splitType == 0">
+                            <div>Split equally</div>
+                            <div *ngFor="let f of friendDebtors" class="form-group">
+                                <input type="checkbox" [ngModel]="f.isActive" (ngModelChange)="f.isActive=$event; calculateTotal();" name="checkbox_{{f.name}}_{{f.userId}}">
+                                <label>{{f.name}}</label>
+                                <span>{{ f.amount | currency:'USD':true:'1.2-2' }}</span>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="model.splitType != 0" class="row">
-                        <div class="col-xs-8 text-uppercase"><b>Total </b></div>
-                        <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
-                            <div><b>{{ total | currency:'USD':true }}</b></div>
-                            <div>{{ left | currency:'USD':true }} left</div>
+                        <div *ngIf="model.splitType != 0">
+                            <div>Split by exact amounts</div>
+                            <div *ngFor="let f of friendDebtors" class="form-group row">
+                                <div class="col-xs-8"><label>{{f.name}}</label></div>
+                                <div *ngIf="model.splitType == 1" class="input-group col-xs-4">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
+                                </div>
+                                <div *ngIf="model.splitType == 2" class="input-group col-xs-4">
+                                    <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-4 text-right" *ngIf="model.splitType == 2">
-                            <div><b>{{ total }}%</b></div>
-                            <div>{{ left }}% left</div>
+                        <div *ngIf="model.splitType != 0" class="row">
+                            <div class="col-xs-8 text-uppercase"><b>Total </b></div>
+                            <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
+                                <div><b>{{ total | currency:'USD':true }}</b></div>
+                                <div>{{ left | currency:'USD':true }} left</div>
+                            </div>
+                            <div class="col-xs-4 text-right" *ngIf="model.splitType == 2">
+                                <div><b>{{ total }}%</b></div>
+                                <div>{{ left }}% left</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,7 +98,19 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
                 <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
             </form>
         </div>
-    `
+    `,
+        animations: [
+        trigger('animateSplitOptions', [
+            transition(':enter', [
+                style({transform: 'translateX(-100%)', opacity: 0}),
+                animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+            ]),
+            transition(':leave', [
+                style({transform: 'translateX(0)', opacity: 1}),
+                animate('500ms', style({transform: 'translateX(-100%)', opacity: 0}))
+            ])
+        ])
+    ]
 })
 export class NewBillComponent implements OnInit {
     submitted = false;
