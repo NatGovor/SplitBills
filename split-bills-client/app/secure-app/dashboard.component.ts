@@ -34,6 +34,8 @@ export class DashboardComponent implements OnInit {
     groups: Group[] = [];
     bills: Bill[] = [];
     currentUser: User;
+    myDebts = [];
+    myCredits = [];
 
     constructor(
         private groupService: GroupService,
@@ -46,31 +48,69 @@ export class DashboardComponent implements OnInit {
      ngOnInit() {
          var self = this;
 
+         var getUnsettledGroups = function(group: Group): Promise<Bill[]> {
+             return Promise.resolve(self.groupService.getBalances(group.id)
+                .then(balances => {
+                    var userBalance = balances.find(function(value, index, arr) {
+                        if (value.friend.userId === self.currentUser.id) {
+                            return true;
+                        }
+                    });
+
+                    if (userBalance.amount !== 0) {
+                        return Promise.resolve(self.billService.getBills(group.id));
+                    }
+                }));
+         };
+
          this.groupService.getUserGroups(this.currentUser.id)
             .then(groups => {
-                groups.forEach(group => {
-                   this.groupService.getBalances(group.id).then(balances => {
-                       var userBalance = balances.find(function(value, index, arr) {
-                           if (value.friend.userId === self.currentUser.id) {
-                               return true;
-                           }
-                       })
+                Promise.all(groups.map(getUnsettledGroups))
+                    .then(bills => {                        
+                        bills.forEach(bill => {
+                            if (bill) {
+                                self.bills = self.bills.concat(bill);
+                            }
+                        });
 
-                       if (userBalance.amount !== 0) { // look into only unsettled groups
-                           this.groups.push(group);
+                        self.bills.forEach(bill => {
+                            if (bill.paidBy === self.currentUser.id) {
+                                self.myCredits.push(bill);
+                            } else {
+                                self.myDebts.push(bill);
+                            }
+                        });
 
-                           this.billService.getBills(group.id)
-                                .then(bills => {
-                                    bills.forEach(bill => {
-                                        if (bill.paidBy === self.currentUser.id) {
-                                            self.bills.push(bill);
-                                        }
-                                        // add bills where currentUser is involved
-                                    });
-                                });
-                       }
+                        var dashboardResult = {};
+                        self.myCredits.forEach(credit => {
+                            credit.debtors.forEach(debtor => {
+                                if (debtor.userId !== self.currentUser.id) {
+                                    if (!dashboardResult[debtor.userId]) {
+                                        dashboardResult[debtor.userId] = debtor.amount;
+                                    } else {
+                                        dashboardResult[debtor.userId] += debtor.amount;
+                                    }
+                                }
+                            })
+                            
+                        });
+
+                        self.myDebts.forEach(debt => {
+                            debt.debtors.forEach(debtor => {
+                                if (debtor.userId !== self.currentUser.id) {
+                                    if (!dashboardResult[debtor.userId]) {
+                                        dashboardResult[debtor.userId] = -debtor.amount;
+                                    } else {
+                                        dashboardResult[debtor.userId] -= debtor.amount;
+                                    }
+                                }
+                            });
+                        });
+
+                        console.log(self.myCredits);
+                        console.log(self.myDebts);
+                        console.log(dashboardResult);
                     });
-                });
             });
      }
 
