@@ -13,11 +13,14 @@ import { GroupService } from './group.service';
 
 import { MakePositivePipe } from '../../pipes/make-positive.pipe';
 
+import { TooltipModule } from 'ng2-bootstrap';
+
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        BillsModule
+        BillsModule,
+        TooltipModule.forRoot()
     ],
     declarations: [
         GroupsComponent,

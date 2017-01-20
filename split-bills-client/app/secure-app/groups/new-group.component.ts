@@ -26,8 +26,16 @@ import { FriendService }    from '../friends/friend.service';
                     <label>Group Members</label>
                     <div *ngFor="let friend of model.friends; let i = index" class="form-group">
                         <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
-                        <input *ngIf="i > 0" type="text" class="form-control" placeholder="Friend name"
-                            [(ngModel)]="friend.name" name="friendName{{i}}">
+                        <div *ngIf="i > 0" class="row">
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" placeholder="Friend name"
+                                    [(ngModel)]="friend.name" name="friendName{{i}}">
+                            </div>
+                            <div class="col-xs-6">
+                                <input *ngIf="friend.userId !== owner.id" type="email" class="form-control col-xs-6" placeholder="Email address (optional)"
+                                    [(ngModel)]="friend.email" name="friendEmail{{i}}">
+                            </div>
+                        </div>
                     </div>
                     <button (click)="addPerson()" type="button" class="btn btn-sm">Add a person</button>
                 </div>
@@ -45,7 +53,7 @@ export class NewGroupComponent implements OnInit {
     owner = this.helpers.getStorageProperty("user") as User;
     model = new Group(0, '', 
     [
-        new Friend(this.owner.name, this.owner.id),
+        new Friend(this.owner.name, this.owner.id, this.owner.email),
         new Friend('', 0),
         new Friend('', 0),
         new Friend('', 0)
@@ -75,10 +83,11 @@ export class NewGroupComponent implements OnInit {
             if (existFriend) {
                 friend.userId = existFriend.userId;
             }
-        });     
+        });
 
         this.groupService.create(this.model)
             .then(group => {
+                this.dialogService.alert('In real app (with server) friends with emails will receive invite to register. But not here... not now...');
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
     }
