@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { Group }   from './group';
 import { Balance } from './balance';
+import { Friend }  from '../friends/friend';
 
 import { GroupService } from './group.service';
 
@@ -13,7 +14,12 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
         <h4>Group Balances</h4>
         <ul>
             <li *ngFor="let balance of balances">
-                <div>{{balance.friend.name}}</div>
+                <template #toolTipTemplate><div [innerHtml]="getTooltip(balance.friend)"></div></template>
+                <div [tooltip]="!balance.friend.email ? toolTipTemplate : ''"
+                     placement="left">
+                    {{balance.friend.name}}
+                    <span *ngIf="!balance.friend.email" class="glyphicon glyphicon-alert"></span>
+                </div>
                 <div *ngIf="balance.amount == 0">
                     <span>settled up</span>
                 </div>
@@ -25,7 +31,12 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
                 </div>
             </li>
         </ul>
-    `
+    `,
+    styles: [`
+        :host >>> .tooltip-inner {
+            text-align: left;
+        }
+    `]
 })
 export class GroupBalancesComponent implements OnInit {
     @Input()
@@ -46,6 +57,19 @@ export class GroupBalancesComponent implements OnInit {
             return 'positive';
         } else {
             return 'negative';
+        }
+    }
+
+    getTooltip(friend: Friend): string {
+        if (!friend.email) {
+            let toolTipHtml = `
+                <div><b>` + friend.name + `</b></div>
+                <div>
+                    <span class="glyphicon glyphicon-alert"></span>
+                    This person does not have an email address, and will not receive notifications about bills.
+                </div>
+            `
+            return toolTipHtml;
         }
     }
 }

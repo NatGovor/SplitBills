@@ -149,15 +149,18 @@ export class InMemoryDataService implements InMemoryDbService {
                 friends: [
                     {
                         userId: 1,
-                        name: 'Nata'
+                        name: 'Nata',
+                        email: 'nata@test.com'
                     },
                     {
                         userId: 3,
-                        name: 'Alexandra' 
+                        name: 'Alexandra' ,
+                        email: 'alexandra@test.com'
                     },
                     {
                         userId: 4,
-                        name: 'Igor'
+                        name: 'Igor',
+                        email: 'igor@test.com'
                     },
                     {
                         userId: 8,
@@ -171,11 +174,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 friends: [
                     {
                         userId: 1,
-                        name: 'Nata'
+                        name: 'Nata',
+                        email: 'nata@test.com'
                     },
                     {
                         userId: 2,
-                        name: 'Alex'
+                        name: 'Alex',
+                        email: 'alex@test.com'
                     }
                 ]
             },
@@ -185,11 +190,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 friends: [
                     {
                         userId: 1,
-                        name: 'Nata'
+                        name: 'Nata',
+                        email: 'nata@test.com'
                     },
                     {
                         userId: 7,
-                        name: 'Alexnekot'
+                        name: 'Alexnekot',
+                        email: 'alexnekot@test.com'
                     }
                 ]
             },
@@ -199,7 +206,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 friends: [
                     {
                         userId: 7,
-                        name: 'Alexnekot'
+                        name: 'Alexnekot',
+                        email: 'alexnekot@test.com'
                     }
                 ]
             }
