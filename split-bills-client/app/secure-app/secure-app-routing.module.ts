@@ -2,7 +2,7 @@ import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SecureAppComponent }   from './secure-app.component';
-import { DashboardComponent }   from './dashboard.component';
+import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ProfileComponent }     from './profile.component';
 import { FriendsComponent }     from './friends/friends.component';
 import { GroupsComponent }      from './groups/groups.component';

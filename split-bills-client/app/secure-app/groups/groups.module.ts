@@ -2,6 +2,7 @@ import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }  from '@angular/forms';
 
+import { SharedModule } from '../../shared.module';
 import { BillsModule } from '../bills/bills.module';
 
 import { GroupsComponent }        from './groups.component';
@@ -11,8 +12,6 @@ import { GroupBalancesComponent } from './group-balances.component';
 
 import { GroupService } from './group.service';
 
-import { MakePositivePipe } from '../../pipes/make-positive.pipe';
-
 import { TooltipModule } from 'ng2-bootstrap';
 
 @NgModule({
@@ -20,14 +19,14 @@ import { TooltipModule } from 'ng2-bootstrap';
         CommonModule,
         FormsModule,
         BillsModule,
-        TooltipModule.forRoot()
+        TooltipModule.forRoot(),
+        SharedModule
     ],
     declarations: [
         GroupsComponent,
         GroupDetailComponent,
         NewGroupComponent,
-        GroupBalancesComponent,
-        MakePositivePipe
+        GroupBalancesComponent
     ],
     providers: [
         GroupService
