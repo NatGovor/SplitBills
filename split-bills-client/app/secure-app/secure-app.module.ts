@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FriendsModule } from './friends/friends.module';
 import { GroupModule }   from './groups/groups.module';
 import { SharedModule }  from '../shared.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 import { SecureAppComponent } from './secure-app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent }   from './profile.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
@@ -17,11 +17,11 @@ import { SecureAppRoutingModule } from './secure-app-routing.module';
         SecureAppRoutingModule,
         FriendsModule,
         GroupModule,
-        SharedModule
+        SharedModule,
+        DashboardModule
     ],
     declarations: [
         SecureAppComponent,
-        DashboardComponent,
         ProfileComponent
     ]
 })
