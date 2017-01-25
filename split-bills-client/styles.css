@@ -135,11 +135,38 @@ nav a.active {
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
+/* Modal windows */
+.modal-header {
+    background-color: #039be5;
+    color: #fff;
+}
+.modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+.modal-header .close:hover {
+    background: none !important;
+    opacity: .5;
+}
+
 .positive {
     color: #50c797;
 }
 .negative {
     color: #de3838;
+}
+.important-btn {
+    background-color: #039be5;
+    color: #fff;
+}
+.important-btn:hover {
+  background-color: #369;
+  color: #fff;
+}
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
 }
 /* everywhere else */
 * {

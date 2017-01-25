@@ -8,7 +8,14 @@ import { GroupService } from './group.service';
 @Component({
     template: `
         <div *ngIf="group">
-            <h4>{{group.name}} details</h4>
+            <div class="row">
+                <div class="col-xs-8">
+                    <h4>{{group.name}} details</h4>
+                </div>
+                <div class="col-xs-4">
+                    <button class="important-btn" (click)="modal.show()">Settle up</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-6">
                     <div>
@@ -32,6 +39,16 @@ import { GroupService } from './group.service';
             </div>
             <bills-list [group]="group"></bills-list>
             <button (click)="goBack()">Back</button>
+        </div>
+
+        <div class="modal fade" bsModal #modal="bs-modal"
+            tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <settle-up [modal]="modal"></settle-up>
+                </div>
+            </div>
         </div>
     `
 })

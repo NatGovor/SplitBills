@@ -9,10 +9,11 @@ import { GroupsComponent }        from './groups.component';
 import { GroupDetailComponent }   from './group-detail.component';
 import { NewGroupComponent }      from './new-group.component';
 import { GroupBalancesComponent } from './group-balances.component';
+import { SettleUpComponent }      from './settle-up.component';
 
 import { GroupService } from './group.service';
 
-import { TooltipModule } from 'ng2-bootstrap';
+import { TooltipModule, ModalModule } from 'ng2-bootstrap';
 
 @NgModule({
     imports: [
@@ -20,13 +21,15 @@ import { TooltipModule } from 'ng2-bootstrap';
         FormsModule,
         BillsModule,
         TooltipModule.forRoot(),
+        ModalModule.forRoot(),
         SharedModule
     ],
     declarations: [
         GroupsComponent,
         GroupDetailComponent,
         NewGroupComponent,
-        GroupBalancesComponent
+        GroupBalancesComponent,
+        SettleUpComponent
     ],
     providers: [
         GroupService
