@@ -10,7 +10,9 @@ import { Debtor }     from './debtor';
 import { User }       from '../../user';
 
 import { BillService }    from './bill.service';
-import { HelpersService } from '../../helpers.service';     
+import { HelpersService } from '../../helpers.service';    
+
+import { PaidByPipe } from '../../pipes/paid-by.pipe'; 
 
 @Component({
     selector: 'bills-list',

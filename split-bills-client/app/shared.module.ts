@@ -1,13 +1,16 @@
 import { NgModule }      from '@angular/core';
 
 import { MakePositivePipe } from './pipes/make-positive.pipe';
+import { PaidByPipe } from './pipes/paid-by.pipe';
 
 @NgModule({
     declarations: [
-        MakePositivePipe
+        MakePositivePipe,
+        PaidByPipe
     ],
     exports: [
-        MakePositivePipe
+        MakePositivePipe,
+        PaidByPipe
     ]
 })
 export class SharedModule { }

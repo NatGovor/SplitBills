@@ -1,5 +1,6 @@
 export enum SplitType {
     Equal,
     ExactAmounts,
-    Percentage
+    Percentage,
+    Payment // for settle up bills
 }

@@ -12,6 +12,8 @@ export class SplitTypePipe implements PipeTransform {
                 return 'Exact Amounts';
             case SplitType.Percentage:
                 return 'Percentage';
+            case SplitType.Payment:
+                return 'Payment';
             default:
                 console.log('Error in parsing SplitType: ', value);
         }

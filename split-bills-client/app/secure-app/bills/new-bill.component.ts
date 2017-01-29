@@ -15,7 +15,7 @@ import { DialogService } from '../../dialog.service';
 import { HelpersService } from '../../helpers.service';
 
 import { SplitTypePipe } from './pipes/split-type.pipe';
-import { PaidByPipe }    from './pipes/paid-by.pipe';
+import { PaidByPipe } from '../../pipes/paid-by.pipe';
 
 @Component({
     template: `
@@ -114,7 +114,7 @@ import { PaidByPipe }    from './pipes/paid-by.pipe';
 })
 export class NewBillComponent implements OnInit {
     submitted = false;
-    model = new Bill(0, '', null, 0, 1, 0, []);
+    model = new Bill(0, '', null, 0, 0, 0, []);
     splitTypes: SplitType[] = [SplitType.Equal, SplitType.ExactAmounts, SplitType.Percentage];
     friends: Friend[] = [];
     friendDebtors: FriendDebtor[] = [];

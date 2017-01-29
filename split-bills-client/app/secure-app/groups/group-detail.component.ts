@@ -39,14 +39,14 @@ import { GroupService } from './group.service';
             </div>
             <bills-list [group]="group"></bills-list>
             <button (click)="goBack()">Back</button>
-        </div>
 
-        <div class="modal fade" bsModal #modal="bs-modal"
-            tabindex="-1"
-            role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <settle-up [modal]="modal"></settle-up>
+            <div class="modal fade" bsModal #modal="bs-modal"
+                tabindex="-1"
+                role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <settle-up [modal]="modal" [group]="group"></settle-up>
+                    </div>
                 </div>
             </div>
         </div>
