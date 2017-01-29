@@ -11,17 +11,28 @@ import { Component, Input, OnInit } from '@angular/core';
         </div>
         <div class="modal-body">
             <div class="text-center">
-                <select class="form-control form-control-inline" required>
-                    <option>you</option>
-                    <option>Alexandra</option>
-                    <option>Test</option>
-                </select>
-                paid
-                <select class="form-control form-control-inline" required>
-                    <option>you</option>
-                    <option>Alexandra</option>
-                    <option>Test</option>
-                </select>
+                <div class="form-group">
+                    Group Name
+                </div>
+                <div class="form-group">
+                    <select class="form-control form-control-inline" required>
+                        <option>you</option>
+                        <option>Alexandra</option>
+                        <option>Test</option>
+                    </select>
+                    paid
+                    <select class="form-control form-control-inline" required>
+                        <option>you</option>
+                        <option>Alexandra</option>
+                        <option>Test</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <div class="input-group col-xs-4 col-xs-push-4">
+                        <span class="input-group-addon">$</span>
+                        <input type="number" class="form-control" required>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
