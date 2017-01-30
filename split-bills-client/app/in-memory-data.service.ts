@@ -277,7 +277,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 ]
             },
             {
-                id: 3,
+                id: 4,
                 description: 'Bars',
                 amount: 15,
                 groupId: 1,
@@ -303,7 +303,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 ]
             },
             {
-                id: 3,
+                id: 5,
                 description: 'Lunch',
                 amount: 20,
                 groupId: 1,
@@ -329,7 +329,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 ]
             },
             {
-                id: 3,
+                id: 6,
                 description: 'Dinner',
                 amount: 40,
                 groupId: 1,
@@ -355,7 +355,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 ]
             },
             {
-                id: 3,
+                id: 7,
                 description: 'Beer museum',
                 amount: 20,
                 groupId: 1,
@@ -381,7 +381,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 ]
             },
             {
-                id: 3,
+                id: 8,
                 description: 'Hostel Brugge',
                 amount: 84,
                 groupId: 1,

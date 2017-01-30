@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { Bill } from '../bills/bill';
 import { Group } from '../groups/group';
@@ -10,6 +10,9 @@ import { PaidByPipe } from '../../pipes/paid-by.pipe';
 
 import { BillService } from '../bills/bill.service';
 import { HelpersService } from '../../helpers.service';
+
+import { GroupInteraction } from './group-interaction.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'settle-up',
@@ -54,20 +57,17 @@ import { HelpersService } from '../../helpers.service';
     `]
 })
 export class SettleUpComponent implements OnInit {
-    @Input()
-    modal;
-
-    @Input()
-    group: Group;
+    @Input() modal;
+    @Input() group: Group;
 
     currentUser: User;
-
     model = new Bill(0, 'Payment', null, 0, 0, SplitType.Payment, []);
     creditor = 0;
 
     constructor(
         private billService: BillService,
-        private helpers: HelpersService) {
+        private helpers: HelpersService,
+        private groupInteraction: GroupInteraction) {
         this.currentUser = (this.helpers.getStorageProperty("user") as User);
     }
 
@@ -100,10 +100,15 @@ export class SettleUpComponent implements OnInit {
     }
 
     savePayment() {
-        this.model.debtors.push(new Debtor(this.creditor, this.model.amount));
+        this.model.paidBy = +this.model.paidBy;
+        this.model.debtors.push(new Debtor(+this.creditor, this.model.amount));
         this.billService.create(this.model)
-            .then(group => {
+            .then(bill => {
                 this.modal.hide();
+                this.groupInteraction.addBill(bill);
+                
+                // reinitialize model
+                this.model = new Bill(0, 'Payment', null, this.group.id, this.group.friends.find(f => f.userId != this.currentUser.id).userId, SplitType.Payment, []);
             });
     }
 }

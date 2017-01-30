@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Group } from './group';
 
 import { GroupService } from './group.service';
+import { GroupInteraction } from './group-interaction.service';
 
 @Component({
     template: `
@@ -50,14 +51,23 @@ import { GroupService } from './group.service';
                 </div>
             </div>
         </div>
-    `
+    `,
+    providers: [
+        GroupInteraction
+    ]
 })
 export class GroupDetailComponent implements OnInit {
     group: Group;
 
     constructor(
         private groupService: GroupService,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private groupInteraction: GroupInteraction) {
+        groupInteraction.billAdded$.subscribe(
+            bill => {
+                console.log(bill);
+                groupInteraction.refreshBills(bill);
+            });
     }
 
     ngOnInit(): void {

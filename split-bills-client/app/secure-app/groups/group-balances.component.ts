@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { Group }   from './group';
 import { Balance } from './balance';
@@ -7,6 +7,9 @@ import { Friend }  from '../friends/friend';
 import { GroupService } from './group.service';
 
 import { MakePositivePipe } from '../../pipes/make-positive.pipe';
+
+import { GroupInteraction } from './group-interaction.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'group-balances',
@@ -44,7 +47,26 @@ export class GroupBalancesComponent implements OnInit {
 
     balances: Balance[];
 
-    constructor(private groupService: GroupService) {}
+    subscription: Subscription;
+
+    constructor(
+        private groupService: GroupService,
+        private groupInteraction: GroupInteraction) {
+        this.subscription = groupInteraction.billRefreshed$.subscribe(
+            bill => {
+                console.log(bill);
+                bill.debtors.forEach(debtor => {
+                    this.balances.forEach(balance => {
+                        if (balance.friend.userId === debtor.userId) {
+                            balance.amount -= debtor.amount;
+                        }
+                        if (balance.friend.userId === bill.paidBy) {
+                            balance.amount += bill.amount;
+                        }
+                    })
+                });
+            });
+    }
 
     ngOnInit() {
         this.groupService.getBalances(this.group.id).then(balances => {
@@ -71,5 +93,9 @@ export class GroupBalancesComponent implements OnInit {
             `
             return toolTipHtml;
         }
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }
