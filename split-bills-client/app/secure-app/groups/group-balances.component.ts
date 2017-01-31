@@ -8,7 +8,7 @@ import { GroupService } from './group.service';
 
 import { MakePositivePipe } from '../../pipes/make-positive.pipe';
 
-import { GroupInteraction } from './group-interaction.service';
+import { ComponentsInteraction } from '../components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -51,10 +51,10 @@ export class GroupBalancesComponent implements OnInit {
 
     constructor(
         private groupService: GroupService,
-        private groupInteraction: GroupInteraction) {
-        this.subscription = groupInteraction.billRefreshed$.subscribe(
+        private componentsInteraction: ComponentsInteraction) {
+        // event is fired by group-detail component
+        this.subscription = componentsInteraction.billRefreshed$.subscribe(
             bill => {
-                console.log(bill);
                 bill.debtors.forEach(debtor => {
                     this.balances.forEach(balance => {
                         if (balance.friend.userId === debtor.userId) {

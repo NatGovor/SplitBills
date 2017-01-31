@@ -11,7 +11,7 @@ import { PaidByPipe } from '../../pipes/paid-by.pipe';
 import { BillService } from '../bills/bill.service';
 import { HelpersService } from '../../helpers.service';
 
-import { GroupInteraction } from './group-interaction.service';
+import { ComponentsInteraction } from '../components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -67,7 +67,7 @@ export class SettleUpComponent implements OnInit {
     constructor(
         private billService: BillService,
         private helpers: HelpersService,
-        private groupInteraction: GroupInteraction) {
+        private componentsInteraction: ComponentsInteraction) {
         this.currentUser = (this.helpers.getStorageProperty("user") as User);
     }
 
@@ -105,7 +105,7 @@ export class SettleUpComponent implements OnInit {
         this.billService.create(this.model)
             .then(bill => {
                 this.modal.hide();
-                this.groupInteraction.addBill(bill);
+                this.componentsInteraction.addBill(bill);
                 
                 // reinitialize model
                 this.model = new Bill(0, 'Payment', null, this.group.id, this.group.friends.find(f => f.userId != this.currentUser.id).userId, SplitType.Payment, []);

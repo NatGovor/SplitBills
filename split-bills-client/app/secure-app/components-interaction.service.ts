@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { Bill } from '../bills/bill';
+import { Bill } from './bills/bill';
 
 @Injectable()
-export class GroupInteraction {
+export class ComponentsInteraction {
     private billAddedSource = new Subject<Bill>();
     private billRefreshedSource = new Subject<Bill>();
 

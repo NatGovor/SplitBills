@@ -11,6 +11,8 @@ import { ProfileComponent }   from './profile.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
 
+import { ComponentsInteraction } from './components-interaction.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -23,6 +25,9 @@ import { SecureAppRoutingModule } from './secure-app-routing.module';
     declarations: [
         SecureAppComponent,
         ProfileComponent
+    ],
+    providers: [
+        ComponentsInteraction
     ]
 })
 export class SecureAppModule { }

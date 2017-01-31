@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Group } from './group';
 
 import { GroupService } from './group.service';
-import { GroupInteraction } from './group-interaction.service';
+import { ComponentsInteraction } from '../components-interaction.service';
 
 @Component({
     template: `
@@ -51,10 +51,7 @@ import { GroupInteraction } from './group-interaction.service';
                 </div>
             </div>
         </div>
-    `,
-    providers: [
-        GroupInteraction
-    ]
+    `
 })
 export class GroupDetailComponent implements OnInit {
     group: Group;
@@ -62,11 +59,11 @@ export class GroupDetailComponent implements OnInit {
     constructor(
         private groupService: GroupService,
         private route: ActivatedRoute,
-        private groupInteraction: GroupInteraction) {
-        groupInteraction.billAdded$.subscribe(
+        private componentsInteraction: ComponentsInteraction) {
+        // event is fired by settle up component
+        componentsInteraction.billAdded$.subscribe(
             bill => {
-                console.log(bill);
-                groupInteraction.refreshBills(bill);
+                componentsInteraction.refreshBills(bill);
             });
     }
 

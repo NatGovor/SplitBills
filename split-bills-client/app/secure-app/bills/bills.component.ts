@@ -1,5 +1,5 @@
 import { Component, 
-         OnInit, Input }  from '@angular/core';
+         OnInit, Input, OnDestroy }  from '@angular/core';
 import { Router,
          ActivatedRoute } from '@angular/router';
 
@@ -12,7 +12,10 @@ import { User }       from '../../user';
 import { BillService }    from './bill.service';
 import { HelpersService } from '../../helpers.service';    
 
-import { PaidByPipe } from '../../pipes/paid-by.pipe'; 
+import { PaidByPipe } from '../../pipes/paid-by.pipe';
+
+import { ComponentsInteraction } from '../components-interaction.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'bills-list',
@@ -45,19 +48,25 @@ import { PaidByPipe } from '../../pipes/paid-by.pipe';
     `]
 })
 export class BillsComponent implements OnInit {
-    @Input()
-    group: Group;
+    @Input() group: Group;
 
     bills: Bill[];
-
     currentUser: User;
+
+    subscription: Subscription;
 
     constructor(
         private billService: BillService,
         private router: Router,
         private route: ActivatedRoute,
-        private helpers: HelpersService) {
+        private helpers: HelpersService,
+        private componentsInteraction: ComponentsInteraction) {
         this.currentUser = this.helpers.getStorageProperty("user") as User;
+        // event is fired by group-detail component
+        this.subscription = componentsInteraction.billRefreshed$.subscribe(
+            bill => {
+                this.bills.push(bill);
+            });
     }
     
     ngOnInit() {
@@ -75,5 +84,9 @@ export class BillsComponent implements OnInit {
         } else {
             return 'negative';
         }
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }
