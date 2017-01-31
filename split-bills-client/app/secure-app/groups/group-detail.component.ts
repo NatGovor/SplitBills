@@ -1,10 +1,12 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, OnDestroy }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Group } from './group';
 
 import { GroupService } from './group.service';
+
 import { ComponentsInteraction } from '../components-interaction.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     template: `
@@ -56,12 +58,13 @@ import { ComponentsInteraction } from '../components-interaction.service';
 export class GroupDetailComponent implements OnInit {
     group: Group;
 
+    subscription: Subscription;
+
     constructor(
         private groupService: GroupService,
         private route: ActivatedRoute,
         private componentsInteraction: ComponentsInteraction) {
-        // event is fired by settle up component
-        componentsInteraction.billAdded$.subscribe(
+        this.subscription = componentsInteraction.billAdded$.subscribe(
             bill => {
                 componentsInteraction.refreshBills(bill);
             });
@@ -76,5 +79,9 @@ export class GroupDetailComponent implements OnInit {
 
     goBack(): void {
         window.history.back();
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }
