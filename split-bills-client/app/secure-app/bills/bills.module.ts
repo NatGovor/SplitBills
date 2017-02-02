@@ -10,7 +10,6 @@ import { NewBillComponent } from './new-bill.component';
 import { BillService } from './bill.service';
 
 import { SplitTypePipe }  from './pipes/split-type.pipe';
-import { LentAmountPipe } from './pipes/lent-amount.pipe';
 
 @NgModule({
     imports: [
@@ -21,8 +20,7 @@ import { LentAmountPipe } from './pipes/lent-amount.pipe';
     declarations: [
         BillsComponent,
         NewBillComponent,
-        SplitTypePipe,
-        LentAmountPipe
+        SplitTypePipe
     ],
     providers: [
         BillService
