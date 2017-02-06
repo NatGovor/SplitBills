@@ -63,6 +63,7 @@ export class SettleUpComponent implements OnInit {
     currentUser: User;
     model = new Bill(0, 'Payment', null, 0, 0, SplitType.Payment, []);
     creditor = 0;
+    groupDebts = {};
 
     constructor(
         private billService: BillService,
@@ -75,28 +76,29 @@ export class SettleUpComponent implements OnInit {
         this.model.groupId = this.group.id;
         this.model.paidBy = this.currentUser.id;
         this.creditor = this.group.friends.find(f => f.userId != this.currentUser.id).userId;
-        
-        /*this.billService.getBills(this.group.id)
-            .then(bills => {
-                console.log(bills);
 
-                var res = {};
+        this.billService.getBills(this.group.id)
+            .then(bills => {
                 bills.forEach(bill => {
                     bill.debtors.forEach(debtor => {
                         if (debtor.userId != bill.paidBy) {
                             // debtor -> creditor
-                            var key = debtor.userId + '-' + bill.paidBy;
-                            if (res[key]) {
-                                res[key] += debtor.amount;
+                            let key = debtor.userId + '-' + bill.paidBy;
+                            let reverseKey = key.split('').reverse().join('');
+                            if (this.groupDebts[key]) {
+                                this.groupDebts[key] += debtor.amount;
+                            } else if (this.groupDebts[reverseKey] ){
+                                this.groupDebts[reverseKey] -= debtor.amount;
                             } else {
-                                res[key] = debtor.amount;
+                                this.groupDebts[key] = debtor.amount;
                             }
                         }
-                    })
-                })
-
-                console.log(res);
-            });*/
+                    });
+                });
+                
+                console.log(this.groupDebts);
+                this.model.amount = this.groupDebts[this.model.paidBy + '-' + this.creditor];
+            });
     }
 
     savePayment() {
