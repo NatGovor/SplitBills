@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs/Subscription';
                 <span>&times;</span>
             </button>
         </div>
+        <form  #settleUpForm="ngForm">
         <div class="modal-body" *ngIf="group">
             <div class="text-center">
                 <div class="form-group">
@@ -50,8 +51,9 @@ import { Subscription } from 'rxjs/Subscription';
         </div>
         <div class="modal-footer">
             <button type="button" class="btn" (click)="modal.hide()">Cancel</button>
-            <button type="button" class="btn important-btn" (click)="savePayment()">Save</button>
+            <button type="button" class="btn important-btn" (click)="savePayment()" [disabled]="!settleUpForm.form.valid">Save</button>
         </div>
+        </form>
     `,
     styles: [`
     `]
