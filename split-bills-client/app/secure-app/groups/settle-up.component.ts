@@ -31,12 +31,12 @@ import { Subscription } from 'rxjs/Subscription';
                 </div>
                 <div class="form-group">
                     <select class="form-control form-control-inline" required
-                        [(ngModel)]="model.paidBy" name="paidBy">
+                        [ngModel]="model.paidBy" (ngModelChange)="model.paidBy=$event; onChangePayers();" name="paidBy">
                         <option *ngFor="let f of group.friends" [value]="f.userId">{{f.userId | paidByName:group.friends }}</option>
                     </select>
                     paid
                     <select class="form-control form-control-inline" required
-                        [(ngModel)]="creditor" name="creditor">
+                        [ngModel]="creditor" (ngModelChange)="creditor=$event; onChangePayers();" name="creditor">
                         <option *ngFor="let f of group.friends" [value]="f.userId">{{f.userId | paidByName:group.friends }}</option>
                     </select>
                 </div>
@@ -129,6 +129,18 @@ export class SettleUpComponent implements OnInit {
                     }
                 }
             });
+    }
+
+    onChangePayers() {
+        let key = this.model.paidBy + '-' + this.creditor;
+        let reverseKey = this.getReverseKey(key);
+        if (this.groupDebts[key] && this.groupDebts[key] > 0) {
+            this.model.amount = Math.abs(this.groupDebts[key]);
+        } else if (this.groupDebts[reverseKey]) {
+            this.model.amount = Math.abs(this.groupDebts[reverseKey]);
+        } else {
+            this.model.amount = null;
+        }
     }
 
     private getReverseKey(key: string) : string {
