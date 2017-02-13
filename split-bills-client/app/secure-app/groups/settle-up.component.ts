@@ -64,6 +64,7 @@ export class SettleUpComponent implements OnInit {
     model = new Bill(0, 'Payment', null, 0, 0, SplitType.Payment, []);
     creditor = 0;
     groupDebts = {};
+    debtsKeys = [];
 
     constructor(
         private billService: BillService,
@@ -84,7 +85,7 @@ export class SettleUpComponent implements OnInit {
                         if (debtor.userId != bill.paidBy) {
                             // debtor -> creditor
                             let key = debtor.userId + '-' + bill.paidBy;
-                            let reverseKey = key.split('').reverse().join('');
+                            let reverseKey = this.getReverseKey(key);;
                             if (this.groupDebts[key]) {
                                 this.groupDebts[key] += debtor.amount;
                             } else if (this.groupDebts[reverseKey] ){
@@ -95,9 +96,9 @@ export class SettleUpComponent implements OnInit {
                         }
                     });
                 });
-                
-                console.log(this.groupDebts);
+
                 this.model.amount = this.groupDebts[this.model.paidBy + '-' + this.creditor];
+                this.setDebtorsKeys();
             });
     }
 
@@ -108,9 +109,39 @@ export class SettleUpComponent implements OnInit {
             .then(bill => {
                 this.modal.hide();
                 this.componentsInteraction.addBill(bill);
-                
+
+                this.clearSettleDebt();
+
                 // reinitialize model
                 this.model = new Bill(0, 'Payment', null, this.group.id, this.group.friends.find(f => f.userId != this.currentUser.id).userId, SplitType.Payment, []);
+                if (this.debtsKeys[0]) {
+                    let usersId = this.debtsKeys[0].split('-');
+                    this.model.amount = Math.abs(this.groupDebts[this.debtsKeys[0]]);
+                    // debtor -> creditor - if amount is negative than switch places of debtor and creditor
+                    if (this.groupDebts[this.debtsKeys[0]] > 0) {
+                        this.model.paidBy = +usersId[0];
+                        this.creditor = +usersId[1];
+                    } else {
+                        this.model.paidBy = +usersId[1];
+                        this.creditor = +usersId[0];
+                    }
+                }
             });
+    }
+
+    private getReverseKey(key: string) : string {
+        return key.split('').reverse().join('');
+    }
+
+    private setDebtorsKeys() {
+        this.debtsKeys = Object.keys(this.groupDebts);
+    }
+
+    private clearSettleDebt() {
+        let key = this.model.paidBy + '-' + this.creditor;
+        let reverseKey = this.getReverseKey(key);
+        delete this.groupDebts[key];
+        delete this.groupDebts[reverseKey];
+        this.setDebtorsKeys();
     }
 }
