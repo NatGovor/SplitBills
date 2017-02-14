@@ -7,10 +7,13 @@ import { DashboardComponent } from './dashboard.component';
 
 import { DashboardService } from './dashboard.service';
 
+import { ModalModule } from 'ng2-bootstrap';
+
 @NgModule({
     imports: [
         CommonModule,
-        SharedModule
+        SharedModule,
+        ModalModule.forRoot()
     ],
     declarations: [
         DashboardComponent

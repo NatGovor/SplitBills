@@ -5,12 +5,20 @@ import { HelpersService } from '../../helpers.service';
 
 import { User } from '../../user';
 import { Balance } from '../groups/balance';
+import { Group } from '../groups/group';
 
 import { MakePositivePipe } from '../../pipes/make-positive.pipe';
 
 @Component({
     template: `
-        <h2>Dashboard</h2>
+        <div class="row header-row">
+            <div class="col-xs-8">
+                <h2>Dashboard</h2>
+            </div>
+            <div class="col-xs-4">
+                <button class="important-btn" (click)="modal.show()">Settle up</button>
+            </div>
+        </div>
         <div class="row total-header">
             <div class="col-xs-4 total-balance">
                 <div>total balance</div>
@@ -41,6 +49,27 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" bsModal #modal="bs-modal"
+            tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Settle up</h4>
+                        <button type="button" class="close pull-right" (click)="modal.hide()">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Choose a group to settle up
+                        <select class="form-control">
+                            <option *ngFor="let group of unsettledGroups" [value]="group.id">{{ group.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
     `,
     styles: [`
         .negatives {
@@ -64,6 +93,9 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
         .total-header .total-balance:first-child {
             border-left: none;
         }
+        .header-row button {
+            margin-top: 20px;
+        }
     `]
 })
 export class DashboardComponent implements OnInit {
@@ -72,6 +104,7 @@ export class DashboardComponent implements OnInit {
     finalDebts: Balance[] = [];
     finalCredits: Balance[] = [];
     totalClass = '';
+    unsettledGroups: Group[] = [];
 
     constructor(
         private dashboardService: DashboardService,
@@ -83,7 +116,8 @@ export class DashboardComponent implements OnInit {
      ngOnInit() {
          this.dashboardService.getTotalBalancesForUser(this.currentUser.id)
             .then(result => {
-                this.finalBalances = result;
+                this.finalBalances = result.totalUserBalances;
+                this.unsettledGroups = result.unsettledGroups;
                 this.totalClass = this.getTotalClass();
                 this.finalDebts = this.finalBalances.filter(r => r.amount < 0);
                 this.finalCredits = this.finalBalances.filter(r => r.amount > 0);

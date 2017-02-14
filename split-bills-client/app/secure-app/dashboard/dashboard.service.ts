@@ -11,6 +11,7 @@ import { Group } from '../groups/group';
 import { Bill } from '../bills/bill';
 import { Balance } from '../groups/balance';
 import { Friend } from '../friends/friend';
+import { DashboardResult } from './dashboard-result';
 
 @Injectable()
 export class DashboardService {
@@ -23,9 +24,10 @@ export class DashboardService {
         private groupService: GroupService,
         private billService: BillService) { }
 
-    getTotalBalancesForUser(userId: number): Promise<Balance[]> {
+    getTotalBalancesForUser(userId: number): Promise<DashboardResult> {
         let self = this;
         let friendsNames = {};
+        let unsettledGroups: Group[] = [];
 
         var getBillsOfUnsettledGroups = function(group: Group): Promise<Bill[]> {
              return Promise.resolve(self.groupService.getBalances(group.id)
@@ -37,6 +39,7 @@ export class DashboardService {
                     });
 
                     if (userBalance.amount !== 0) {
+                        unsettledGroups.push(group);
                         return Promise.resolve(self.billService.getBills(group.id));
                     }
                 }));
@@ -109,7 +112,7 @@ export class DashboardService {
                                     );
                                 }
 
-                                return finalBalances;
+                                return new DashboardResult(unsettledGroups, finalBalances);
                             });
                     });
             });

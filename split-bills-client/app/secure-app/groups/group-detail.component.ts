@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
     template: `
         <div *ngIf="group">
-            <div class="row">
+            <div class="row header-row">
                 <div class="col-xs-8">
                     <h4>{{group.name}} details</h4>
                 </div>
@@ -53,7 +53,12 @@ import { Subscription } from 'rxjs/Subscription';
                 </div>
             </div>
         </div>
-    `
+    `,
+    styles: [`
+        .header-row button {
+            margin-top: 10px;
+        }
+    `]
 })
 export class GroupDetailComponent implements OnInit {
     group: Group;
