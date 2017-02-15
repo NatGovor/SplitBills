@@ -62,10 +62,13 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
                         </button>
                     </div>
                     <div class="modal-body">
-                        Choose a group to settle up
-                        <select class="form-control">
+                        <label>Choose a group to settle up</label>
+                        <select class="form-control"  [(ngModel)]="groupId" name="group">
                             <option *ngFor="let group of unsettledGroups" [value]="group.id">{{ group.name }}</option>
                         </select>
+                        <div *ngIf="groupId">
+                            <settle-up [attr.modal]="modal"></settle-up>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,6 +108,7 @@ export class DashboardComponent implements OnInit {
     finalCredits: Balance[] = [];
     totalClass = '';
     unsettledGroups: Group[] = [];
+    groupId: Number;
 
     constructor(
         private dashboardService: DashboardService,

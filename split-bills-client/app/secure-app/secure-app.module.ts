@@ -13,6 +13,8 @@ import { SecureAppRoutingModule } from './secure-app-routing.module';
 
 import { ComponentsInteraction } from './components-interaction.service';
 
+import { ModalModule } from 'ng2-bootstrap';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -20,7 +22,8 @@ import { ComponentsInteraction } from './components-interaction.service';
         FriendsModule,
         GroupModule,
         SharedModule,
-        DashboardModule
+        DashboardModule,
+        ModalModule.forRoot()
     ],
     declarations: [
         SecureAppComponent,

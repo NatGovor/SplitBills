@@ -9,7 +9,6 @@ import { GroupsComponent }        from './groups.component';
 import { GroupDetailComponent }   from './group-detail.component';
 import { NewGroupComponent }      from './new-group.component';
 import { GroupBalancesComponent } from './group-balances.component';
-import { SettleUpComponent }      from './settle-up.component';
 
 import { GroupService } from './group.service';
 
@@ -28,8 +27,7 @@ import { TooltipModule, ModalModule } from 'ng2-bootstrap';
         GroupsComponent,
         GroupDetailComponent,
         NewGroupComponent,
-        GroupBalancesComponent,
-        SettleUpComponent
+        GroupBalancesComponent
     ],
     providers: [
         GroupService

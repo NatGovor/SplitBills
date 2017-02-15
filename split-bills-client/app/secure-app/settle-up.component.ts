@@ -1,17 +1,17 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { Bill } from '../bills/bill';
-import { Group } from '../groups/group';
-import { SplitType } from '../bills/split-type';
-import { User } from '../../user';
-import { Debtor } from '../bills/debtor';
+import { Bill } from './bills/bill';
+import { Group } from './groups/group';
+import { SplitType } from './bills/split-type';
+import { User } from '../user';
+import { Debtor } from './bills/debtor';
 
-import { PaidByPipe } from '../../pipes/paid-by.pipe';
+import { PaidByPipe } from '../pipes/paid-by.pipe';
 
-import { BillService } from '../bills/bill.service';
-import { HelpersService } from '../../helpers.service';
+import { BillService } from './bills/bill.service';
+import { HelpersService } from '../helpers.service';
 
-import { ComponentsInteraction } from '../components-interaction.service';
+import { ComponentsInteraction } from './components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -59,8 +59,8 @@ import { Subscription } from 'rxjs/Subscription';
     `]
 })
 export class SettleUpComponent implements OnInit {
-    @Input() modal;
-    @Input() group: Group;
+    @Input() public modal;
+    @Input() public group: Group;
 
     currentUser: User;
     model = new Bill(0, 'Payment', null, 0, 0, SplitType.Payment, []);
