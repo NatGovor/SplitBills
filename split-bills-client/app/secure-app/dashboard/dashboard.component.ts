@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { DashboardService }   from './dashboard.service';
 import { HelpersService } from '../../helpers.service';
@@ -8,6 +8,9 @@ import { Balance } from '../groups/balance';
 import { Group } from '../groups/group';
 
 import { MakePositivePipe } from '../../pipes/make-positive.pipe';
+
+import { ComponentsInteraction } from '../components-interaction.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     template: `
@@ -112,11 +115,28 @@ export class DashboardComponent implements OnInit {
     groupId: Number;
     group: Group;
 
+    subscription: Subscription;
+
     constructor(
         private dashboardService: DashboardService,
-        private helpers: HelpersService
+        private helpers: HelpersService,
+        private componentsInteraction: ComponentsInteraction
     ) {
         this.currentUser = this.helpers.getStorageProperty("user") as User;
+        this.subscription = componentsInteraction.billAdded$.subscribe(
+            bill => {
+                if (bill.paidBy === this.currentUser.id || bill.debtors[0].userId === this.currentUser.id) {
+                    this.finalBalances.forEach(balance => {
+                        if (balance.friend.userId === bill.paidBy) {
+                            balance.amount -= bill.amount;
+                        } else if (balance.friend.userId === bill.debtors[0].userId) {
+                            balance.amount += bill.amount;
+                        }
+                    });
+
+                    this.divideBalances();
+                }
+            });
     }
 
      ngOnInit() {
@@ -124,10 +144,14 @@ export class DashboardComponent implements OnInit {
             .then(result => {
                 this.finalBalances = result.totalUserBalances;
                 this.unsettledGroups = result.unsettledGroups;
-                this.totalClass = this.getTotalClass();
-                this.finalDebts = this.finalBalances.filter(r => r.amount < 0);
-                this.finalCredits = this.finalBalances.filter(r => r.amount > 0);
+                this.divideBalances();
             });
+     }
+
+     divideBalances() {
+         this.totalClass = this.getTotalClass();
+         this.finalDebts = this.finalBalances.filter(r => r.amount < 0);
+         this.finalCredits = this.finalBalances.filter(r => r.amount > 0);
      }
 
      getTotalValue(array) {
@@ -153,4 +177,8 @@ export class DashboardComponent implements OnInit {
          this.groupId = id;
          this.group = this.unsettledGroups.find(group => group.id == this.groupId);
      }
+
+     ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 }
