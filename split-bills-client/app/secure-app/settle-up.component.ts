@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChange } from '@angular/core';
 
 import { Bill } from './bills/bill';
 import { Group } from './groups/group';
@@ -70,11 +70,17 @@ export class SettleUpComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.initializeData(this.group.id);
+    }
+
+    initializeData(groupId) {
+        this.groupDebts = {};
+        this.model.amount = 0;
         this.model.groupId = this.group.id;
         this.model.paidBy = this.currentUser.id;
         this.creditor = this.group.friends.find(f => f.userId != this.currentUser.id).userId;
 
-        this.billService.getBills(this.group.id)
+        this.billService.getBills(groupId)
             .then(bills => {
                 bills.forEach(bill => {
                     bill.debtors.forEach(debtor => {
@@ -96,6 +102,13 @@ export class SettleUpComponent implements OnInit {
                 this.model.amount = this.groupDebts[this.model.paidBy + '-' + this.creditor];
                 this.setDebtorsKeys();
             });
+    }
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        let groupChnages = changes['group'];
+        if (!groupChnages.isFirstChange()) {
+            this.initializeData(this.group.id);
+        }
     }
 
     savePayment() {
