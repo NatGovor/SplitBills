@@ -48,6 +48,12 @@ import { Subscription } from 'rxjs/Subscription';
                 role="dialog">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Settle up</h4>
+                            <button type="button" class="close pull-right" (click)="modal.hide()">
+                                <span>&times;</span>
+                            </button>
+                        </div>
                         <settle-up [modal]="modal" [group]="group"></settle-up>
                     </div>
                 </div>

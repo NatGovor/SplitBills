@@ -63,11 +63,11 @@ import { MakePositivePipe } from '../../pipes/make-positive.pipe';
                     </div>
                     <div class="modal-body">
                         <label>Choose a group to settle up</label>
-                        <select class="form-control"  [(ngModel)]="groupId" name="group">
+                        <select class="form-control"  [ngModel]="groupId" (ngModelChange)="getGroupForSettleUp($event);" name="group">
                             <option *ngFor="let group of unsettledGroups" [value]="group.id">{{ group.name }}</option>
                         </select>
-                        <div *ngIf="groupId">
-                            <settle-up [attr.modal]="modal"></settle-up>
+                        <div *ngIf="group">
+                            <settle-up [modal]="modal" [group]="group"></settle-up>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,9 @@ export class DashboardComponent implements OnInit {
     finalCredits: Balance[] = [];
     totalClass = '';
     unsettledGroups: Group[] = [];
+
     groupId: Number;
+    group: Group;
 
     constructor(
         private dashboardService: DashboardService,
@@ -145,5 +147,10 @@ export class DashboardComponent implements OnInit {
          } else {
              return 'negative';
          }
+     }
+
+     getGroupForSettleUp(id) {
+         this.groupId = id;
+         this.group = this.unsettledGroups.find(group => group.id == this.groupId);
      }
 }

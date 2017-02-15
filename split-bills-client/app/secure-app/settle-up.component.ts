@@ -17,12 +17,6 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
     selector: 'settle-up',
     template: `
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Settle up</h4>
-            <button type="button" class="close pull-right" (click)="modal.hide()">
-                <span>&times;</span>
-            </button>
-        </div>
         <form  #settleUpForm="ngForm">
         <div class="modal-body" *ngIf="group">
             <div class="text-center">
