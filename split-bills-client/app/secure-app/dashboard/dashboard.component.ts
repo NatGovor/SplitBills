@@ -22,33 +22,38 @@ import { Subscription } from 'rxjs/Subscription';
                 <button class="important-btn" (click)="modal.show()">Settle up</button>
             </div>
         </div>
-        <div class="row total-header">
-            <div class="col-xs-4 total-balance">
-                <div>total balance</div>
-                <div  [ngClass]="totalClass">{{ getTotalValue(finalBalances) | currency:'USD':true:'1.2-2' }}</div>
-            </div>
-            <div class="col-xs-4 total-balance">
-                <div>you owe</div>
-                <div class="negative">{{ getTotalValue(finalDebts) | currency:'USD':true:'1.2-2' }}</div>
-            </div>
-            <div class="col-xs-4 total-balance">
-                <div>you are owed</div>
-                <div class="positive">{{ getTotalValue(finalCredits) | currency:'USD':true:'1.2-2' }}</div>
-            </div>
+        <div [hidden]="!isSettledUp">
+            <h3>You are settled up. Awesome!</h3>
         </div>
-        <div class="row">
-            <div class="col-xs-6 negatives">
-                <div class="text-uppercase text-left balance-header"><b>You owe</b></div>
-                <div *ngFor="let res of finalDebts" class="balance">
-                    <div>{{ res.friend.name }}</div>
-                    <div class="negative">you owe {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+        <div [hidden]="isSettledUp">
+            <div class="row total-header">
+                <div class="col-xs-4 total-balance">
+                    <div>total balance</div>
+                    <div  [ngClass]="totalClass">{{ getTotalValue(finalBalances) | currency:'USD':true:'1.2-2' }}</div>
                 </div>
-            </div>            
-            <div class="col-xs-6 positives">
-                <div class="text-uppercase text-right balance-header"><b>You are owed</b></div>
-                <div *ngFor="let res of finalCredits" class="balance">
-                    <div>{{ res.friend.name }}</div>
-                    <div class="positive">owes you {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+                <div class="col-xs-4 total-balance">
+                    <div>you owe</div>
+                    <div class="negative">{{ getTotalValue(finalDebts) | currency:'USD':true:'1.2-2' }}</div>
+                </div>
+                <div class="col-xs-4 total-balance">
+                    <div>you are owed</div>
+                    <div class="positive">{{ getTotalValue(finalCredits) | currency:'USD':true:'1.2-2' }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 negatives">
+                    <div class="text-uppercase text-left balance-header"><b>You owe</b></div>
+                    <div *ngFor="let res of finalDebts" class="balance">
+                        <div>{{ res.friend.name }}</div>
+                        <div class="negative">you owe {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+                    </div>
+                </div>            
+                <div class="col-xs-6 positives">
+                    <div class="text-uppercase text-right balance-header"><b>You are owed</b></div>
+                    <div *ngFor="let res of finalCredits" class="balance">
+                        <div>{{ res.friend.name }}</div>
+                        <div class="positive">owes you {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,6 +116,7 @@ export class DashboardComponent implements OnInit {
     finalCredits: Balance[] = [];
     totalClass = '';
     unsettledGroups: Group[] = [];
+    isSettledUp = false;
 
     groupId: Number;
     group: Group;
@@ -152,6 +158,7 @@ export class DashboardComponent implements OnInit {
          this.totalClass = this.getTotalClass();
          this.finalDebts = this.finalBalances.filter(r => r.amount < 0);
          this.finalCredits = this.finalBalances.filter(r => r.amount > 0);
+         this.isSettledUp = this.finalDebts.length == 0 && this.finalCredits.length == 0;
      }
 
      getTotalValue(array) {
