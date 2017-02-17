@@ -8,6 +8,9 @@ import { User }   from '../../user';
 
 import { UserService } from '../../user.service'; 
 
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class FriendService {
     private usersUrl = 'app/users'; // URL to web api
@@ -21,6 +24,12 @@ export class FriendService {
                     .then (users => users.find(user => user.id === userId))
                     .then (user => user.friends)
                     .catch(this.handleError);
+    }
+
+    search(userId: number, term: string): Observable<Friend[]> {
+        return this.http
+                    .get(this.usersUrl + `/?name=${term}`)
+                    .map(response => response.json().data as Friend[]);
     }
 
     addFriends(userId: number, potentialFriends: Friend[]): Promise<User> {

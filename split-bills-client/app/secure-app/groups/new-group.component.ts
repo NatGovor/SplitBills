@@ -10,6 +10,17 @@ import { HelpersService } from '../../helpers.service';
 import { DialogService }  from '../../dialog.service';
 import { FriendService }    from '../friends/friend.service';
 
+import { Subject }           from 'rxjs/Subject';
+import { Observable }        from 'rxjs/Observable';
+// Observable class extensions
+import 'rxjs/add/observable/of';
+
+// Observable operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+
 @Component({
     template: `
         <div class="col-sm-4">
@@ -29,7 +40,11 @@ import { FriendService }    from '../friends/friend.service';
                         <div *ngIf="i > 0" class="row">
                             <div class="col-xs-6">
                                 <input type="text" class="form-control" placeholder="Friend name"
-                                    [(ngModel)]="friend.name" name="friendName{{i}}">
+                                    [(ngModel)]="friend.name" name="friendName{{i}}" (keyup)="search($event)">
+                                <div *ngFor="let friend of friends | async"
+                                    class="search-result">
+                                    {{friend.name}}
+                                </div>
                             </div>
                             <div class="col-xs-6">
                                 <input *ngIf="friend.userId !== owner.id" type="email" class="form-control col-xs-6" placeholder="Email address (optional)"
@@ -58,6 +73,9 @@ export class NewGroupComponent implements OnInit {
         new Friend('', 0),
         new Friend('', 0)
     ]);
+    friends: Observable<Friend[]>;
+
+    private searchTerms = new Subject<string>();
 
     constructor(
         private groupService: GroupService,
@@ -67,9 +85,27 @@ export class NewGroupComponent implements OnInit {
         private dialogService: DialogService,
         private friendService: FriendService) {}
 
+    search(event) {
+        this.searchTerms.next(event.target.value);
+    }
+
     ngOnInit() {
         this.friendService.getFriends(this.owner.id)
-            .then(friends => this.currentUserFriends = friends);
+            .then(friends => {
+                this.currentUserFriends = friends;
+            });
+        this.friends = this.searchTerms
+                    .debounceTime(300)
+                    .distinctUntilChanged()
+                    .switchMap(term => {
+                        return term
+                        ? this.friendService.search(this.owner.id, term)
+                        : Observable.of<Friend[]>([])
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        return Observable.of<Friend[]>([]);
+                    });
     }
 
     onSubmit() {
