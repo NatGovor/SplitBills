@@ -5,6 +5,7 @@ import { SecureAppComponent }   from './secure-app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ProfileComponent }     from './profile.component';
 import { FriendsComponent }     from './friends/friends.component';
+import { FriendDetailComponent }     from './friends/friend-detail.component';
 import { GroupsComponent }      from './groups/groups.component';
 import { GroupDetailComponent } from './groups/group-detail.component';
 import { NewGroupComponent }    from './groups/new-group.component';
@@ -28,6 +29,7 @@ import { CanDeactivateGuard } from '../can-deactivate-guard.service';
                         children: [
                             { path: 'profile', component: ProfileComponent },
                             { path: 'friends', component: FriendsComponent },                            
+                            { path: 'friends/:id', component: FriendDetailComponent },
                             { path: 'dashboard', component: DashboardComponent },
                             { path: 'groups', component: GroupsComponent },                            
                             { path: 'groups/new', component: NewGroupComponent, canDeactivate: [CanDeactivateGuard] },
