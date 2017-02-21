@@ -40,10 +40,10 @@ import 'rxjs/add/operator/switchMap';
                         <div *ngIf="i > 0" class="row">
                             <div class="col-xs-6">
                                 <input type="text" class="form-control" placeholder="Friend name"
-                                    [(ngModel)]="friend.name" name="friendName{{i}}" (keyup)="search($event)">
-                                <div *ngFor="let friend of friends | async"
+                                    [(ngModel)]="friend.name" name="friendName{{i}}" (keyup)="search($event, i)">
+                                <div *ngFor="let friend of friends[i] | async"
                                     class="search-result">
-                                    {{friend.name}}
+                                    <div (click)="chooseFriend(friend, i)">{{friend.name}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -60,11 +60,20 @@ import 'rxjs/add/operator/switchMap';
                 <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
             </form>
         </div>
-    `
+    `,
+    styles: [`
+        .search-result {
+            border-bottom: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+    `]
 })
 export class NewGroupComponent implements OnInit {
     submitted = false;
-    currentUserFriends: Friend[];
     owner = this.helpers.getStorageProperty("user") as User;
     model = new Group(0, '', 
     [
@@ -73,9 +82,19 @@ export class NewGroupComponent implements OnInit {
         new Friend('', 0),
         new Friend('', 0)
     ]);
-    friends: Observable<Friend[]>;
+    friends = [
+        Observable.of<Friend[]>([]),
+        Observable.of<Friend[]>([]),
+        Observable.of<Friend[]>([]),
+        Observable.of<Friend[]>([])
+    ];
 
-    private searchTerms = new Subject<string>();
+    private searchTerms = [
+        new Subject<string>(),
+        new Subject<string>(),
+        new Subject<string>(),
+        new Subject<string>()
+    ];
 
     constructor(
         private groupService: GroupService,
@@ -85,27 +104,30 @@ export class NewGroupComponent implements OnInit {
         private dialogService: DialogService,
         private friendService: FriendService) {}
 
-    search(event) {
-        this.searchTerms.next(event.target.value);
+    search(event, i) {
+        this.searchTerms[i].next(event.target.value);
     }
 
     ngOnInit() {
-        this.friendService.getFriends(this.owner.id)
-            .then(friends => {
-                this.currentUserFriends = friends;
+        // to organize dynamic search of friends
+       for (let i=0; i< this.friends.length; i++) {
+            this.friends[i] = this.subscribeOnChanges(this.searchTerms[i]);
+        };
+    }
+
+    subscribeOnChanges(searchTerms) {
+        return searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .switchMap(term => {
+                return term
+                ? this.friendService.search(this.owner.id, term)
+                : Observable.of<Friend[]>([])
+            })
+            .catch(error => {
+                console.log(error);
+                return Observable.of<Friend[]>([]);
             });
-        this.friends = this.searchTerms
-                    .debounceTime(300)
-                    .distinctUntilChanged()
-                    .switchMap(term => {
-                        return term
-                        ? this.friendService.search(this.owner.id, term)
-                        : Observable.of<Friend[]>([])
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        return Observable.of<Friend[]>([]);
-                    });
     }
 
     onSubmit() {
@@ -113,17 +135,9 @@ export class NewGroupComponent implements OnInit {
 
         this.model.friends = this.model.friends.filter(friend => friend.name != "");
 
-        // find friends that are associated with users
-        this.model.friends.forEach(friend => {
-            let existFriend = this.currentUserFriends.find(f => f.name == friend.name);
-            if (existFriend) {
-                friend.userId = existFriend.userId;
-            }
-        });
-
         this.groupService.create(this.model)
             .then(group => {
-                this.dialogService.alert('In real app (with server) friends with emails will receive invite to register. But not here... not now...');
+                this.dialogService.alert('In real app (with server) new friends with emails will receive invite to register. But not here... not now...');
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
     }
@@ -138,6 +152,17 @@ export class NewGroupComponent implements OnInit {
 
     addPerson() {
         this.model.friends.push(new Friend('', 0));
+        
+        // to organize dynamic search of friends
+        let newFriends = Observable.of<Friend[]>([]);
+        let newSearchTerms = new Subject<string>()
+        newFriends = this.subscribeOnChanges(newSearchTerms);
+        this.searchTerms.push(newSearchTerms);
+        this.friends.push(newFriends);
+    }
+
+    chooseFriend(friend, i) {
+        this.model.friends[i] = friend;
     }
 
     goBack() {
