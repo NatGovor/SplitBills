@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
             <div class="col-xs-8">
                 <h2>Dashboard</h2>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-4 text-right">
                 <button class="important-btn" (click)="modal.show()">Settle up</button>
             </div>
         </div>
