@@ -30,7 +30,7 @@ export class GroupsComponent implements OnInit {
         private route: ActivatedRoute,
         private helpers: HelpersService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.groupService.getUserGroups((this.helpers.getStorageProperty("user") as User).id)
             .then(groups => this.groups = groups);
     }
@@ -39,7 +39,7 @@ export class GroupsComponent implements OnInit {
         this.router.navigate([group.id], { relativeTo: this.route});
     }
 
-    addNew() {
+    addNew(): void {
         this.router.navigate(['new'], { relativeTo: this.route});
     }
 }

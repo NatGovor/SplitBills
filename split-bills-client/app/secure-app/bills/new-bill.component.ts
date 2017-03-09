@@ -132,7 +132,7 @@ export class NewBillComponent implements OnInit {
         private helpersService: HelpersService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.model.groupId = +params['groupId'];
         });
@@ -152,11 +152,11 @@ export class NewBillComponent implements OnInit {
         return this.dialogService.confirm('Discard creating new bill?')
     }
 
-    goBack() {
+    goBack(): void {
         this.router.navigate(['../../', this.model.groupId], { relativeTo: this.route });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         // validation
         if (this.total != this.model.amount && this.left != 0) {
             this.dialogService.alert("The following errors occurred:\nThe total of everyone's owed shares is different than the total cost.");
@@ -189,7 +189,7 @@ export class NewBillComponent implements OnInit {
     }
 
     // in unequal splitting user enters amounts manually, so we need to calculate and display tips to him
-    calculateTotal() {
+    calculateTotal(): void {
         if (this.model.splitType === SplitType.Equal) {
             var res = this.helpersService.divideNumbersEvenly(this.model.amount, this.friendDebtors.filter(x => x.isActive).length, 2);
             this.friendDebtors.forEach(f => {
@@ -207,7 +207,7 @@ export class NewBillComponent implements OnInit {
         this.left = this.model.amount - this.total;
     }
 
-    changeSplitType(newValue) {
+    changeSplitType(newValue): void {
         this.model.splitType = newValue;
         if (this.model.splitType !== SplitType.Equal) {
             this.showSplitOptions = true;

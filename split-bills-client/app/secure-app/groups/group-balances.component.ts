@@ -74,7 +74,7 @@ export class GroupBalancesComponent implements OnInit {
             });
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.groupService.getBalances(this.group.id).then(balances => {
             this.balances = balances;
         });
@@ -101,7 +101,7 @@ export class GroupBalancesComponent implements OnInit {
         }
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 

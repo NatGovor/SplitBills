@@ -104,18 +104,18 @@ export class NewGroupComponent implements OnInit {
         private dialogService: DialogService,
         private friendService: FriendService) {}
 
-    search(event, i) {
+    search(event, i): void {
         this.searchTerms[i].next(event.target.value);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // to organize dynamic search of friends
        for (let i=0; i< this.friends.length; i++) {
             this.friends[i] = this.subscribeOnChanges(this.searchTerms[i]);
         };
     }
 
-    subscribeOnChanges(searchTerms) {
+    subscribeOnChanges(searchTerms): Observable<Friend[]> {
         return searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
@@ -130,7 +130,7 @@ export class NewGroupComponent implements OnInit {
             });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         this.submitted = true;
 
         this.model.friends = this.model.friends.filter(friend => friend.name != "");
@@ -150,7 +150,7 @@ export class NewGroupComponent implements OnInit {
         return this.dialogService.confirm('Discard creating new group?')
     }
 
-    addPerson() {
+    addPerson(): void {
         this.model.friends.push(new Friend('', 0));
         
         // to organize dynamic search of friends
@@ -161,11 +161,11 @@ export class NewGroupComponent implements OnInit {
         this.friends.push(newFriends);
     }
 
-    chooseFriend(friend, i) {
+    chooseFriend(friend, i): void {
         this.model.friends[i] = friend;
     }
 
-    goBack() {
+    goBack(): void {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 }

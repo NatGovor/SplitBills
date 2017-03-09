@@ -92,7 +92,7 @@ export class GroupDetailComponent implements OnInit {
         window.history.back();
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 }

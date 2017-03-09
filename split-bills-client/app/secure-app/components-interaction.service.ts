@@ -11,11 +11,11 @@ export class ComponentsInteraction {
     billAdded$ = this.billAddedSource.asObservable();
     billRefreshed$ = this.billRefreshedSource.asObservable();
 
-    addBill(bill: Bill) {
+    addBill(bill: Bill): void {
         this.billAddedSource.next(bill);
     }
 
-    refreshBills(bill: Bill) {
+    refreshBills(bill: Bill): void {
         this.billRefreshedSource.next(bill);
     }
 }

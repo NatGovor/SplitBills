@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-     ngOnInit() {
+     ngOnInit(): void {
          this.dashboardService.getTotalBalancesForUser(this.currentUser.id)
             .then(result => {
                 this.finalBalances = result.totalUserBalances;
@@ -154,14 +154,14 @@ export class DashboardComponent implements OnInit {
             });
      }
 
-     divideBalances() {
+     divideBalances(): void {
          this.totalClass = this.getTotalClass();
          this.finalDebts = this.finalBalances.filter(r => r.amount < 0);
          this.finalCredits = this.finalBalances.filter(r => r.amount > 0);
          this.isSettledUp = this.finalDebts.length == 0 && this.finalCredits.length == 0;
      }
 
-     getTotalValue(array) {
+     getTotalValue(array): Number {
          if (array) {
              let total = 0;
              array.forEach(el => {
@@ -172,7 +172,7 @@ export class DashboardComponent implements OnInit {
          }
      }
 
-     getTotalClass() {
+     getTotalClass(): string {
          if (this.getTotalValue(this.finalBalances) >= 0) {
              return 'positive';
          } else {
@@ -180,12 +180,12 @@ export class DashboardComponent implements OnInit {
          }
      }
 
-     getGroupForSettleUp(id) {
+     getGroupForSettleUp(id): void {
          this.groupId = id;
          this.group = this.unsettledGroups.find(group => group.id == this.groupId);
      }
 
-     ngOnDestroy() {
+     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 }

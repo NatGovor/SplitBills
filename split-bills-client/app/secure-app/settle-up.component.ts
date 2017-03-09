@@ -69,11 +69,11 @@ export class SettleUpComponent implements OnInit {
         this.currentUser = (this.helpers.getStorageProperty("user") as User);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.initializeData(this.group.id);
     }
 
-    initializeData(groupId) {
+    initializeData(groupId): void {
         this.groupDebts = {};
         this.model.amount = 0;
         this.model.groupId = this.group.id;
@@ -104,14 +104,14 @@ export class SettleUpComponent implements OnInit {
             });
     }
 
-    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}): void {
         let groupChnages = changes['group'];
         if (!groupChnages.isFirstChange()) {
             this.initializeData(this.group.id);
         }
     }
 
-    savePayment() {
+    savePayment(): void {
         this.model.paidBy = +this.model.paidBy;
         this.model.debtors.push(new Debtor(+this.creditor, this.model.amount));
         this.billService.create(this.model)
@@ -138,7 +138,7 @@ export class SettleUpComponent implements OnInit {
             });
     }
 
-    onChangePayers() {
+    onChangePayers(): void {
         let key = this.model.paidBy + '-' + this.creditor;
         let reverseKey = this.getReverseKey(key);
         if (this.groupDebts[key] && this.groupDebts[key] > 0) {
@@ -154,11 +154,11 @@ export class SettleUpComponent implements OnInit {
         return key.split('').reverse().join('');
     }
 
-    private setDebtorsKeys() {
+    private setDebtorsKeys(): void {
         this.debtsKeys = Object.keys(this.groupDebts);
     }
 
-    private clearSettleDebt() {
+    private clearSettleDebt(): void {
         let key = this.model.paidBy + '-' + this.creditor;
         let reverseKey = this.getReverseKey(key);
         delete this.groupDebts[key];

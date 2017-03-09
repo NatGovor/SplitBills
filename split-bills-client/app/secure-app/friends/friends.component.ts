@@ -28,7 +28,7 @@ export class FriendsComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.friendService.getFriends((this.helpers.getStorageProperty("user") as User).id)
             .then(friends => this.friends = friends);
     }

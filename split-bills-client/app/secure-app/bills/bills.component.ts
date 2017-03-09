@@ -73,7 +73,7 @@ export class BillsComponent implements OnInit {
             });
     }
     
-    ngOnInit() {
+    ngOnInit(): void {
         this.billService.getBills(this.group.id)
             .then(bills => this.bills = bills);
 
@@ -82,7 +82,7 @@ export class BillsComponent implements OnInit {
         });
     }
 
-    addNew() {
+    addNew(): void {
         this.router.navigate(['../bill/new', { groupId: this.group.id }], { relativeTo: this.route});
     }
 
@@ -94,7 +94,7 @@ export class BillsComponent implements OnInit {
         }
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 
@@ -106,7 +106,7 @@ export class BillsComponent implements OnInit {
         }
     }
 
-    getLentAmount(bill: Bill) {
+    getLentAmount(bill: Bill): Number {
         let self = this;
 
         let calculateDebt = function (sum, debtor) {

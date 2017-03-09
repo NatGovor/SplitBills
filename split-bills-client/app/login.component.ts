@@ -31,7 +31,7 @@ export class LoginComponent {
         }
     }
 
-    login() {
+    login(): void {
         this.authService.login(this.email, this.password).then(() => {
             if (this.authService.isLoggedIn) {
                 let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
