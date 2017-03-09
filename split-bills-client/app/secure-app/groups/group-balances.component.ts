@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Router }    from '@angular/router';
 
 import { Group }   from './group';
 import { Balance } from './balance';
@@ -15,8 +16,8 @@ import { Subscription } from 'rxjs/Subscription';
     selector: 'group-balances',
     template: `
         <h4>Group Balances</h4>
-        <ul>
-            <li *ngFor="let balance of balances">
+        <ul class="balances">
+            <li *ngFor="let balance of balances" (click)="gotoDetail(balance.friend)">
                 <template #toolTipTemplate><div [innerHtml]="getTooltip(balance.friend)"></div></template>
                 <div [tooltip]="!balance.friend.email ? toolTipTemplate : ''"
                      placement="left">
@@ -39,6 +40,10 @@ import { Subscription } from 'rxjs/Subscription';
         :host >>> .tooltip-inner {
             text-align: left;
         }
+        .balances li:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
     `]
 })
 export class GroupBalancesComponent implements OnInit {
@@ -51,7 +56,8 @@ export class GroupBalancesComponent implements OnInit {
 
     constructor(
         private groupService: GroupService,
-        private componentsInteraction: ComponentsInteraction) {
+        private componentsInteraction: ComponentsInteraction,
+        private router: Router) {
         // event is fired by group-detail component
         this.subscription = componentsInteraction.billRefreshed$.subscribe(
             bill => {
@@ -88,7 +94,7 @@ export class GroupBalancesComponent implements OnInit {
                 <div><b>` + friend.name + `</b></div>
                 <div>
                     <span class="glyphicon glyphicon-alert"></span>
-                    This person does not have an email address, and will not receive notifications about bills.
+                    This person does not have an email address (or not confirmed it yet), and will not receive notifications about bills.
                 </div>
             `
             return toolTipHtml;
@@ -97,5 +103,9 @@ export class GroupBalancesComponent implements OnInit {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    gotoDetail(friend: Friend): void {
+        this.router.navigate(['friends', friend.userId]);
     }
 }

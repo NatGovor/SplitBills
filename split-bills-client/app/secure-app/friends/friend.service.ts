@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class FriendService {
     private usersUrl = 'app/users'; // URL to web api
+    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http, private userService: UserService) { }
 
@@ -43,6 +44,15 @@ export class FriendService {
                     user.friends = user.friends.concat(newFriends);
                     return this.userService.update(user);
                 })));
+    }
+
+    update(friend: Friend): Promise<Friend> {
+        const url = `${this.usersUrl}/${friend.userId}`;
+        return this.http
+            .put(url, JSON.stringify({ id: friend.userId, name: friend.name, email: friend.email}), {headers: this.headers})
+            .toPromise()
+            .then(() => friend)
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {
