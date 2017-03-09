@@ -61,7 +61,7 @@ import { Subscription } from 'rxjs/Subscription';
         <div class="modal fade" bsModal #modal="bs-modal"
             tabindex="-1"
             role="dialog">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title pull-left">Settle up</h4>
