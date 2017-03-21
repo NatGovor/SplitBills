@@ -2,22 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, 
          Router, Params }    from '@angular/router';
 
-import { Friend } from './friend';
-import { User }   from '../../shared-app/models/user';
+import { Friend } from '../models/friend';
+import { User }   from '../../../shared-app/models/user';
 
-import { FriendService }  from './friend.service';
-import { HelpersService } from '../../shared-app/services/helpers.service';
+import { FriendService }  from '../services/friend.service';
+import { HelpersService } from '../../../shared-app/services/helpers.service';
 
 @Component({
-    template: `
-        <h2>Friends: </h2>
-        <ul class="items">
-            <li *ngFor="let friend of friends" (click)="gotoDetail(friend)">
-                <span class="badge">{{friend.userId}}</span>
-                {{friend.name}}
-            </li>
-        </ul>
-    `
+    templateUrl: './app/secure-app/friends/components/friends.component.html'
 })
 export class FriendsComponent implements OnInit {
     friends: Friend[];

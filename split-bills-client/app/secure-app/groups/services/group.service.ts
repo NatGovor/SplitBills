@@ -3,14 +3,14 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Group }   from './group';
-import { User }    from '../../shared-app/models/user';
-import { Friend }  from '../friends/friend';
-import { Balance } from './balance';
+import { Group }   from '../models/group';
+import { User }    from '../../../shared-app/models/user';
+import { Friend }  from '../../friends/models/friend';
+import { Balance } from '../models/balance';
 
-import { UserService }   from '../../shared-app/services/user.service';
-import { FriendService } from '../friends/friend.service';
-import { BillService }   from '../bills/bill.service';
+import { UserService }   from '../../../shared-app/services/user.service';
+import { FriendService } from '../../friends/services/friend.service';
+import { BillService }   from '../../bills/services/bill.service';
 
 @Injectable()
 export class GroupService {

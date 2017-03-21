@@ -1,0 +1,79 @@
+<div class="col-sm-4">
+    <h4>New Bill</h4>
+    <form (ngSubmit)="onSubmit()" #groupForm="ngForm">
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" id="description"
+                required
+                [(ngModel)]="model.description" name="description">
+        </div>
+        <div class="form-group">
+            <label>Amount ($)</label>
+            <input type="number" class="form-control" id="amount"
+                required
+                [ngModel]="model.amount" (ngModelChange)="model.amount=$event; calculateTotal();" name="amount">
+        </div>
+        <div class="form-group">
+            <label>Paid By</label>
+            <select class="form-control" id="paidBy" 
+                    required
+                    [(ngModel)]="model.paidBy" name="paidBy">
+                <option *ngFor="let f of friends" [value]="f.userId">{{f.userId | paidByName:friends}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Split type</label>
+            <select class="form-control" id="splitType" 
+                    required
+                    [ngModel]="model.splitType" (ngModelChange)="changeSplitType($event)" name="splitType">
+                <option *ngFor="let type of splitTypes" [value]="type">{{type | splitTypeName }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <div (click)="showSplitOptions = !showSplitOptions;" class="btn btn-default">
+                Extended split options <span *ngIf="!showSplitOptions" class="glyphicon glyphicon-menu-down"></span>
+                <span *ngIf="showSplitOptions" class="glyphicon glyphicon-menu-up"></span>
+            </div>
+
+            <div *ngIf="showSplitOptions" [@animateSplitOptions]="showSplitOptions">
+                <div *ngIf="model.splitType == 0">
+                    <div>Split equally</div>
+                    <div *ngFor="let f of friendDebtors" class="form-group">
+                        <input type="checkbox" [ngModel]="f.isActive" (ngModelChange)="f.isActive=$event; calculateTotal();" name="checkbox_{{f.name}}_{{f.userId}}">
+                        <label>{{f.name}}</label>
+                        <span>{{ f.amount | currency:'USD':true:'1.2-2' }}</span>
+                    </div>
+                </div>
+                <div *ngIf="model.splitType != 0">
+                    <div>Split by exact amounts</div>
+                    <div *ngFor="let f of friendDebtors" class="form-group row">
+                        <div class="col-xs-8"><label>{{f.name}}</label></div>
+                        <div *ngIf="model.splitType == 1" class="input-group col-xs-4">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
+                        </div>
+                        <div *ngIf="model.splitType == 2" class="input-group col-xs-4">
+                            <input type="number" class="form-control" name="unequal_{{f.name}}_{{f.userId}}" [ngModel]="f.amount" (ngModelChange)="f.amount=$event; calculateTotal();">
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="model.splitType != 0" class="row">
+                    <div class="col-xs-8 text-uppercase"><b>Total </b></div>
+                    <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
+                        <div><b>{{ total | currency:'USD':true }}</b></div>
+                        <div>{{ left | currency:'USD':true }} left</div>
+                    </div>
+                    <div class="col-xs-4 text-right" *ngIf="model.splitType == 2">
+                        <div><b>{{ total }}%</b></div>
+                        <div>{{ left }}% left</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
+        <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
+    </form>
+</div>

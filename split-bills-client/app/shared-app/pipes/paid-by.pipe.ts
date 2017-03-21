@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Friend } from '../../secure-app/friends/friend';
+import { Friend } from '../../secure-app/friends/models/friend';
 import { User }   from '../models/user';
 
 import { HelpersService } from '../services/helpers.service';

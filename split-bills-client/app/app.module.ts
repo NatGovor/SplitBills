@@ -12,8 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SecureAppModule }    from './secure-app/secure-app.module';
 import { LoginRoutingModule } from './shared-app/login-routing.module';
-import { LoginComponent }     from './shared-app/login.component';
-import { HomeComponent }      from './shared-app/home.component';
+import { LoginComponent }     from './shared-app/components/login.component';
+import { HomeComponent }      from './shared-app/components/home.component';
 
 import { UserService }    from './shared-app/services/user.service';
 import { HelpersService } from './shared-app/services/helpers.service';

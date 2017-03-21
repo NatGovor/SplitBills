@@ -5,12 +5,12 @@ import { FormsModule }  from '@angular/forms';
 import { SharedModule } from '../../shared-app/shared.module';
 import { BillsModule } from '../bills/bills.module';
 
-import { GroupsComponent }        from './groups.component';
-import { GroupDetailComponent }   from './group-detail.component';
-import { NewGroupComponent }      from './new-group.component';
-import { GroupBalancesComponent } from './group-balances.component';
+import { GroupsComponent }        from './components/groups.component';
+import { GroupDetailComponent }   from './components/group-detail.component';
+import { NewGroupComponent }      from './components/new-group.component';
+import { GroupBalancesComponent } from './components/group-balances.component';
 
-import { GroupService } from './group.service';
+import { GroupService } from './services/group.service';
 
 import { TooltipModule, ModalModule } from 'ng2-bootstrap';
 

@@ -11,7 +11,7 @@ import { ProfileComponent }   from './profile.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
 
-import { ComponentsInteraction } from './components-interaction.service';
+import { ComponentsInteraction } from './services/components-interaction.service';
 
 import { ModalModule } from 'ng2-bootstrap';
 

@@ -1,17 +1,17 @@
 import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChange } from '@angular/core';
 
-import { Bill } from './bills/bill';
-import { Group } from './groups/group';
-import { SplitType } from './bills/split-type';
+import { Bill } from './bills/models/bill';
+import { Group } from './groups/models/group';
+import { SplitType } from './bills/models/split-type';
 import { User } from '../shared-app/models/user';
-import { Debtor } from './bills/debtor';
+import { Debtor } from './bills/models/debtor';
 
 import { PaidByPipe } from '../shared-app/pipes/paid-by.pipe';
 
-import { BillService } from './bills/bill.service';
+import { BillService } from './bills/services/bill.service';
 import { HelpersService } from '../shared-app/services/helpers.service';
 
-import { ComponentsInteraction } from './components-interaction.service';
+import { ComponentsInteraction } from './services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

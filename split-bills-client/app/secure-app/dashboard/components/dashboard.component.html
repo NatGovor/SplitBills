@@ -1,0 +1,67 @@
+<div class="row header-row">
+    <div class="col-xs-8">
+        <h2>Dashboard</h2>
+    </div>
+    <div class="col-xs-4 text-right">
+        <button class="important-btn" (click)="modal.show()">Settle up</button>
+    </div>
+</div>
+<div [hidden]="!isSettledUp">
+    <h3>You are settled up. Awesome!</h3>
+</div>
+<div [hidden]="isSettledUp">
+    <div class="row total-header">
+        <div class="col-xs-4 total-balance">
+            <div>total balance</div>
+            <div  [ngClass]="totalClass">{{ getTotalValue(finalBalances) | currency:'USD':true:'1.2-2' }}</div>
+        </div>
+        <div class="col-xs-4 total-balance">
+            <div>you owe</div>
+            <div class="negative">{{ getTotalValue(finalDebts) | currency:'USD':true:'1.2-2' }}</div>
+        </div>
+        <div class="col-xs-4 total-balance">
+            <div>you are owed</div>
+            <div class="positive">{{ getTotalValue(finalCredits) | currency:'USD':true:'1.2-2' }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 negatives">
+            <div class="text-uppercase text-left balance-header"><b>You owe</b></div>
+            <div *ngFor="let res of finalDebts" class="balance">
+                <div>{{ res.friend.name }}</div>
+                <div class="negative">you owe {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+            </div>
+        </div>            
+        <div class="col-xs-6 positives">
+            <div class="text-uppercase text-right balance-header"><b>You are owed</b></div>
+            <div *ngFor="let res of finalCredits" class="balance">
+                <div>{{ res.friend.name }}</div>
+                <div class="positive">owes you {{ res.amount | makePositive | currency:'USD':true:'1.2-2' }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #modal="bs-modal"
+    tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Settle up</h4>
+                <button type="button" class="close pull-right" (click)="modal.hide()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Choose a group to settle up</label>
+                <select class="form-control"  [ngModel]="groupId" (ngModelChange)="getGroupForSettleUp($event);" name="group">
+                    <option *ngFor="let group of unsettledGroups" [value]="group.id">{{ group.name }}</option>
+                </select>
+                <div *ngIf="group">
+                    <settle-up [modal]="modal" [group]="group"></settle-up>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div *ngIf="friend">
+    <h2>{{ friend.name }}</h2>
+    <div *ngIf="friend.email">{{ friend.email }}</div>
+    <div *ngIf="!friend.email" class="row">
+        <div class="col-xs-8">No email address</div>
+        <div class="col-xs-4">
+            <button (click)="editFriendInfo()" class="important-btn">Invite {{ friend.name }}</button>
+        </div>
+    </div>
+    <button (click)="goBack()">Back</button>
+</div>

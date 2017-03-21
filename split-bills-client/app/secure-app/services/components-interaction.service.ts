@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { Bill } from './bills/bill';
+import { Bill } from '../bills/models/bill';
 
 @Injectable()
 export class ComponentsInteraction {

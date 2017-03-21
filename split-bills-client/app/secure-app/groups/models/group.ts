@@ -1,4 +1,4 @@
-import { Friend } from '../friends/friend';
+import { Friend } from '../../friends/models/friend';
 
 export class Group {
     constructor(

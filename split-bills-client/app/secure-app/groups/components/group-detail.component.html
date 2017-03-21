@@ -1,0 +1,49 @@
+<div *ngIf="group">
+    <div class="row header-row">
+        <div class="col-xs-8">
+            <h4>{{group.name}} details</h4>
+        </div>
+        <div class="col-xs-4">
+            <button class="important-btn" (click)="modal.show()">Settle up</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div>
+                <span>id: </span>{{group.id}}
+            </div>
+            <div>
+                <span>name: </span>{{group.name}}
+            </div>
+            <div>
+                <span>Members: </span>
+                <ul>
+                    <li *ngFor="let friend of group.friends">
+                        {{friend.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <group-balances [group]="group"></group-balances>
+        </div>
+    </div>
+    <bills-list [group]="group"></bills-list>
+    <button (click)="goBack()">Back</button>
+
+    <div class="modal fade" bsModal #modal="bs-modal"
+        tabindex="-1"
+        role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Settle up</h4>
+                    <button type="button" class="close pull-right" (click)="modal.hide()">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <settle-up [modal]="modal" [group]="group"></settle-up>
+            </div>
+        </div>
+    </div>
+</div>

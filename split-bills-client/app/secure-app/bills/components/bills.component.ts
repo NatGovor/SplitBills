@@ -3,51 +3,25 @@ import { Component,
 import { Router,
          ActivatedRoute } from '@angular/router';
 
-import { Bill }       from './bill';
-import { ClientBill } from './client-bill';
-import { Group }      from '../groups/group';
-import { Debtor }     from './debtor';
-import { User }       from '../../shared-app/models/user';
-import { SplitType }  from './split-type';
+import { Bill }       from '../models/bill';
+import { ClientBill } from '../models/client-bill';
+import { Group }      from '../../groups/models/group';
+import { Debtor }     from '../models/debtor';
+import { User }       from '../../../shared-app/models/user';
+import { SplitType }  from '../models/split-type';
 
-import { BillService }    from './bill.service';
-import { HelpersService } from '../../shared-app/services/helpers.service';    
+import { BillService }    from '../services/bill.service';
+import { HelpersService } from '../../../shared-app/services/helpers.service';    
 
-import { PaidByPipe } from '../../shared-app/pipes/paid-by.pipe';
+import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';
 
-import { ComponentsInteraction } from '../components-interaction.service';
+import { ComponentsInteraction } from '../../services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'bills-list',
-    template: `
-        <h4>Bills list</h4>
-        <button (click)="addNew();">Add new</button>
-
-        <table *ngIf="bills" class="table table-hover">
-            <tr *ngFor="let bill of bills">
-                <td>
-                    <strong>{{ getBillDescription(bill) }}</strong>
-                </td>
-                <td>
-                    <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} paid</div>
-                    <div *ngIf="bill.splitType != 3"><strong>{{ bill.amount | currency:'USD':true:'1.2-2' }}</strong></div>
-                </td>
-                <td>
-                    <div *ngIf="bill.splitType != 3" class="sub-info">{{ bill.paidBy | paidByName:group.friends:true }}</div>
-                    <div [ngClass]="addClass(bill.paidBy)">
-                        <strong *ngIf="getLentAmount(bill) != 0">{{ getLentAmount(bill) | currency:'USD':true:'1.2-2' }}</strong>
-                    </div>
-                    <div class="sub-info" *ngIf="getLentAmount(bill) == 0">not involved</div>
-                </td>
-            </tr>
-        </table>
-    `,
-    styles: [`
-        .sub-info {
-            font-size: 10px;
-        }
-    `]
+    templateUrl: './app/secure-app/bills/components/bills.component.html',
+    styleUrls: ['./app/secure-app/bills/components/bills.component.css']
 })
 export class BillsComponent implements OnInit {
     @Input() group: Group;

@@ -3,15 +3,15 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { FriendService } from '../friends/friend.service';
-import { GroupService } from '../groups/group.service';
-import { BillService } from '../bills/bill.service';
+import { FriendService } from '../../friends/services/friend.service';
+import { GroupService } from '../../groups/services/group.service';
+import { BillService } from '../../bills/services/bill.service';
 
-import { Group } from '../groups/group';
-import { Bill } from '../bills/bill';
-import { Balance } from '../groups/balance';
-import { Friend } from '../friends/friend';
-import { DashboardResult } from './dashboard-result';
+import { Group } from '../../groups/models/group';
+import { Bill } from '../../bills/models/bill';
+import { Balance } from '../../groups/models/balance';
+import { Friend } from '../../friends/models/friend';
+import { DashboardResult } from '../models/dashboard-result';
 
 @Injectable()
 export class DashboardService {

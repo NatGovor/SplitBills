@@ -4,9 +4,9 @@ import { FormsModule }  from '@angular/forms';
 
 import { SharedModule } from '../../shared-app/shared.module';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent } from './components/dashboard.component';
 
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from './services/dashboard.service';
 
 import { ModalModule } from 'ng2-bootstrap';
 

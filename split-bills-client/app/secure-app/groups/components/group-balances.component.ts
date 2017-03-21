@@ -1,50 +1,21 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router }    from '@angular/router';
 
-import { Group }   from './group';
-import { Balance } from './balance';
-import { Friend }  from '../friends/friend';
+import { Group }   from '../models/group';
+import { Balance } from '../models/balance';
+import { Friend }  from '../../friends/models/friend';
 
-import { GroupService } from './group.service';
+import { GroupService } from '../services/group.service';
 
-import { MakePositivePipe } from '../../shared-app/pipes/make-positive.pipe';
+import { MakePositivePipe } from '../../../shared-app/pipes/make-positive.pipe';
 
-import { ComponentsInteraction } from '../components-interaction.service';
+import { ComponentsInteraction } from '../../services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'group-balances',
-    template: `
-        <h4>Group Balances</h4>
-        <ul class="balances">
-            <li *ngFor="let balance of balances" (click)="gotoDetail(balance.friend)">
-                <template #toolTipTemplate><div [innerHtml]="getTooltip(balance.friend)"></div></template>
-                <div [tooltip]="!balance.friend.email ? toolTipTemplate : ''"
-                     placement="left">
-                    {{balance.friend.name}}
-                    <span *ngIf="!balance.friend.email" class="glyphicon glyphicon-alert"></span>
-                </div>
-                <div *ngIf="balance.amount == 0">
-                    <span>settled up</span>
-                </div>
-                <div *ngIf="balance.amount != 0"
-                     [ngClass]="addClass(balance.amount)">
-                    <span *ngIf="balance.amount > 0">gets back </span>
-                    <span *ngIf="balance.amount < 0">owes </span>
-                    {{balance.amount | makePositive | currency:'USD':true:'1.2-2' }}
-                </div>
-            </li>
-        </ul>
-    `,
-    styles: [`
-        :host >>> .tooltip-inner {
-            text-align: left;
-        }
-        .balances li:hover {
-            background-color: #f5f5f5;
-            cursor: pointer;
-        }
-    `]
+    templateUrl: './app/secure-app/groups/components/group-balances.component.html',
+    styleUrls: ['./app/secure-app/groups/components/group-balances.component.css']
 })
 export class GroupBalancesComponent implements OnInit {
     @Input()

@@ -1,14 +1,14 @@
 import { Component, OnInit }         from '@angular/core';
 import { Router, ActivatedRoute }    from '@angular/router';
 
-import { Group }  from './group';
-import { Friend } from '../friends/friend';
-import { User }   from '../../shared-app/models/user';
+import { Group }  from '../models/group';
+import { Friend } from '../../friends/models/friend';
+import { User }   from '../../../shared-app/models/user';
 
-import { GroupService }   from './group.service';
-import { HelpersService } from '../../shared-app/services/helpers.service';
-import { DialogService }  from '../../shared-app/services/dialog.service';
-import { FriendService }    from '../friends/friend.service';
+import { GroupService }   from '../services/group.service';
+import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { DialogService }  from '../../../shared-app/services/dialog.service';
+import { FriendService }    from '../../friends/services/friend.service';
 
 import { Subject }           from 'rxjs/Subject';
 import { Observable }        from 'rxjs/Observable';
@@ -22,55 +22,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    template: `
-        <div class="col-sm-4">
-            <h2>Start a new group</h2>
-            <form (ngSubmit)="onSubmit()" #groupForm="ngForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" 
-                        required
-                        [(ngModel)]="model.name" name="name">
-                </div>
-
-                <div>
-                    <label>Group Members</label>
-                    <div *ngFor="let friend of model.friends; let i = index" class="form-group">
-                        <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
-                        <div *ngIf="i > 0" class="row">
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Friend name"
-                                    [(ngModel)]="friend.name" name="friendName{{i}}" (keyup)="search($event, i)">
-                                <div *ngFor="let friend of friends[i] | async"
-                                    class="search-result">
-                                    <div (click)="chooseFriend(friend, i)">{{friend.name}}</div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <input *ngIf="friend.userId !== owner.id" type="email" class="form-control col-xs-6" placeholder="Email address (optional)"
-                                    [(ngModel)]="friend.email" name="friendEmail{{i}}">
-                            </div>
-                        </div>
-                    </div>
-                    <button (click)="addPerson()" type="button" class="btn btn-sm">Add a person</button>
-                </div>
-                
-                <br/>
-                <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
-                <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
-            </form>
-        </div>
-    `,
-    styles: [`
-        .search-result {
-            border-bottom: 1px solid #ccc;
-            border-left: 1px solid #ccc;
-            border-right: 1px solid #ccc;
-            padding: 5px;
-            background-color: white;
-            cursor: pointer;
-        }
-    `]
+    templateUrl: './app/secure-app/groups/components/new-group.component.html',
+    styleUrls: ['./app/secure-app/groups/components/new-group.component.css']
 })
 export class NewGroupComponent implements OnInit {
     submitted = false;

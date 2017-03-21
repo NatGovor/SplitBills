@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { SplitType } from '../split-type';
+import { SplitType } from '../models/split-type';
 
 @Pipe({name: 'splitTypeName'})
 export class SplitTypePipe implements PipeTransform {

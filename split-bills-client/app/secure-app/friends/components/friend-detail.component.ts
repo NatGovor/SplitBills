@@ -1,25 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { Friend } from './friend';
-import { User }   from '../../shared-app/models/user';
+import { Friend } from '../models/friend';
+import { User }   from '../../../shared-app/models/user';
 
-import { UserService }  from '../../shared-app/services/user.service';
+import { UserService }  from '../../../shared-app/services/user.service';
 
 @Component({
-    template: `
-        <div *ngIf="friend">
-            <h2>{{ friend.name }}</h2>
-            <div *ngIf="friend.email">{{ friend.email }}</div>
-            <div *ngIf="!friend.email" class="row">
-                <div class="col-xs-8">No email address</div>
-                <div class="col-xs-4">
-                    <button (click)="editFriendInfo()" class="important-btn">Invite {{ friend.name }}</button>
-                </div>
-            </div>
-            <button (click)="goBack()">Back</button>
-        </div>
-    `
+    templateUrl: './app/secure-app/friends/components/friend-detail.component.html' 
 })
 export class FriendDetailComponent implements OnInit {
     friend: Friend;

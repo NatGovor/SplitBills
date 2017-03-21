@@ -1,5 +1,5 @@
-import { Balance } from '../groups/balance';
-import { Group } from '../groups/group';
+import { Balance } from '../../groups/models/balance';
+import { Group } from '../../groups/models/group';
 
 export class DashboardResult {
     constructor(
