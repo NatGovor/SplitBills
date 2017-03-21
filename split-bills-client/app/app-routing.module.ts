@@ -1,9 +1,9 @@
 import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './shared-app/home.component';
 
-import { CanDeactivateGuard } from './can-deactivate-guard.service';
+import { CanDeactivateGuard } from './shared-app/services/can-deactivate-guard.service';
 
 @NgModule({
     imports: [

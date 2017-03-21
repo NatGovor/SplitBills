@@ -12,9 +12,9 @@ import { GroupDetailComponent }  from './groups/group-detail.component';
 import { NewGroupComponent }     from './groups/new-group.component';
 import { NewBillComponent }      from './bills/new-bill.component';
 
-import { AuthGuard } from '../auth-guard.service';
+import { AuthGuard } from '../shared-app/services/auth-guard.service';
 
-import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+import { CanDeactivateGuard } from '../shared-app/services/can-deactivate-guard.service';
 
 @NgModule({
     imports: [

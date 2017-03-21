@@ -1,4 +1,4 @@
-import { Friend } from './secure-app/friends/friend';
+import { Friend } from '../../secure-app/friends/friend';
 
 export class User {
     constructor(

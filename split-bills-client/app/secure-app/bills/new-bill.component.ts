@@ -11,11 +11,11 @@ import { FriendDebtor } from './friend-debtor';
 
 import { BillService }   from './bill.service';
 import { GroupService }  from '../groups/group.service';
-import { DialogService } from '../../dialog.service';
-import { HelpersService } from '../../helpers.service';
+import { DialogService } from '../../shared-app/services/dialog.service';
+import { HelpersService } from '../../shared-app/services/helpers.service';
 
 import { SplitTypePipe } from './pipes/split-type.pipe';
-import { PaidByPipe } from '../../pipes/paid-by.pipe';
+import { PaidByPipe } from '../../shared-app/pipes/paid-by.pipe';
 
 @Component({
     template: `

@@ -5,19 +5,19 @@ import { HttpModule }    from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './shared-app/services/in-memory-data.service';
 
 import { AppComponent }     from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SecureAppModule }    from './secure-app/secure-app.module';
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent }     from './login.component';
-import { HomeComponent }      from './home.component';
+import { LoginRoutingModule } from './shared-app/login-routing.module';
+import { LoginComponent }     from './shared-app/login.component';
+import { HomeComponent }      from './shared-app/home.component';
 
-import { UserService }    from './user.service';
-import { HelpersService } from './helpers.service';
-import { DialogService }  from './dialog.service';
+import { UserService }    from './shared-app/services/user.service';
+import { HelpersService } from './shared-app/services/helpers.service';
+import { DialogService }  from './shared-app/services/dialog.service';
 
 @NgModule({
     imports: [

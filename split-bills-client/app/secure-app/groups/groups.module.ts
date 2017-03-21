@@ -2,7 +2,7 @@ import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }  from '@angular/forms';
 
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../shared-app/shared.module';
 import { BillsModule } from '../bills/bills.module';
 
 import { GroupsComponent }        from './groups.component';

@@ -4,9 +4,9 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Friend } from './friend';
-import { User }   from '../../user';
+import { User }   from '../../shared-app/models/user';
 
-import { UserService } from '../../user.service'; 
+import { UserService } from '../../shared-app/services/user.service'; 
 
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';

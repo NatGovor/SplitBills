@@ -3,11 +3,11 @@ import { Router, ActivatedRoute }    from '@angular/router';
 
 import { Group }  from './group';
 import { Friend } from '../friends/friend';
-import { User }   from '../../user';
+import { User }   from '../../shared-app/models/user';
 
 import { GroupService }   from './group.service';
-import { HelpersService } from '../../helpers.service';
-import { DialogService }  from '../../dialog.service';
+import { HelpersService } from '../../shared-app/services/helpers.service';
+import { DialogService }  from '../../shared-app/services/dialog.service';
 import { FriendService }    from '../friends/friend.service';
 
 import { Subject }           from 'rxjs/Subject';
@@ -74,7 +74,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class NewGroupComponent implements OnInit {
     submitted = false;
-    owner = this.helpers.getStorageProperty("user") as User;
+    owner = this.helpers.getUserFromStorage();
     model = new Group(0, '', 
     [
         new Friend(this.owner.name, this.owner.id, this.owner.email),

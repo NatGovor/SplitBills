@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user';
+import { User } from '../shared-app/models/user';
 
-import { UserService }    from '../user.service';
-import { HelpersService } from '../helpers.service';
+import { UserService }    from '../shared-app/services/user.service';
+import { HelpersService } from '../shared-app/services/helpers.service';
 
 @Component({
     template: `
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
         private helpers: HelpersService) {}
 
     ngOnInit(): void {
-        this.userService.getUser((this.helpers.getStorageProperty("user") as User).id)
+        this.userService.getUser(this.helpers.getUserFromStorage().id)
             .then(user => this.user = user);
     }
 }

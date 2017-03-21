@@ -7,13 +7,13 @@ import { Bill }       from './bill';
 import { ClientBill } from './client-bill';
 import { Group }      from '../groups/group';
 import { Debtor }     from './debtor';
-import { User }       from '../../user';
+import { User }       from '../../shared-app/models/user';
 import { SplitType }  from './split-type';
 
 import { BillService }    from './bill.service';
-import { HelpersService } from '../../helpers.service';    
+import { HelpersService } from '../../shared-app/services/helpers.service';    
 
-import { PaidByPipe } from '../../pipes/paid-by.pipe';
+import { PaidByPipe } from '../../shared-app/pipes/paid-by.pipe';
 
 import { ComponentsInteraction } from '../components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -65,7 +65,7 @@ export class BillsComponent implements OnInit {
         private route: ActivatedRoute,
         private helpers: HelpersService,
         private componentsInteraction: ComponentsInteraction) {
-        this.currentUser = this.helpers.getStorageProperty("user") as User;
+        this.currentUser = this.helpers.getUserFromStorage();
         // event is fired by group-detail component
         this.subscription = componentsInteraction.billRefreshed$.subscribe(
             bill => {

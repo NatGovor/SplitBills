@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Friend } from '../secure-app/friends/friend';
-import { User }   from '../user';
+import { Friend } from '../../secure-app/friends/friend';
+import { User }   from '../models/user';
 
-import { HelpersService } from '../helpers.service';
+import { HelpersService } from '../services/helpers.service';
 
 @Pipe({name: 'paidByName'})
 export class PaidByPipe implements PipeTransform {
     currentUser: User;
 
     constructor(private helpers: HelpersService) {
-        this.currentUser = this.helpers.getStorageProperty("user") as User;
+        this.currentUser = this.helpers.getUserFromStorage();
     }
 
     transform(payerId: number, friends: Friend[], additionalText: boolean): string {

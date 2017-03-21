@@ -7,7 +7,7 @@ import { Friend }  from '../friends/friend';
 
 import { GroupService } from './group.service';
 
-import { MakePositivePipe } from '../../pipes/make-positive.pipe';
+import { MakePositivePipe } from '../../shared-app/pipes/make-positive.pipe';
 
 import { ComponentsInteraction } from '../components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';

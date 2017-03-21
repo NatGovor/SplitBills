@@ -4,11 +4,11 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Group }   from './group';
-import { User }    from '../../user';
+import { User }    from '../../shared-app/models/user';
 import { Friend }  from '../friends/friend';
 import { Balance } from './balance';
 
-import { UserService }   from '../../user.service';
+import { UserService }   from '../../shared-app/services/user.service';
 import { FriendService } from '../friends/friend.service';
 import { BillService }   from '../bills/bill.service';
 

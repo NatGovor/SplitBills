@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router }    from '@angular/router';
 
-import { User } from '../user';
+import { User } from '../shared-app/models/user';
 
-import { HelpersService } from '../helpers.service';
+import { HelpersService } from '../shared-app/services/helpers.service';
 
 @Component({
     template: `
@@ -21,6 +21,6 @@ export class SecureAppComponent {
     user: User;
 
     constructor(private helpers: HelpersService) {
-        this.user = this.helpers.getStorageProperty("user") as User;
+        this.user = this.helpers.getUserFromStorage();
     }
 }

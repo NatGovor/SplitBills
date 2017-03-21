@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { DashboardService }   from './dashboard.service';
-import { HelpersService } from '../../helpers.service';
+import { HelpersService } from '../../shared-app/services/helpers.service';
 
-import { User } from '../../user';
+import { User } from '../../shared-app/models/user';
 import { Balance } from '../groups/balance';
 import { Group } from '../groups/group';
 
-import { MakePositivePipe } from '../../pipes/make-positive.pipe';
+import { MakePositivePipe } from '../../shared-app/pipes/make-positive.pipe';
 
 import { ComponentsInteraction } from '../components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
         private helpers: HelpersService,
         private componentsInteraction: ComponentsInteraction
     ) {
-        this.currentUser = this.helpers.getStorageProperty("user") as User;
+        this.currentUser = this.helpers.getUserFromStorage();;
         this.subscription = componentsInteraction.billAdded$.subscribe(
             bill => {
                 if (bill.paidBy === this.currentUser.id || bill.debtors[0].userId === this.currentUser.id) {

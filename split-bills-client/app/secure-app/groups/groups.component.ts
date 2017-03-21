@@ -3,10 +3,10 @@ import { ActivatedRoute,
          Router, Params }    from '@angular/router';
 
 import { Group } from './group';
-import { User }  from '../../user';
+import { User }  from '../../shared-app/models/user';
 
 import { GroupService }   from './group.service';
-import { HelpersService } from '../../helpers.service';
+import { HelpersService } from '../../shared-app/services/helpers.service';
 
 @Component({
     template: `
@@ -31,7 +31,7 @@ export class GroupsComponent implements OnInit {
         private helpers: HelpersService) {}
 
     ngOnInit(): void {
-        this.groupService.getUserGroups((this.helpers.getStorageProperty("user") as User).id)
+        this.groupService.getUserGroups(this.helpers.getUserFromStorage().id)
             .then(groups => this.groups = groups);
     }
 

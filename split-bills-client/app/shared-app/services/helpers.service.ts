@@ -1,9 +1,10 @@
 import { Injectable }    from '@angular/core';
 
-import { User } from './user';
+import { User } from '../models/user';
 
 @Injectable()
 export class HelpersService {
+    // return user additional helper
     getStorageProperty(name): Object {
         if (localStorage.getItem(name) != null) {
             let value = localStorage.getItem(name);
@@ -24,6 +25,20 @@ export class HelpersService {
         } else {
             localStorage.setItem(name, typeof (value) == "string" ? value : JSON.stringify(value));
         }
+    }
+
+    getUserFromStorage(): User {
+        if (localStorage.getItem("user") != null) {
+            let value = localStorage.getItem("user");
+
+            if (value[0] === "{" || value[0] === "[") {
+                return JSON.parse(value);
+            }
+
+            return Object(value) as User;
+        }
+
+        return null;
     }
 
     divideNumbersEvenly(amount, dividers, digits): Array<number> {

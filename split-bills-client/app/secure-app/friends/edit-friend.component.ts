@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Friend } from './friend';
-import { User }   from '../../user';
+import { User }   from '../../shared-app/models/user';
 
-import { UserService }  from '../../user.service';
+import { UserService }  from '../../shared-app/services/user.service';
 import { FriendService } from './friend.service';
 
 @Component({

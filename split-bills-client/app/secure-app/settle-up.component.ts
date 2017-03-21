@@ -3,13 +3,13 @@ import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChange } from '@a
 import { Bill } from './bills/bill';
 import { Group } from './groups/group';
 import { SplitType } from './bills/split-type';
-import { User } from '../user';
+import { User } from '../shared-app/models/user';
 import { Debtor } from './bills/debtor';
 
-import { PaidByPipe } from '../pipes/paid-by.pipe';
+import { PaidByPipe } from '../shared-app/pipes/paid-by.pipe';
 
 import { BillService } from './bills/bill.service';
-import { HelpersService } from '../helpers.service';
+import { HelpersService } from '../shared-app/services/helpers.service';
 
 import { ComponentsInteraction } from './components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -66,7 +66,7 @@ export class SettleUpComponent implements OnInit {
         private billService: BillService,
         private helpers: HelpersService,
         private componentsInteraction: ComponentsInteraction) {
-        this.currentUser = (this.helpers.getStorageProperty("user") as User);
+        this.currentUser = this.helpers.getUserFromStorage();
     }
 
     ngOnInit(): void {

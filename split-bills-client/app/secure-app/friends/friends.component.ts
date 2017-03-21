@@ -3,10 +3,10 @@ import { ActivatedRoute,
          Router, Params }    from '@angular/router';
 
 import { Friend } from './friend';
-import { User }   from '../../user';
+import { User }   from '../../shared-app/models/user';
 
 import { FriendService }  from './friend.service';
-import { HelpersService } from '../../helpers.service';
+import { HelpersService } from '../../shared-app/services/helpers.service';
 
 @Component({
     template: `
@@ -29,7 +29,7 @@ export class FriendsComponent implements OnInit {
         private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.friendService.getFriends((this.helpers.getStorageProperty("user") as User).id)
+        this.friendService.getFriends(this.helpers.getUserFromStorage().id)
             .then(friends => this.friends = friends);
     }
 

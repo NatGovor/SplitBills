@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FriendsModule } from './friends/friends.module';
 import { GroupModule }   from './groups/groups.module';
-import { SharedModule }  from '../shared.module';
+import { SharedModule }  from '../shared-app/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 import { SecureAppComponent } from './secure-app.component';
