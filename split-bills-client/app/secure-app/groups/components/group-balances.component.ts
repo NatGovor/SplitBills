@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router }    from '@angular/router';
+import { Router } from '@angular/router';
 
-import { Group }   from '../models/group';
+import { Group } from '../models/group';
 import { Balance } from '../models/balance';
-import { Friend }  from '../../friends/models/friend';
+import { Friend } from '../../friends/models/friend';
 
 import { GroupService } from '../services/group.service';
 

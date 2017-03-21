@@ -1,8 +1,8 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule }  from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { FriendsComponent }   from './components/friends.component';
+import { FriendsComponent } from './components/friends.component';
 import { FriendDetailComponent } from './components/friend-detail.component';
 import { EditFriendComponent } from './components/edit-friend.component';
 

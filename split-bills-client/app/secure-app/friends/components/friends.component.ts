@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, 
-         Router, Params }    from '@angular/router';
+import { ActivatedRoute,
+         Router, Params } from '@angular/router';
 
 import { Friend } from '../models/friend';
-import { User }   from '../../../shared-app/models/user';
+import { User } from '../../../shared-app/models/user';
 
-import { FriendService }  from '../services/friend.service';
+import { FriendService } from '../services/friend.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 
 @Component({

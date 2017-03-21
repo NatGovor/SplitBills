@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, 
-         Router, Params }    from '@angular/router';
+import { ActivatedRoute,
+         Router, Params } from '@angular/router';
 
 import { Group } from '../models/group';
-import { User }  from '../../../shared-app/models/user';
+import { User } from '../../../shared-app/models/user';
 
-import { GroupService }   from '../services/group.service';
+import { GroupService } from '../services/group.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 
 @Component({

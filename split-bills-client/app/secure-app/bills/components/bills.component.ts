@@ -1,16 +1,14 @@
-import { Component, 
-         OnInit, Input, OnDestroy }  from '@angular/core';
-import { Router,
-         ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { Bill }       from '../models/bill';
+import { Bill } from '../models/bill';
 import { ClientBill } from '../models/client-bill';
-import { Group }      from '../../groups/models/group';
-import { Debtor }     from '../models/debtor';
-import { User }       from '../../../shared-app/models/user';
-import { SplitType }  from '../models/split-type';
+import { Group } from '../../groups/models/group';
+import { Debtor } from '../models/debtor';
+import { User } from '../../../shared-app/models/user';
+import { SplitType } from '../models/split-type';
 
-import { BillService }    from '../services/bill.service';
+import { BillService } from '../services/bill.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';    
 
 import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';

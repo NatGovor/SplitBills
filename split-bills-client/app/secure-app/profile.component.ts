@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../shared-app/models/user';
 
-import { UserService }    from '../shared-app/services/user.service';
+import { UserService } from '../shared-app/services/user.service';
 import { HelpersService } from '../shared-app/services/helpers.service';
 
 @Component({

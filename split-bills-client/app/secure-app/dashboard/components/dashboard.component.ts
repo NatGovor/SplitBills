@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { DashboardService }   from '../services/dashboard.service';
+import { DashboardService } from '../services/dashboard.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 
 import { User } from '../../../shared-app/models/user';

@@ -1,16 +1,15 @@
 import { Component, OnInit, Input, trigger, state, style,
          transition,  animate } from '@angular/core';
-import { Router, ActivatedRoute, 
-         Params }            from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Bill }         from '../models/bill';
-import { SplitType }    from '../models/split-type';
-import { Friend }       from '../../friends/models/friend';
-import { Debtor }       from '../models/debtor';
+import { Bill } from '../models/bill';
+import { SplitType } from '../models/split-type';
+import { Friend } from '../../friends/models/friend';
+import { Debtor } from '../models/debtor';
 import { FriendDebtor } from '../models/friend-debtor';
 
-import { BillService }   from '../services/bill.service';
-import { GroupService }  from '../../groups/services/group.service';
+import { BillService } from '../services/bill.service';
+import { GroupService } from '../../groups/services/group.service';
 import { DialogService } from '../../../shared-app/services/dialog.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 

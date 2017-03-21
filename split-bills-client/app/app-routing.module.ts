@@ -1,4 +1,4 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './shared-app/components/home.component';
@@ -7,7 +7,7 @@ import { CanDeactivateGuard } from './shared-app/services/can-deactivate-guard.s
 
 @NgModule({
     imports: [
-        RouterModule.forRoot([   
+        RouterModule.forRoot([ 
             {
                 path: '',
                 component: HomeComponent

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
-import { UserService }    from './user.service';
+import { UserService } from './user.service';
 import { HelpersService } from './helpers.service';
 
 @Injectable()

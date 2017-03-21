@@ -1,15 +1,15 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule }  from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../shared-app/shared.module';
 
-import { BillsComponent }   from './components/bills.component';
+import { BillsComponent } from './components/bills.component';
 import { NewBillComponent } from './components/new-bill.component';
 
 import { BillService } from './services/bill.service';
 
-import { SplitTypePipe }  from './pipes/split-type.pipe';
+import { SplitTypePipe } from './pipes/split-type.pipe';
 
 @NgModule({
     imports: [
