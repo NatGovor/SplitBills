@@ -18,6 +18,7 @@ import { HomeComponent } from './shared-app/components/home.component';
 import { UserService } from './shared-app/services/user.service';
 import { HelpersService } from './shared-app/services/helpers.service';
 import { DialogService } from './shared-app/services/dialog.service';
+import { HistoryService } from './shared-app/services/history.service';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { DialogService } from './shared-app/services/dialog.service';
     providers: [
         UserService,
         HelpersService,
-        DialogService
+        DialogService,
+        HistoryService
     ],
     bootstrap: [ AppComponent ]
 })

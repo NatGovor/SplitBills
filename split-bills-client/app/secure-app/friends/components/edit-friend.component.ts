@@ -6,6 +6,7 @@ import { User } from '../../../shared-app/models/user';
 
 import { UserService } from '../../../shared-app/services/user.service';
 import { FriendService } from '../services/friend.service';
+import { HistoryService } from "../../../shared-app/services/history.service";
 
 @Component({
     templateUrl: './app/secure-app/friends/components/edit-friend.component.html' 
@@ -16,7 +17,8 @@ export class EditFriendComponent implements OnInit {
     constructor(
         private userService: UserService,
         private friendService: FriendService,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute,
+        private historyService: HistoryService) {}
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
@@ -27,11 +29,11 @@ export class EditFriendComponent implements OnInit {
 
     onSubmit(): void {
         this.friendService.update(this.friend).then(friend => {
-            window.history.back();
+            this.historyService.back();
         });
     }
 
     cancel(): void {
-        window.history.back();
+        this.historyService.back();
     }
 }

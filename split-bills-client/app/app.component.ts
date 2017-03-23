@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { AuthService } from './shared-app/services/auth.service';
+import { HistoryService } from "./shared-app/services/history.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
     selector: 'my-app',
@@ -16,11 +18,28 @@ import { AuthService } from './shared-app/services/auth.service';
         </div>
     `
 })
-export class AppComponent {
-    constructor(public authService: AuthService, private router: Router) {}
+export class AppComponent implements OnInit {
+    subscription: Subscription;
+
+    constructor(
+        public authService: AuthService,
+        private router: Router,
+        private historyService: HistoryService) { }
+
+    ngOnInit(): void {
+        this.subscription = this.router.events
+            .filter(e => e instanceof NavigationEnd)
+            .subscribe(e => {
+                this.historyService.addPage(e as NavigationEnd);
+            });
+    }
 
     logout(): void {
         this.authService.logout();
         this.router.navigate(['']);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }

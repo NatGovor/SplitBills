@@ -5,6 +5,7 @@ import { Friend } from '../models/friend';
 import { User } from '../../../shared-app/models/user';
 
 import { UserService } from '../../../shared-app/services/user.service';
+import { HistoryService } from "../../../shared-app/services/history.service";
 
 @Component({
     templateUrl: './app/secure-app/friends/components/friend-detail.component.html' 
@@ -15,7 +16,8 @@ export class FriendDetailComponent implements OnInit {
     constructor(
         private userService: UserService,
         private route: ActivatedRoute,
-        private router: Router) {}
+        private router: Router,
+        private historyService: HistoryService) {}
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
@@ -25,7 +27,7 @@ export class FriendDetailComponent implements OnInit {
     }
 
     goBack(): void {
-        window.history.back();
+        this.historyService.back();
     }
 
     editFriendInfo(): void {
