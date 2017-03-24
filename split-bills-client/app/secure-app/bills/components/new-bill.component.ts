@@ -1,20 +1,20 @@
-import { Component, OnInit, Input, trigger, state, style,
-         transition,  animate } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { animate, Component, Input, OnInit, state, style,
+         transition,  trigger } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { Bill } from '../models/bill';
-import { SplitType } from '../models/split-type';
 import { Friend } from '../../friends/models/friend';
+import { Bill } from '../models/bill';
 import { Debtor } from '../models/debtor';
 import { FriendDebtor } from '../models/friend-debtor';
+import { SplitType } from '../models/split-type';
 
-import { BillService } from '../services/bill.service';
-import { GroupService } from '../../groups/services/group.service';
 import { DialogService } from '../../../shared-app/services/dialog.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { GroupService } from '../../groups/services/group.service';
+import { BillService } from '../services/bill.service';
 
-import { SplitTypePipe } from '../pipes/split-type.pipe';
 import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';
+import { SplitTypePipe } from '../pipes/split-type.pipe';
 
 @Component({
     templateUrl: './app/secure-app/bills/components/new-bill.component.html',
@@ -57,9 +57,9 @@ export class NewBillComponent implements OnInit {
         });
 
         this.groupService.getGroup(this.model.groupId)
-            .then(group => {
+            .then((group) => {
                 this.friends = group.friends;
-                this.friendDebtors = this.friends.map(f => new FriendDebtor(f.userId, f.name, true, 0));
+                this.friendDebtors = this.friends.map((f) => new FriendDebtor(f.userId, f.name, true, 0));
             });
     }
 
@@ -77,7 +77,7 @@ export class NewBillComponent implements OnInit {
 
     onSubmit(): void {
         // validation
-        if (this.total != this.model.amount && this.left != 0) {
+        if (this.total !== this.model.amount && this.left !== 0) {
             this.dialogService.alert("The following errors occurred:\nThe total of everyone's owed shares is different than the total cost.");
             return;
         }
@@ -87,22 +87,22 @@ export class NewBillComponent implements OnInit {
         this.model.paidBy = +this.model.paidBy;
         this.model.splitType = +this.model.splitType;
 
-        switch(this.model.splitType) {
+        switch (this.model.splitType) {
             case SplitType.Equal:
             case SplitType.ExactAmounts:
-                this.friendDebtors.forEach(friend => {
+                this.friendDebtors.forEach((friend) => {
                     this.model.debtors.push(new Debtor(friend.userId, friend.amount));
                 });
                 break;
             case SplitType.Percentage:
-                this.friendDebtors.forEach(friend => {
+                this.friendDebtors.forEach((friend) => {
                     this.model.debtors.push(new Debtor(friend.userId, this.model.amount * friend.amount / 100));
                 });
                 break;
         }
 
         this.billService.create(this.model)
-            .then(group => {
+            .then((group) => {
                 this.router.navigate(['/groups', this.model.groupId]);
             });
     }
@@ -110,8 +110,9 @@ export class NewBillComponent implements OnInit {
     // in unequal splitting user enters amounts manually, so we need to calculate and display tips to him
     calculateTotal(): void {
         if (this.model.splitType === SplitType.Equal) {
-            var res = this.helpersService.divideNumbersEvenly(this.model.amount, this.friendDebtors.filter(x => x.isActive).length, 2);
-            this.friendDebtors.forEach(f => {
+            const res = this.helpersService.divideNumbersEvenly(
+                this.model.amount, this.friendDebtors.filter((x) => x.isActive).length, 2);
+            this.friendDebtors.forEach((f) => {
                 if (f.isActive) {
                     f.amount = res.shift();
                 } else {

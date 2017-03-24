@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Group } from '../models/group';
 
 import { GroupService } from '../services/group.service';
 
-import { ComponentsInteraction } from '../../services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ComponentsInteraction } from '../../services/components-interaction.service';
 
 @Component({
     templateUrl: './app/secure-app/groups/components/group-detail.component.html',
@@ -22,7 +22,7 @@ export class GroupDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private componentsInteraction: ComponentsInteraction) {
         this.subscription = componentsInteraction.billAdded$.subscribe(
-            bill => {
+            (bill) => {
                 componentsInteraction.refreshBills(bill);
             });
     }
@@ -30,7 +30,7 @@ export class GroupDetailComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.groupService.getGroup(id).then(group => this.group = group);
+            this.groupService.getGroup(id).then((group) => this.group = group);
         });
     }
 

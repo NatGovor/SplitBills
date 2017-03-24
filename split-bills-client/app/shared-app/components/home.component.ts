@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
         <p>Split Bills together with your friends!</p>
     `
 })
-export class HomeComponent { 
+export class HomeComponent {
     constructor(private authService: AuthService, private router: Router) {
         if (this.authService.isLoggedIn) {
             this.router.navigate(['/dashboard']);

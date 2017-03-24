@@ -1,5 +1,5 @@
-import { SplitType } from './split-type';
 import { Debtor } from './debtor';
+import { SplitType } from './split-type';
 
 export class Bill {
     constructor(

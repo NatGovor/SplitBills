@@ -3,13 +3,13 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Friend } from '../models/friend';
 import { User } from '../../../shared-app/models/user';
+import { Friend } from '../models/friend';
 
 import { UserService } from '../../../shared-app/services/user.service'; 
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class FriendService {
@@ -21,26 +21,26 @@ export class FriendService {
     getFriends(userId: number): Promise<Friend[]> {
         return this.http.get(this.usersUrl)
                     .toPromise()
-                    .then(response => response.json().data as User[])
-                    .then (users => users.find(user => user.id === userId))
-                    .then (user => user.friends)
+                    .then((response) => response.json().data as User[])
+                    .then ((users) => users.find((user) => user.id === userId))
+                    .then ((user) => user.friends)
                     .catch(this.handleError);
     }
 
     search(userId: number, term: string): Observable<Friend[]> {
         return this.http
                     .get(this.usersUrl + `/?name=${term}`)
-                    .map(response => response.json().data.filter(f => f.id != userId) as Friend[]);
+                    .map((response) => response.json().data.filter((f) => f.id != userId) as Friend[]);
     }
 
     addFriends(userId: number, potentialFriends: Friend[]): Promise<User> {
         return Promise.resolve(this.getFriends(userId)
-            .then(friends => {
-                let userFriendsIds = friends.map(f => f.userId);
-                return potentialFriends.filter(friend => userId !== friend.userId && !userFriendsIds.includes(friend.userId));
+            .then((friends) => {
+                let userFriendsIds = friends.map((f) => f.userId);
+                return potentialFriends.filter((friend) => userId !== friend.userId && !userFriendsIds.includes(friend.userId));
             })
-            .then(newFriends => this.userService.getUser(userId)
-                .then(user => {
+            .then((newFriends) => this.userService.getUser(userId)
+                .then((user) => {
                     user.friends = user.friends.concat(newFriends);
                     return this.userService.update(user);
                 })));
@@ -49,7 +49,11 @@ export class FriendService {
     update(friend: Friend): Promise<Friend> {
         const url = `${this.usersUrl}/${friend.userId}`;
         return this.http
-            .put(url, JSON.stringify({ id: friend.userId, name: friend.name, email: friend.email}), {headers: this.headers})
+            .put(url, JSON.stringify({
+                id: friend.userId,
+                name: friend.name,
+                email: friend.email}),
+                {headers: this.headers})
             .toPromise()
             .then(() => friend)
             .catch(this.handleError);

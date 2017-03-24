@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,
-         Router, Params } from '@angular/router';
+         Params, Router } from '@angular/router';
 
-import { Friend } from '../models/friend';
 import { User } from '../../../shared-app/models/user';
+import { Friend } from '../models/friend';
 
-import { FriendService } from '../services/friend.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { FriendService } from '../services/friend.service';
 
 @Component({
     templateUrl: './app/secure-app/friends/components/friends.component.html'
@@ -22,7 +22,7 @@ export class FriendsComponent implements OnInit {
 
     ngOnInit(): void {
         this.friendService.getFriends(this.helpers.getUserFromStorage().id)
-            .then(friends => this.friends = friends);
+            .then((friends) => this.friends = friends);
     }
 
     gotoDetail(friend: Friend): void {

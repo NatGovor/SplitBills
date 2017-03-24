@@ -1,18 +1,18 @@
-import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
 
-import { Bill } from './bills/models/bill';
-import { Group } from './groups/models/group';
-import { SplitType } from './bills/models/split-type';
 import { User } from '../shared-app/models/user';
+import { Bill } from './bills/models/bill';
 import { Debtor } from './bills/models/debtor';
+import { SplitType } from './bills/models/split-type';
+import { Group } from './groups/models/group';
 
 import { PaidByPipe } from '../shared-app/pipes/paid-by.pipe';
 
-import { BillService } from './bills/services/bill.service';
 import { HelpersService } from '../shared-app/services/helpers.service';
+import { BillService } from './bills/services/bill.service';
 
-import { ComponentsInteraction } from './services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ComponentsInteraction } from './services/components-interaction.service';
 
 @Component({
     selector: 'settle-up',
@@ -78,16 +78,16 @@ export class SettleUpComponent implements OnInit {
         this.model.amount = 0;
         this.model.groupId = this.group.id;
         this.model.paidBy = this.currentUser.id;
-        this.creditor = this.group.friends.find(f => f.userId != this.currentUser.id).userId;
+        this.creditor = this.group.friends.find((f) => f.userId !== this.currentUser.id).userId;
 
         this.billService.getBills(groupId)
-            .then(bills => {
-                bills.forEach(bill => {
-                    bill.debtors.forEach(debtor => {
-                        if (debtor.userId != bill.paidBy) {
+            .then((bills) => {
+                bills.forEach((bill) => {
+                    bill.debtors.forEach((debtor) => {
+                        if (debtor.userId !== bill.paidBy) {
                             // debtor -> creditor
-                            let key = debtor.userId + '-' + bill.paidBy;
-                            let reverseKey = this.getReverseKey(key);;
+                            const key = debtor.userId + '-' + bill.paidBy;
+                            const reverseKey = this.getReverseKey(key);;
                             if (this.groupDebts[key]) {
                                 this.groupDebts[key] += debtor.amount;
                             } else if (this.groupDebts[reverseKey] ){
@@ -105,7 +105,7 @@ export class SettleUpComponent implements OnInit {
     }
 
     ngOnChanges(changes: {[propKey: string]: SimpleChange}): void {
-        let groupChnages = changes['group'];
+        const groupChnages = changes['group'];
         if (!groupChnages.isFirstChange()) {
             this.initializeData(this.group.id);
         }
@@ -115,16 +115,17 @@ export class SettleUpComponent implements OnInit {
         this.model.paidBy = +this.model.paidBy;
         this.model.debtors.push(new Debtor(+this.creditor, this.model.amount));
         this.billService.create(this.model)
-            .then(bill => {
+            .then((bill) => {
                 this.modal.hide();
                 this.componentsInteraction.addBill(bill);
 
                 this.clearSettleDebt();
 
                 // reinitialize model
-                this.model = new Bill(0, 'Payment', null, this.group.id, this.group.friends.find(f => f.userId != this.currentUser.id).userId, SplitType.Payment, []);
+                this.model = new Bill(0, 'Payment', null, this.group.id,
+                        this.group.friends.find((f) => f.userId !== this.currentUser.id).userId, SplitType.Payment, []);
                 if (this.debtsKeys[0]) {
-                    let usersId = this.debtsKeys[0].split('-');
+                    const usersId = this.debtsKeys[0].split('-');
                     this.model.amount = Math.abs(this.groupDebts[this.debtsKeys[0]]);
                     // debtor -> creditor - if amount is negative than switch places of debtor and creditor
                     if (this.groupDebts[this.debtsKeys[0]] > 0) {
@@ -139,8 +140,8 @@ export class SettleUpComponent implements OnInit {
     }
 
     onChangePayers(): void {
-        let key = this.model.paidBy + '-' + this.creditor;
-        let reverseKey = this.getReverseKey(key);
+        const key = this.model.paidBy + '-' + this.creditor;
+        const reverseKey = this.getReverseKey(key);
         if (this.groupDebts[key] && this.groupDebts[key] > 0) {
             this.model.amount = Math.abs(this.groupDebts[key]);
         } else if (this.groupDebts[reverseKey]) {
@@ -159,8 +160,8 @@ export class SettleUpComponent implements OnInit {
     }
 
     private clearSettleDebt(): void {
-        let key = this.model.paidBy + '-' + this.creditor;
-        let reverseKey = this.getReverseKey(key);
+        const key = this.model.paidBy + '-' + this.creditor;
+        const reverseKey = this.getReverseKey(key);
         delete this.groupDebts[key];
         delete this.groupDebts[reverseKey];
         this.setDebtorsKeys();

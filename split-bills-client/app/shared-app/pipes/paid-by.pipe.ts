@@ -14,7 +14,7 @@ export class PaidByPipe implements PipeTransform {
     }
 
     transform(payerId: number, friends: Friend[], additionalText: boolean): string {
-        let payer = friends.find(f => f.userId === payerId);
+        const payer = friends.find(f => f.userId === payerId);
         if (!additionalText) {
             return payer.userId === this.currentUser.id ? 'you' : payer.name;
         } else {

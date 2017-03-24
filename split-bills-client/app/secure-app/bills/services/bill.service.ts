@@ -15,18 +15,24 @@ export class BillService {
     getBills(groupId: number): Promise<Bill[]> {
         return this.http.get(this.billsUrl)
                     .toPromise()
-                    .then(response => response.json().data as Bill[])
-                    .then(bills => bills.filter(bill => bill.groupId === groupId))
+                    .then((response) => response.json().data as Bill[])
+                    .then((bills) => bills.filter((bill) => bill.groupId === groupId))
                     .catch(this.handleError);
     }
 
     create(bill: Bill): Promise<Bill> {
         return this.http
-                .post(this.billsUrl, 
-                      JSON.stringify({description: bill.description, amount: bill.amount, groupId: bill.groupId, paidBy: bill.paidBy, splitType: bill.splitType, debtors: bill.debtors}), 
+                .post(this.billsUrl,
+                      JSON.stringify({
+                          description: bill.description,
+                          amount: bill.amount,
+                          groupId: bill.groupId,
+                          paidBy: bill.paidBy,
+                          splitType: bill.splitType,
+                          debtors: bill.debtors}),
                       {headers: this.headers})
                 .toPromise()
-                .then(res => res.json().data)
+                .then((res) => res.json().data)
                 .catch(this.handleError);
     }
 

@@ -1,20 +1,20 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { User } from '../../../shared-app/models/user';
+import { Group } from '../../groups/models/group';
 import { Bill } from '../models/bill';
 import { ClientBill } from '../models/client-bill';
-import { Group } from '../../groups/models/group';
 import { Debtor } from '../models/debtor';
-import { User } from '../../../shared-app/models/user';
 import { SplitType } from '../models/split-type';
 
+import { HelpersService } from '../../../shared-app/services/helpers.service';
 import { BillService } from '../services/bill.service';
-import { HelpersService } from '../../../shared-app/services/helpers.service';    
 
 import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';
 
-import { ComponentsInteraction } from '../../services/components-interaction.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ComponentsInteraction } from '../../services/components-interaction.service';
 
 @Component({
     selector: 'bills-list',
@@ -40,16 +40,16 @@ export class BillsComponent implements OnInit {
         this.currentUser = this.helpers.getUserFromStorage();
         // event is fired by group-detail component
         this.subscription = componentsInteraction.billRefreshed$.subscribe(
-            bill => {
+            (bill) => {
                 this.bills.push(bill);
             });
     }
-    
+
     ngOnInit(): void {
         this.billService.getBills(this.group.id)
-            .then(bills => this.bills = bills);
+            .then((bills) => this.bills = bills);
 
-        this.group.friends.forEach(friend => {
+        this.group.friends.forEach((friend) => {
             this.friendsNames[friend.userId] = friend.name;
         });
     }
@@ -72,24 +72,24 @@ export class BillsComponent implements OnInit {
 
     getBillDescription(bill: Bill): string {
         if (bill.splitType === SplitType.Payment) {
-            return this.friendsNames[bill.paidBy] + " paid " + this.friendsNames[bill.debtors[0].userId];
+            return this.friendsNames[bill.paidBy] + ' paid ' + this.friendsNames[bill.debtors[0].userId];
         } else {
             return bill.description;
         }
     }
 
-    getLentAmount(bill: Bill): Number {
-        let self = this;
+    getLentAmount(bill: Bill): number {
+        const self = this;
 
-        let calculateDebt = function (sum, debtor) {
+        const calculateDebt = (sum, debtor) => {
             if (debtor.userId ===  self.currentUser.id) {
                 return sum + debtor.amount;
             }
             return sum;
         };
 
-        let calculateCredit = function (sum, debtor) {
-            if ( debtor.userId !=  self.currentUser.id) {
+        const calculateCredit = (sum, debtor) => {
+            if ( debtor.userId !==  self.currentUser.id) {
                 return sum + debtor.amount;
             }
             return sum;

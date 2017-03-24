@@ -7,9 +7,9 @@ export class HelpersService {
     // return user additional helper
     getStorageProperty(name): Object {
         if (localStorage.getItem(name) != null) {
-            let value = localStorage.getItem(name);
+            const value = localStorage.getItem(name);
 
-            if (value[0] === "{" || value[0] === "[") {
+            if (value[0] === '{' || value[0] === '[') {
                 return JSON.parse(value);
             }
 
@@ -23,15 +23,15 @@ export class HelpersService {
         if (value === null) {
             localStorage.removeItem(name);
         } else {
-            localStorage.setItem(name, typeof (value) == "string" ? value : JSON.stringify(value));
+            localStorage.setItem(name, typeof (value) === 'string' ? value : JSON.stringify(value));
         }
     }
 
     getUserFromStorage(): User {
-        if (localStorage.getItem("user") != null) {
-            let value = localStorage.getItem("user");
+        if (localStorage.getItem('user') != null) {
+            const value = localStorage.getItem('user');
 
-            if (value[0] === "{" || value[0] === "[") {
+            if (value[0] === '{' || value[0] === '[') {
                 return JSON.parse(value);
             }
 
@@ -42,23 +42,23 @@ export class HelpersService {
     }
 
     divideNumbersEvenly(amount, dividers, digits): Array<number> {
-        let fill = function (x) {
-            return function (y) {
+        const fill = (x) => {
+            return (y) => {
                 return new Array(y).fill(x);
             }
         };
 
-        let quotrem = function (x) {
-            return function (y) {
+        const quotrem = (x) => {
+            return (y) => {
                 return [Math.floor(y / x), Math.floor(y % x)];
             };
         };
 
-        let distribute = function (digits) {
-            return function (dividers) {
-                return function (amount) {
-                    let e = Math.pow(10, digits);
-                    let x = quotrem(dividers)(amount * e);
+        const distribute = (digits) => {
+            return (dividers) => {
+                return (amount) => {
+                    const e = Math.pow(10, digits);
+                    const x = quotrem(dividers)(amount * e);
                     return fill((x[0] + 1) / e)(x[1]).concat(fill(x[0] / e)(dividers - x[1]));
                 };
             };

@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MakePositivePipe } from './pipes/make-positive.pipe';
 import { PaidByPipe } from './pipes/paid-by.pipe';
 
-import { SettleUpComponent } from '../secure-app/settle-up.component';
 import { ModalModule } from 'ng2-bootstrap';
+import { SettleUpComponent } from '../secure-app/settle-up.component';
 
 @NgModule({
     imports: [

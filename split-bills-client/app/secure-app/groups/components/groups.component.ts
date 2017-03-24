@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,
-         Router, Params } from '@angular/router';
+         Params, Router } from '@angular/router';
 
-import { Group } from '../models/group';
 import { User } from '../../../shared-app/models/user';
+import { Group } from '../models/group';
 
-import { GroupService } from '../services/group.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { GroupService } from '../services/group.service';
 
 @Component({
     templateUrl: './app/secure-app/groups/components/groups.component.html' 
@@ -22,7 +22,7 @@ export class GroupsComponent implements OnInit {
 
     ngOnInit(): void {
         this.groupService.getUserGroups(this.helpers.getUserFromStorage().id)
-            .then(groups => this.groups = groups);
+            .then((groups) => this.groups = groups);
     }
 
     gotoDetail(group: Group): void {

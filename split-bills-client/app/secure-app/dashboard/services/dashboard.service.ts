@@ -3,14 +3,14 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+import { BillService } from '../../bills/services/bill.service';
 import { FriendService } from '../../friends/services/friend.service';
 import { GroupService } from '../../groups/services/group.service';
-import { BillService } from '../../bills/services/bill.service';
 
-import { Group } from '../../groups/models/group';
 import { Bill } from '../../bills/models/bill';
-import { Balance } from '../../groups/models/balance';
 import { Friend } from '../../friends/models/friend';
+import { Balance } from '../../groups/models/balance';
+import { Group } from '../../groups/models/group';
 import { DashboardResult } from '../models/dashboard-result';
 
 @Injectable()
@@ -25,14 +25,14 @@ export class DashboardService {
         private billService: BillService) { }
 
     getTotalBalancesForUser(userId: number): Promise<DashboardResult> {
-        let self = this;
-        let friendsNames = {};
-        let unsettledGroups: Group[] = [];
+        const self = this;
+        const friendsNames = {};
+        const unsettledGroups: Group[] = [];
 
-        var getBillsOfUnsettledGroups = function(group: Group): Promise<Bill[]> {
+        const getBillsOfUnsettledGroups = (group: Group): Promise<Bill[]> => {
              return Promise.resolve(self.groupService.getBalances(group.id)
-                .then(balances => {
-                    var userBalance = balances.find(function(value, index, arr) {
+                .then((balances) => {
+                    const userBalance = balances.find((value, index, arr) => {
                         if (value.friend.userId === userId) {
                             return true;
                         }
@@ -46,30 +46,31 @@ export class DashboardService {
          };
 
         return this.friendService.getFriends(userId)
-            .then(friends => {
+            .then((friends) => {
                 // create dictionary of friends names for quick access by userId
-                friends.forEach(friend => {
+                friends.forEach((friend) => {
                     friendsNames[friend.userId] = friend.name;
                 });
 
                 return this.groupService.getUserGroups(userId)
-                    .then(groups => {
+                    .then((groups) => {
                         return Promise.all(groups.map(getBillsOfUnsettledGroups))
-                            .then(groupBills => {
-                                
+                            .then((groupBills) => {
+
                                 let allBills = [];
 
-                                // create from two-dimensioal array (array of Bill[]) one-dimensial array of allBills (Bill)                        
-                                groupBills.forEach(bills => {
+                                // tslint:disable-next-line:max-line-length
+                                // create from two-dimensioal array (array of Bill[]) one-dimensial array of allBills (Bill)
+                                groupBills.forEach((bills) => {
                                     if (bills) { // empty bills are returned by settled groups
                                         allBills = allBills.concat(bills);
                                     }
                                 });
 
                                 // create creadits and debts array for currentUser from allBills
-                                let myCredits = [];
-                                let myDebts = [];
-                                allBills.forEach(bill => {
+                                const myCredits = [];
+                                const myDebts = [];
+                                allBills.forEach((bill) => {
                                     if (bill.paidBy === userId) {
                                         myCredits.push(bill);
                                     } else {
@@ -78,9 +79,9 @@ export class DashboardService {
                                 });
 
                                 // transform credits and debts to dashboard result
-                                var dashboardResult = {};
-                                myCredits.forEach(credit => {
-                                    credit.debtors.forEach(debtor => {
+                                const dashboardResult = {};
+                                myCredits.forEach((credit) => {
+                                    credit.debtors.forEach((debtor) => {
                                         if (debtor.userId !== userId) {
                                             if (!dashboardResult[debtor.userId]) {
                                                 dashboardResult[debtor.userId] = debtor.amount;
@@ -88,10 +89,10 @@ export class DashboardService {
                                                 dashboardResult[debtor.userId] += debtor.amount;
                                             }
                                         }
-                                    })                                    
+                                    });
                                 });
-                                myDebts.forEach(debt => {
-                                    debt.debtors.forEach(debtor => {
+                                myDebts.forEach((debt) => {
+                                    debt.debtors.forEach((debtor) => {
                                         if (debtor.userId === userId) {
                                             if (!dashboardResult[debt.paidBy]) {
                                                 dashboardResult[debt.paidBy] = -debtor.amount;
@@ -103,11 +104,11 @@ export class DashboardService {
                                 });
 
                                 // create final dashboard balances
-                                var finalBalances = [];
-                                for (var key in dashboardResult) {
+                                const finalBalances = [];
+                                for (const key in dashboardResult) {
                                     finalBalances.push(
                                         new Balance(
-                                            new Friend(friendsNames[parseInt(key)], parseInt(key)), 
+                                            new Friend(friendsNames[parseInt(key)], parseInt(key)),
                                             dashboardResult[key])
                                     );
                                 }

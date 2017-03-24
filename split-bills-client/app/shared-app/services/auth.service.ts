@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import { Observable } from 'rxjs/Observable';
 
-import { UserService } from './user.service';
 import { HelpersService } from './helpers.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +22,7 @@ export class AuthService {
 
     login(email: string, password: string): Promise<boolean> {
         return this.userService.getUsers()
-            .then(users => users.find(user => user.email === email && user.password === password))
+            .then((users) => users.find((user) => user.email === email && user.password === password))
             .then((user) => {
                 if (user) {
                     this.helpers.setStorageProperty('authToken', '12345678');

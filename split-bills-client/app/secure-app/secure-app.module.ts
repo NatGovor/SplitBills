@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { FriendsModule } from './friends/friends.module';
-import { GroupModule } from './groups/groups.module';
 import { SharedModule } from '../shared-app/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { FriendsModule } from './friends/friends.module';
+import { GroupModule } from './groups/groups.module';
 
-import { SecureAppComponent } from './secure-app.component';
 import { ProfileComponent } from './profile.component';
+import { SecureAppComponent } from './secure-app.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './shared-app/services/auth.service';
-import { HistoryService } from "./shared-app/services/history.service";
-import { Subscription } from "rxjs/Subscription";
+import { HistoryService } from './shared-app/services/history.service';
 
 @Component({
     selector: 'my-app',
@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.subscription = this.router.events
-            .filter(e => e instanceof NavigationEnd)
-            .subscribe(e => {
+            .filter((e) => e instanceof NavigationEnd)
+            .subscribe((e) => {
                 this.historyService.addPage(e as NavigationEnd);
             });
     }

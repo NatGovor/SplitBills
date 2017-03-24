@@ -4,10 +4,10 @@ import { SplitType } from '../../secure-app/bills/models/split-type';
 
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {
-        let users = [
-            { 
-                id: 1, 
-                name: 'Nata', 
+        const users = [
+            {
+                id: 1,
+                name: 'Nata',
                 email: 'nata@test.com',
                 password: 'testpwd1',
                 isReal: true,
@@ -38,7 +38,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             },
-            { 
+            {
                 id: 2,
                 name: 'Alex',
                 email: 'alex@test.com',
@@ -51,7 +51,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             },
-            { 
+            {
                 id: 3,
                 name: 'Alexandra',
                 email: 'alexandra@test.com',
@@ -68,7 +68,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             },
-            { 
+            {
                 id: 4,
                 name: 'Igor',
                 email: 'igor@test.com',
@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             },
-            { 
+            {
                 id: 5,
                 name: 'John',
                 email: 'john@test.com',
@@ -93,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 isReal: true,
                 friends: []
             },
-            { 
+            {
                 id: 6,
                 name: 'Dima',
                 email: 'dima@test.com',
@@ -106,7 +106,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             },
-            { 
+            {
                 id: 7,
                 name: 'Alexnekot',
                 email: 'alexnekot@test.com',
@@ -142,7 +142,7 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        let groups = [
+        const groups = [
             {
                 id: 1,
                 name: 'Belgium trip',
@@ -213,7 +213,7 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        let bills = [
+        const bills = [
             {
                 id: 1,
                 description: 'Apartments',
@@ -237,7 +237,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 description: 'Train',
                 amount: 50,
                 groupId: 3,
-                paidBy:7,
+                paidBy: 7,
                 splitType: SplitType.Equal,
                 debtors: [
                     {
@@ -255,7 +255,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 description: 'Hostel Brussels',
                 amount: 184,
                 groupId: 1,
-                paidBy:3,
+                paidBy: 3,
                 splitType: SplitType.Equal,
                 debtors: [
                     {

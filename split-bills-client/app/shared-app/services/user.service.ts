@@ -15,18 +15,18 @@ export class UserService {
     getUsers(): Promise<User[]> {
         return this.http.get(this.usersUrl)
                     .toPromise()
-                    .then(response => response.json().data as User[])
+                    .then((response) => response.json().data as User[])
                     .catch(this.handleError);
     }
 
     getUser(id: number): Promise<User> {
         return this.getUsers()
-                    .then(users => users.find(user => user.id === id));
+                    .then((users) => users.find((user) => user.id === id));
     }
 
     getUserByEmail(email: string): Promise<User> {
         return this.getUsers()
-                    .then(users => users.find(user => user.email === email));
+                    .then((users) => users.find((user) => user.email === email));
     }
 
     update(user: User): Promise<User> {
@@ -40,11 +40,16 @@ export class UserService {
 
     create(user: User): Promise<User> {
         return this.http
-            .post(this.usersUrl, 
-                  JSON.stringify({name: user.name, email: user.email, password: user.password, isReal: user.isReal, friends: user.friends}), 
+            .post(this.usersUrl,
+                  JSON.stringify({
+                      name: user.name,
+                      email: user.email,
+                      password: user.password,
+                      isReal: user.isReal,
+                      friends: user.friends}),
                   {headers: this.headers})
             .toPromise()
-            .then(res => res.json().data)
+            .then((res) => res.json().data)
             .catch(this.handleError);
     }
 

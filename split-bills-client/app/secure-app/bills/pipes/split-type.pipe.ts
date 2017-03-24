@@ -15,7 +15,7 @@ export class SplitTypePipe implements PipeTransform {
             case SplitType.Payment:
                 return 'Payment';
             default:
-                console.log('Error in parsing SplitType: ', value);
+                console.log('Error in parsing SplitType: ', value); // for demo purposes only
         }
     }
 }
