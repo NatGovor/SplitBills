@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../shared-app/models/user';
+import { User } from '../../../shared-app/models/user';
 
-import { HelpersService } from '../shared-app/services/helpers.service';
-import { UserService } from '../shared-app/services/user.service';
+import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { UserService } from '../../../shared-app/services/user.service';
 
 @Component({
     template: `

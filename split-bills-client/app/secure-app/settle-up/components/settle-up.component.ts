@@ -1,17 +1,15 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 
-import { User } from '../shared-app/models/user';
-import { Bill } from './bills/models/bill';
-import { Debtor } from './bills/models/debtor';
-import { SplitType } from './bills/models/split-type';
-import { Group } from './groups/models/group';
+import { User } from '../../../shared-app/models/user';
+import { Bill } from '../../bills/models/bill';
+import { Debtor } from '../../bills/models/debtor';
+import { SplitType } from '../../bills/models/split-type';
+import { Group } from '../../groups/models/group';
 
-import { PaidByPipe } from '../shared-app/pipes/paid-by.pipe';
+import { HelpersService } from '../../../shared-app/services/helpers.service';
+import { BillService } from '../../bills/services/bill.service';
 
-import { HelpersService } from '../shared-app/services/helpers.service';
-import { BillService } from './bills/services/bill.service';
-
-import { ComponentsInteraction } from './services/components-interaction.service';
+import { ComponentsInteraction } from '../../services/components-interaction.service';
 
 @Component({
     selector: 'settle-up',

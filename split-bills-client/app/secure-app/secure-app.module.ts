@@ -6,7 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { FriendsModule } from './friends/friends.module';
 import { GroupModule } from './groups/groups.module';
 
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './profile/components/profile.component';
 import { SecureAppComponent } from './secure-app.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';

@@ -9,7 +9,7 @@ import { FriendsComponent } from './friends/components/friends.component';
 import { GroupDetailComponent } from './groups/components/group-detail.component';
 import { GroupsComponent } from './groups/components/groups.component';
 import { NewGroupComponent } from './groups/components/new-group.component';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './profile/components/profile.component';
 import { SecureAppComponent } from './secure-app.component';
 
 import { AuthGuard } from '../shared-app/services/auth-guard.service';
