@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { User } from '../../../shared-app/models/user';
 import { Friend } from '../models/friend';
 
 import { HistoryService } from '../../../shared-app/services/history.service';

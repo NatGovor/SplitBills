@@ -1,4 +1,4 @@
-import { animate, Component, Input, OnInit, state, style,
+import { animate, Component, OnInit, style,
          transition,  trigger } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -12,9 +12,6 @@ import { DialogService } from '../../../shared-app/services/dialog.service';
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 import { GroupService } from '../../groups/services/group.service';
 import { BillService } from '../services/bill.service';
-
-import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';
-import { SplitTypePipe } from '../pipes/split-type.pipe';
 
 @Component({
     templateUrl: './app/secure-app/bills/components/new-bill.component.html',

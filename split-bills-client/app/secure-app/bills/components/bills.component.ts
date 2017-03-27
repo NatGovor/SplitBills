@@ -4,14 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../shared-app/models/user';
 import { Group } from '../../groups/models/group';
 import { Bill } from '../models/bill';
-import { ClientBill } from '../models/client-bill';
-import { Debtor } from '../models/debtor';
 import { SplitType } from '../models/split-type';
 
 import { HelpersService } from '../../../shared-app/services/helpers.service';
 import { BillService } from '../services/bill.service';
-
-import { PaidByPipe } from '../../../shared-app/pipes/paid-by.pipe';
 
 import { Subscription } from 'rxjs/Subscription';
 import { ComponentsInteraction } from '../../services/components-interaction.service';
@@ -21,7 +17,7 @@ import { ComponentsInteraction } from '../../services/components-interaction.ser
     templateUrl: './app/secure-app/bills/components/bills.component.html',
     styleUrls: ['./app/secure-app/bills/components/bills.component.css']
 })
-export class BillsComponent implements OnInit {
+export class BillsComponent implements OnInit, OnDestroy {
     @Input() group: Group;
 
     friendsNames = {};

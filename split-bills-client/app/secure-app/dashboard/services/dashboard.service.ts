@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -15,9 +15,6 @@ import { DashboardResult } from '../models/dashboard-result';
 
 @Injectable()
 export class DashboardService {
-    private groupsUrl = 'app/groups'; // URL to web api
-    private headers = new Headers({'Content-Type': 'application/json'});
-
     constructor(
         private http: Http,
         private friendService: FriendService,

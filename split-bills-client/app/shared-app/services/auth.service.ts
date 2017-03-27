@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/do';
-import { Observable } from 'rxjs/Observable';
-
 import { HelpersService } from './helpers.service';
 import { UserService } from './user.service';
 

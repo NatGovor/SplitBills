@@ -38,7 +38,8 @@
     "object-literal-sort-keys": false,
     "no-string-literal": false,
     "no-reference": false,
-    "variable-name": false
+    "variable-name": false,
+    "no-unused-variable": true
   },
   "jsRules": {
     /*

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 
 import { User } from '../shared-app/models/user';
 import { Bill } from './bills/models/bill';
@@ -11,7 +11,6 @@ import { PaidByPipe } from '../shared-app/pipes/paid-by.pipe';
 import { HelpersService } from '../shared-app/services/helpers.service';
 import { BillService } from './bills/services/bill.service';
 
-import { Subscription } from 'rxjs/Subscription';
 import { ComponentsInteraction } from './services/components-interaction.service';
 
 @Component({
@@ -52,7 +51,7 @@ import { ComponentsInteraction } from './services/components-interaction.service
     styles: [`
     `]
 })
-export class SettleUpComponent implements OnInit {
+export class SettleUpComponent implements OnInit, OnChanges {
     @Input() public modal;
     @Input() public group: Group;
 

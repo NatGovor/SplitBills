@@ -7,8 +7,6 @@ import { User } from '../../../shared-app/models/user';
 import { Balance } from '../../groups/models/balance';
 import { Group } from '../../groups/models/group';
 
-import { MakePositivePipe } from '../../../shared-app/pipes/make-positive.pipe';
-
 import { Subscription } from 'rxjs/Subscription';
 import { ComponentsInteraction } from '../../services/components-interaction.service';
 
@@ -16,7 +14,7 @@ import { ComponentsInteraction } from '../../services/components-interaction.ser
     templateUrl: './app/secure-app/dashboard/components/dashboard.component.html',
     styleUrls: ['./app/secure-app/dashboard/components/dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
     currentUser: User;
     finalBalances: Balance[];
     finalDebts: Balance[] = [];

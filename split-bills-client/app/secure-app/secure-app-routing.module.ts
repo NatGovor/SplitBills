@@ -29,11 +29,11 @@ import { CanDeactivateGuard } from '../shared-app/services/can-deactivate-guard.
                         canActivateChild: [AuthGuard],
                         children: [
                             { path: 'profile', component: ProfileComponent },
-                            { path: 'friends', component: FriendsComponent },                            
+                            { path: 'friends', component: FriendsComponent },
                             { path: 'friends/:id', component: FriendDetailComponent },
                             { path: 'friends/:id/edit', component: EditFriendComponent },
                             { path: 'dashboard', component: DashboardComponent },
-                            { path: 'groups', component: GroupsComponent },                            
+                            { path: 'groups', component: GroupsComponent },
                             { path: 'groups/new', component: NewGroupComponent, canDeactivate: [CanDeactivateGuard] },
                             { path: 'groups/:id', component: GroupDetailComponent },
                             { path: 'groups/bill/new', component: NewBillComponent, canDeactivate: [CanDeactivateGuard] }

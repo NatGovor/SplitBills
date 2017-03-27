@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User } from '../../../shared-app/models/user';
 import { Friend } from '../../friends/models/friend';
 import { Group } from '../models/group';
 
@@ -65,7 +64,7 @@ export class NewGroupComponent implements OnInit {
         // to organize dynamic search of friends
        for (let i = 0; i < this.friends.length; i++) {
             this.friends[i] = this.subscribeOnChanges(this.searchTerms[i]);
-        };
+        }
     }
 
     subscribeOnChanges(searchTerms): Observable<Friend[]> {
@@ -108,7 +107,7 @@ export class NewGroupComponent implements OnInit {
 
         // to organize dynamic search of friends
         let newFriends = Observable.of<Friend[]>([]);
-        let newSearchTerms = new Subject<string>()
+        const newSearchTerms = new Subject<string>();
         newFriends = this.subscribeOnChanges(newSearchTerms);
         this.searchTerms.push(newSearchTerms);
         this.friends.push(newFriends);

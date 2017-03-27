@@ -18,7 +18,7 @@ import { HistoryService } from './shared-app/services/history.service';
         </div>
     `
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(

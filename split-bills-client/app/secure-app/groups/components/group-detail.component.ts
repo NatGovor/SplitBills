@@ -12,7 +12,7 @@ import { ComponentsInteraction } from '../../services/components-interaction.ser
     templateUrl: './app/secure-app/groups/components/group-detail.component.html',
     styleUrls: ['./app/secure-app/groups/components/group-detail.component.css']
 })
-export class GroupDetailComponent implements OnInit {
+export class GroupDetailComponent implements OnInit, OnDestroy {
     group: Group;
 
     subscription: Subscription;

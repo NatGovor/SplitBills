@@ -7,8 +7,6 @@ import { Group } from '../models/group';
 
 import { GroupService } from '../services/group.service';
 
-import { MakePositivePipe } from '../../../shared-app/pipes/make-positive.pipe';
-
 import { Subscription } from 'rxjs/Subscription';
 import { ComponentsInteraction } from '../../services/components-interaction.service';
 
@@ -17,7 +15,7 @@ import { ComponentsInteraction } from '../../services/components-interaction.ser
     templateUrl: './app/secure-app/groups/components/group-balances.component.html',
     styleUrls: ['./app/secure-app/groups/components/group-balances.component.css']
 })
-export class GroupBalancesComponent implements OnInit {
+export class GroupBalancesComponent implements OnInit, OnDestroy {
     @Input()
     group: Group;
 
