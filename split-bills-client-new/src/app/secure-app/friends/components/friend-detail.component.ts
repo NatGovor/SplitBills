@@ -3,8 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Friend } from '../../../common/models/friend';
 
-//import { HistoryService } from '../../../shared-app/services/history.service';
 import { UserService } from '../../../common/services/user.service';
+import { HistoryService } from '../../../common/services/history.service';
 
 @Component({
     templateUrl: './/friend-detail.component.html'
@@ -16,7 +16,7 @@ export class FriendDetailComponent implements OnInit {
         private userService: UserService,
         private route: ActivatedRoute,
         private router: Router,
-        /*private historyService: HistoryService*/) {}
+        private historyService: HistoryService) {}
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
@@ -26,7 +26,7 @@ export class FriendDetailComponent implements OnInit {
     }
 
     goBack(): void {
-        //this.historyService.back();
+        this.historyService.back();
     }
 
     editFriendInfo(): void {

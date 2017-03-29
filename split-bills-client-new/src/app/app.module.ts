@@ -18,6 +18,7 @@ import { LoginRoutingModule } from './unsecure-app/login-routing.module';
 import { UserService } from './common/services/user.service';
 import { DialogService } from './common/services/dialog.service';
 import { HelpersService } from './common/services/helpers.service';
+import { HistoryService } from './common/services/history.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HelpersService } from './common/services/helpers.service';
   providers: [
     UserService,
     HelpersService,
-    DialogService
+    DialogService,
+    HistoryService
   ],
   bootstrap: [AppComponent]
 })

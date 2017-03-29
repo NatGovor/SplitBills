@@ -14,7 +14,7 @@ import { NewBillComponent } from './bills/components/new-bill.component';
 
 import { AuthGuard } from '../common/services/auth-guard.service';
 
-/*import { CanDeactivateGuard } from '../shared-app/services/can-deactivate-guard.service';*/
+import { CanDeactivateGuard } from '../common/services/can-deactivate-guard.service';
 
 @NgModule({
     imports: [
@@ -34,9 +34,9 @@ import { AuthGuard } from '../common/services/auth-guard.service';
                             { path: 'friends/:id', component: FriendDetailComponent },
                             { path: 'friends/:id/edit', component: EditFriendComponent },
                             { path: 'groups', component: GroupsComponent },
-                            { path: 'groups/new', component: NewGroupComponent/*, canDeactivate: [CanDeactivateGuard]*/ },
+                            { path: 'groups/new', component: NewGroupComponent, canDeactivate: [CanDeactivateGuard] },
                             { path: 'groups/:id', component: GroupDetailComponent },
-                            { path: 'groups/bill/new', component: NewBillComponent/*, canDeactivate: [CanDeactivateGuard]*/ }
+                            { path: 'groups/bill/new', component: NewBillComponent, canDeactivate: [CanDeactivateGuard] }
                         ]
                     }
                 ]

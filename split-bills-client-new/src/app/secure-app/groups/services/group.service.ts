@@ -9,7 +9,7 @@ import { Group } from '../../../common/models/group';
 import { Balance } from '../models/balance';
 
 import { UserService } from '../../../common/services/user.service';
-//import { BillService } from '../../bills/services/bill.service';
+import { BillService } from '../../bills/services/bill.service';
 import { FriendService } from '../../friends/services/friend.service';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class GroupService {
         private http: Http,
         private userService: UserService,
         private friendService: FriendService,
-        /*private billService: BillService*/) { }
+        private billService: BillService) { }
 
     getGroups(): Promise<Group[]> {
         return this.http.get(this.groupsUrl)
@@ -50,7 +50,7 @@ export class GroupService {
     create(group: Group): Promise<any> {
         const self = this;
 
-        const createUserFromFriend = function(friend: Friend): Promise<Friend> {
+        const createUserFromFriend = (friend: Friend): Promise<Friend> => {
             if (friend.userId) {
                 return Promise.resolve(friend);
             }
@@ -78,7 +78,7 @@ export class GroupService {
             });
     }
 
-    /*getBalances(groupId: number): Promise<Balance[]> {
+    getBalances(groupId: number): Promise<Balance[]> {
         const balances: Balance[] = [];
         Promise.resolve(this.getGroup(groupId).then((group) => {
             group.friends.forEach((friend) => {
@@ -93,7 +93,7 @@ export class GroupService {
                     bills.forEach((bill) => {
                         if (bill.paidBy === balance.friend.userId) {
                             bill.debtors.forEach((debtor) => {
-                                if (debtor.userId != balance.friend.userId) {
+                                if (debtor.userId !== balance.friend.userId) {
                                     sum += debtor.amount;
                                 }
                             });
@@ -123,7 +123,7 @@ export class GroupService {
 
                 return balances;
             });
-    }*/
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

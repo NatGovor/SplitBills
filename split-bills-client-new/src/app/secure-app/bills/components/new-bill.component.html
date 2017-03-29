@@ -36,7 +36,8 @@
                 <span *ngIf="showSplitOptions" class="glyphicon glyphicon-menu-up"></span>
             </div>
 
-            <div *ngIf="showSplitOptions" [@animateSplitOptions]="showSplitOptions">
+            <!--<div *ngIf="showSplitOptions" [@animateSplitOptions]="showSplitOptions">-->
+            <div *ngIf="showSplitOptions">
                 <div *ngIf="model.splitType == 0">
                     <div>Split equally</div>
                     <div *ngFor="let f of friendDebtors" class="form-group">
