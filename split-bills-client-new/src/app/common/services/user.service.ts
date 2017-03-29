@@ -45,8 +45,8 @@ export class UserService {
                       name: user.name,
                       email: user.email,
                       password: user.password,
-                      isReal: user.isReal//,
-                      /*friends: user.friends*/}),
+                      isReal: user.isReal,
+                      friends: user.friends}),
                   {headers: this.headers})
             .toPromise()
             .then((res) => res.json().data)

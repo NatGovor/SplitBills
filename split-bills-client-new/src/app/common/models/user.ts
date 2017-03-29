@@ -1,4 +1,4 @@
-//import { Friend } from '../../secure-app/friends/models/friend';
+import { Friend } from './friend';
 
 export class User {
     constructor(
@@ -7,6 +7,6 @@ export class User {
         public email: string,
         public password: string,
         public isReal: boolean,
-        //public friends: Friend[]
+        public friends: Friend[]
     ) {}
 }
