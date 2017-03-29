@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-/*import { ModalModule, TooltipModule } from 'ng2-bootstrap';*/
+import { ModalModule, TooltipModule } from 'ng2-bootstrap';
 
 import { GroupsComponent } from './components/groups.component';
 import { GroupDetailComponent } from './components/group-detail.component';
@@ -20,8 +20,8 @@ import { GroupService } from './services/group.service';
         CommonModule,
         FormsModule,
         BillsModule,
-        /*TooltipModule.forRoot(),
-        ModalModule.forRoot(),*/
+        TooltipModule.forRoot(),
+        ModalModule.forRoot(),
         SharedModule
     ],
     declarations: [

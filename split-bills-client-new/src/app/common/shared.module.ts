@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { MakePositivePipe } from './pipes/make-positive.pipe';
 import { PaidByPipe } from './pipes/paid-by.pipe';
 
-//import { ModalModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap';
 //import { SettleUpComponent } from '../secure-app/settle-up/components/settle-up.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        //ModalModule.forRoot()
+        ModalModule.forRoot()
     ],
     declarations: [
         MakePositivePipe,
