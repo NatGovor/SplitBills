@@ -31,7 +31,7 @@
     <app-bills-list [group]="group"></app-bills-list>
     <button (click)="goBack()">Back</button>
 
-    <!--<div class="modal fade" bsModal #modal="bs-modal"
+    <div class="modal fade" bsModal #modal="bs-modal"
         tabindex="-1"
         role="dialog">
         <div class="modal-dialog modal-sm">
@@ -42,8 +42,8 @@
                         <span>&times;</span>
                     </button>
                 </div>
-                <settle-up [modal]="modal" [group]="group"></settle-up>
+                <app-settle-up [modal]="modal" [group]="group"></app-settle-up>
             </div>
         </div>
-    </div>-->
+    </div>
 </div>

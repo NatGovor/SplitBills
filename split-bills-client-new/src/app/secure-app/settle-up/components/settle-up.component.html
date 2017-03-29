@@ -1,0 +1,31 @@
+<form  #settleUpForm="ngForm">
+<div class="modal-body" *ngIf="group">
+    <div class="text-center">
+        <div class="form-group">
+            {{group.name}}
+        </div>
+        <div class="form-group">
+            <select class="form-control form-control-inline" required
+                [ngModel]="model.paidBy" (ngModelChange)="model.paidBy=$event; onChangePayers();" name="paidBy">
+                <option *ngFor="let f of group.friends" [value]="f.userId">{{f.userId | paidByName:group.friends }}</option>
+            </select>
+            paid
+            <select class="form-control form-control-inline" required
+                [ngModel]="creditor" (ngModelChange)="creditor=$event; onChangePayers();" name="creditor">
+                <option *ngFor="let f of group.friends" [value]="f.userId">{{f.userId | paidByName:group.friends }}</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            <div class="input-group col-xs-4 col-xs-push-4">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" required 
+                    [(ngModel)]="model.amount" name="amount">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn" (click)="modal.hide()">Cancel</button>
+    <button type="button" class="btn important-btn" (click)="savePayment()" [disabled]="!settleUpForm.form.valid">Save</button>
+</div>
+</form>
