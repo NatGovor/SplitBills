@@ -6,7 +6,7 @@ import { Group } from '../../../common/models/group';
 import { GroupService } from '../services/group.service';
 
 import { Subscription } from 'rxjs/Subscription';
-//import { ComponentsInteraction } from '../../services/components-interaction.service';
+import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
 
 @Component({
     templateUrl: './group-detail.component.html',
@@ -20,11 +20,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     constructor(
         private groupService: GroupService,
         private route: ActivatedRoute,
-        /*private componentsInteraction: ComponentsInteraction*/) {
-        /*his.subscription = componentsInteraction.billAdded$.subscribe(
+        private billsRefreshInteraction: BillsRefreshInteraction) {
+        this.subscription = billsRefreshInteraction.billAdded$.subscribe(
             (bill) => {
-                componentsInteraction.refreshBills(bill);
-            });*/
+                billsRefreshInteraction.refreshBills(bill);
+            });
     }
 
     ngOnInit(): void {
@@ -39,6 +39,6 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        //this.subscription.unsubscribe();
+        this.subscription.unsubscribe();
     }
 }

@@ -10,7 +10,7 @@ import { HelpersService } from '../../../common/services/helpers.service';
 import { BillService } from '../services/bill.service';
 
 import { Subscription } from 'rxjs/Subscription';
-//import { ComponentsInteraction } from '../../services/components-interaction.service';
+import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-bills-list',
@@ -32,13 +32,13 @@ export class BillsComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private helpers: HelpersService,
-        /*private componentsInteraction: ComponentsInteraction*/) {
+        private billsRefreshInteraction: BillsRefreshInteraction) {
         this.currentUser = this.helpers.getUserFromStorage();
         // event is fired by group-detail component
-        /*this.subscription = componentsInteraction.billRefreshed$.subscribe(
+        this.subscription = billsRefreshInteraction.billRefreshed$.subscribe(
             (bill) => {
                 this.bills.push(bill);
-            });*/
+            });
     }
 
     ngOnInit(): void {
@@ -63,7 +63,7 @@ export class BillsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        //this.subscription.unsubscribe();
+        this.subscription.unsubscribe();
     }
 
     getBillDescription(bill: Bill): string {

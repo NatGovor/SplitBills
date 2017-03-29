@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard/components/dashboard.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
 
-/*import { ComponentsInteraction } from './services/components-interaction.service';*/
+import { BillsRefreshInteraction } from './services/bills-refresh-interaction.service';
 
 //import { ModalModule } from 'ng2-bootstrap';
 
@@ -31,7 +31,7 @@ import { SecureAppRoutingModule } from './secure-app-routing.module';
         DashboardComponent
     ],
     providers: [
-        //ComponentsInteraction
+        BillsRefreshInteraction
     ]
 })
 export class SecureAppModule { }

@@ -8,7 +8,7 @@ import { Group } from '../../../common/models/group';
 import { GroupService } from '../services/group.service';
 
 import { Subscription } from 'rxjs/Subscription';
-//import { ComponentsInteraction } from '../../services/components-interaction.service';
+import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-group-balances',
@@ -25,10 +25,10 @@ export class GroupBalancesComponent implements OnInit, OnDestroy {
 
     constructor(
         private groupService: GroupService,
-        //private componentsInteraction: ComponentsInteraction,
+        private billsRefreshInteraction: BillsRefreshInteraction,
         private router: Router) {
         // event is fired by group-detail component
-        /*this.subscription = componentsInteraction.billRefreshed$.subscribe(
+        this.subscription = billsRefreshInteraction.billRefreshed$.subscribe(
             (bill) => {
                 bill.debtors.forEach((debtor) => {
                     this.balances.forEach((balance) => {
@@ -40,7 +40,7 @@ export class GroupBalancesComponent implements OnInit, OnDestroy {
                         }
                     });
                 });
-            });*/
+            });
     }
 
     ngOnInit(): void {
@@ -71,7 +71,7 @@ export class GroupBalancesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        //this.subscription.unsubscribe();
+        this.subscription.unsubscribe();
     }
 
     gotoDetail(friend: Friend): void {

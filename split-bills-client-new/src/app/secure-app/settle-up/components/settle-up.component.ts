@@ -9,7 +9,7 @@ import { Group } from '../../../common/models/group';
 import { HelpersService } from '../../../common/services/helpers.service';
 import { BillService } from '../../bills/services/bill.service';
 
-//import { ComponentsInteraction } from '../../services/components-interaction.service';
+import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-settle-up',
@@ -28,7 +28,7 @@ export class SettleUpComponent implements OnInit, OnChanges {
     constructor(
         private billService: BillService,
         private helpers: HelpersService,
-        /*private componentsInteraction: ComponentsInteraction*/) {
+        private billsRefreshInteraction: BillsRefreshInteraction) {
         this.currentUser = this.helpers.getUserFromStorage();
     }
 
@@ -80,7 +80,7 @@ export class SettleUpComponent implements OnInit, OnChanges {
         this.billService.create(this.model)
             .then((bill) => {
                 this.modal.hide();
-                //this.componentsInteraction.addBill(bill);
+                this.billsRefreshInteraction.addBill(bill);
 
                 this.clearSettleDebt();
 
