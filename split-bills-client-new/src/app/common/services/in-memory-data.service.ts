@@ -408,6 +408,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];*/
 
-        return {users, groups/*, bills*/};
+        return {users, groups, /*bills*/};
     }
 }

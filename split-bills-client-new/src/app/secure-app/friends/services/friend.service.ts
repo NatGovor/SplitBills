@@ -30,7 +30,7 @@ export class FriendService {
     search(userId: number, term: string): Observable<Friend[]> {
         return this.http
                     .get(this.usersUrl + `/?name=${term}`)
-                    .map((response) => response.json().data.filter((f) => f.id != userId) as Friend[]);
+                    .map((response) => response.json().data.filter((f) => f.id !== userId) as Friend[]);
     }
 
     addFriends(userId: number, potentialFriends: Friend[]): Promise<User> {

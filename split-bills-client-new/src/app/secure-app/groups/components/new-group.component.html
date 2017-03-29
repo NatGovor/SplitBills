@@ -1,0 +1,37 @@
+<div class="col-sm-4">
+    <h2>Start a new group</h2>
+    <form (ngSubmit)="onSubmit()" #groupForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" 
+                required
+                [(ngModel)]="model.name" name="name">
+        </div>
+
+        <div>
+            <label>Group Members</label>
+            <div *ngFor="let friend of model.friends; let i = index" class="form-group">
+                <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
+                <div *ngIf="i > 0" class="row">
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" placeholder="Friend name"
+                            [(ngModel)]="friend.name" name="friendName{{i}}" (keyup)="search($event, i)">
+                        <div *ngFor="let friend of friends[i] | async"
+                            class="search-result">
+                            <div (click)="chooseFriend(friend, i)">{{friend.name}}</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <input *ngIf="friend.userId !== owner.id" type="email" class="form-control col-xs-6" placeholder="Email address (optional)"
+                            [(ngModel)]="friend.email" name="friendEmail{{i}}">
+                    </div>
+                </div>
+            </div>
+            <button (click)="addPerson()" type="button" class="btn btn-sm">Add a person</button>
+        </div>
+        
+        <br/>
+        <button type="submit" class="btn btn-default" [disabled]="!groupForm.form.valid">Submit</button>
+        <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
+    </form>
+</div>
