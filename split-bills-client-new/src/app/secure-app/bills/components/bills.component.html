@@ -1,0 +1,21 @@
+<h4>Bills list</h4>
+<button (click)="addNew();">Add new</button>
+
+<table *ngIf="bills" class="table table-hover">
+    <tr *ngFor="let bill of bills">
+        <td>
+            <strong>{{ getBillDescription(bill) }}</strong>
+        </td>
+        <td>
+            <div class="sub-info">{{ bill.paidBy | paidByName:group.friends }} paid</div>
+            <div *ngIf="bill.splitType != 3"><strong>{{ bill.amount | currency:'USD':true:'1.2-2' }}</strong></div>
+        </td>
+        <td>
+            <div *ngIf="bill.splitType != 3" class="sub-info">{{ bill.paidBy | paidByName:group.friends:true }}</div>
+            <div [ngClass]="addClass(bill.paidBy)">
+                <strong *ngIf="getLentAmount(bill) != 0">{{ getLentAmount(bill) | currency:'USD':true:'1.2-2' }}</strong>
+            </div>
+            <div class="sub-info" *ngIf="getLentAmount(bill) == 0">not involved</div>
+        </td>
+    </tr>
+</table>

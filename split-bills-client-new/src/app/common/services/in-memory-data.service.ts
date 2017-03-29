@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-//import { SplitType } from '../../secure-app/bills/models/split-type';
+import { SplitType } from '../models/split-type';
 
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {
@@ -213,7 +213,7 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        /*const bills = [
+        const bills = [
             {
                 id: 1,
                 description: 'Apartments',
@@ -406,8 +406,8 @@ export class InMemoryDataService implements InMemoryDbService {
                     }
                 ]
             }
-        ];*/
+        ];
 
-        return {users, groups, /*bills*/};
+        return {users, groups, bills};
     }
 }

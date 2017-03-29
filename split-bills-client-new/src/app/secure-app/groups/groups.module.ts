@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 /*import { ModalModule, TooltipModule } from 'ng2-bootstrap';
 
 import { SharedModule } from '../../shared-app/shared.module';
-import { BillsModule } from '../bills/bills.module';*/
+*/
 
 /*import { GroupBalancesComponent } from './components/group-balances.component';*/
 import { GroupsComponent } from './components/groups.component';
 import { GroupDetailComponent } from './components/group-detail.component';
 import { NewGroupComponent } from './components/new-group.component';
+
+import { BillsModule } from '../bills/bills.module';
 
 import { GroupService } from './services/group.service';
 
@@ -18,8 +20,8 @@ import { GroupService } from './services/group.service';
     imports: [
         CommonModule,
         FormsModule,
-        /*BillsModule,
-        TooltipModule.forRoot(),
+        BillsModule,
+        /*TooltipModule.forRoot(),
         ModalModule.forRoot(),
         SharedModule*/
     ],

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-//import { NewBillComponent } from './bills/components/new-bill.component';
-/**/
 import { SecureAppComponent } from './secure-app.component';
 import { DashboardComponent } from './dashboard/components/dashboard.component';
 import { ProfileComponent } from './profile/components/profile.component';
@@ -12,6 +10,7 @@ import { EditFriendComponent } from './friends/components/edit-friend.component'
 import { GroupsComponent } from './groups/components/groups.component';
 import { GroupDetailComponent } from './groups/components/group-detail.component';
 import { NewGroupComponent } from './groups/components/new-group.component';
+import { NewBillComponent } from './bills/components/new-bill.component';
 
 import { AuthGuard } from '../common/services/auth-guard.service';
 
@@ -37,6 +36,7 @@ import { AuthGuard } from '../common/services/auth-guard.service';
                             { path: 'groups', component: GroupsComponent },
                             { path: 'groups/new', component: NewGroupComponent/*, canDeactivate: [CanDeactivateGuard]*/ },
                             { path: 'groups/:id', component: GroupDetailComponent },
+                            { path: 'groups/bill/new', component: NewBillComponent/*, canDeactivate: [CanDeactivateGuard]*/ }
                         ]
                     }
                 ]
