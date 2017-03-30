@@ -1,7 +1,5 @@
 <div>
-  <h1>
-    My Split bills
-  </h1>
+  <h1>My Split bills</h1>
   <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
   <nav>
     <a *ngIf="!authService.isLoggedIn" routerLink="/login">Login</a>

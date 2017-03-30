@@ -1,32 +1,51 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { RouterLinkStubDirective } from '../testing/router-stubs';
+import { RouterOutletStubComponent } from '../testing/router-stubs';
 
-describe('AppComponent', () => {
+class RouterStub {
+  navigateByUrl(url: string) { return url; }
+}
+
+let comp: AppComponent;
+let fixture: ComponentFixture<AppComponent>;
+
+describe('AppComponent & TestModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        RouterLinkStubDirective, RouterOutletStubComponent
       ],
-    }).compileComponents();
+      providers: [
+        { provide: Router, useClass: RouterStub }
+      ]
+    })
+    .compileComponents()
+    .then(() => {
+      fixture = TestBed.createComponent(AppComponent);
+      comp = fixture.componentInstance;
+    });
   }));
-
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+  tests();
 });
+
+function tests() {
+  beforeEach(() => {
+    fixture.detectChanges();
+  });
+
+  it('can instantiate it', () => {
+    expect(comp).not.toBeNull();
+  });
+
+  it(`should have as title 'My Split bills'`, async(() => {
+    const de = fixture.debugElement.query(By.css('h1'));
+    const el = de.nativeElement;
+    expect(el.textContent).toEqual('My Split bills');
+  }));
+}
