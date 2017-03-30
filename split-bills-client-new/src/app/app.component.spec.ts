@@ -76,6 +76,11 @@ describe('AppComponent & TestModule', () => {
 });
 
 function tests() {
+  let authSpy;
+
+  beforeEach( async() => {
+    authSpy = fixture.debugElement.injector.get(AuthService);
+  });
 
   beforeEach(() => {
     fixture.detectChanges();
@@ -90,4 +95,8 @@ function tests() {
     const el = de.nativeElement;
     expect(el.textContent).toEqual('My Split bills');
   }));
+
+  it('should not have called `login`', () => {
+        expect(authSpy.login.calls.count()).toBe(0, 'login called once');
+  });
 }
