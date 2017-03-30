@@ -13,8 +13,6 @@ import { SecureAppRoutingModule } from './secure-app-routing.module';
 
 import { BillsRefreshInteraction } from './services/bills-refresh-interaction.service';
 
-//import { ModalModule } from 'ng2-bootstrap';
-
 @NgModule({
     imports: [
         CommonModule,

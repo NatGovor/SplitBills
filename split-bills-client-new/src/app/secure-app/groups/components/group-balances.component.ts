@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Friend } from '../../../common/models/friend';
-import { Balance } from '../models/balance';
+import { Balance } from '../../../common/models/balance';
 import { Group } from '../../../common/models/group';
 
 import { GroupService } from '../services/group.service';

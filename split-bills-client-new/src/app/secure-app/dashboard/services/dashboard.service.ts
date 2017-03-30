@@ -7,9 +7,9 @@ import { BillService } from '../../bills/services/bill.service';
 import { FriendService } from '../../friends/services/friend.service';
 import { GroupService } from '../../groups/services/group.service';
 
-import { Bill } from '../../bills/models/bill';
+import { Bill } from '../../../common/models/bill';
 import { Friend } from '../../../common/models/friend';
-import { Balance } from '../../groups/models/balance';
+import { Balance } from '../../../common/models/balance';
 import { Group } from '../../../common/models/group';
 import { DashboardResult } from '../models/dashboard-result';
 

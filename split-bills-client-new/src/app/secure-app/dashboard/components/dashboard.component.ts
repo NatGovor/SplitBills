@@ -4,7 +4,7 @@ import { HelpersService } from '../../../common/services/helpers.service';
 import { DashboardService } from '../services/dashboard.service';
 
 import { User } from '../../../common/models/user';
-import { Balance } from '../../groups/models/balance';
+import { Balance } from '../../../common/models/balance';
 import { Group } from '../../../common/models/group';
 
 import { Subscription } from 'rxjs/Subscription';

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../../common/models/user';
 import { Group } from '../../../common/models/group';
-import { Bill } from '../models/bill';
+import { Bill } from '../../../common/models/bill';
 import { SplitType } from '../../../common/models/split-type';
 
 import { HelpersService } from '../../../common/services/helpers.service';

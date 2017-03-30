@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../../../common/models/user';
 import { Friend } from '../../../common/models/friend';
 import { Group } from '../../../common/models/group';
-import { Balance } from '../models/balance';
+import { Balance } from '../../../common/models/balance';
 
 import { UserService } from '../../../common/services/user.service';
 import { BillService } from '../../bills/services/bill.service';

@@ -1,4 +1,4 @@
-import { Balance } from '../../groups/models/balance';
+import { Balance } from '../../../common/models/balance';
 import { Group } from '../../../common/models/group';
 
 export class DashboardResult {

@@ -8,11 +8,9 @@ import { HistoryService } from './common/services/history.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'My Split bills';
   subscription: Subscription;
 
   constructor(

@@ -3,8 +3,8 @@ import { animate, Component, OnInit, style,
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Friend } from '../../../common/models/friend';
-import { Bill } from '../models/bill';
-import { Debtor } from '../models/debtor';
+import { Bill } from '../../../common/models/bill';
+import { Debtor } from '../../../common/models/debtor';
 import { FriendDebtor } from '../models/friend-debtor';
 import { SplitType } from '../../../common/models/split-type';
 
