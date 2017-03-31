@@ -4,9 +4,10 @@ import { By } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AppComponent } from './app.component';
 import { RouterLinkStubDirective } from '../testing/router-stubs';
 import { RouterOutletStubComponent } from '../testing/router-stubs';
+
+import { AppComponent } from './app.component';
 import { AuthService } from './unsecure-app/services/auth.service';
 import { HistoryService } from './common/services/history.service';
 
@@ -32,11 +33,17 @@ class AuthServiceSpy {
   login = jasmine.createSpy('login').and.callFake(
     () => Promise
       .resolve(true)
-      .then(() => Object.assign({}, true))
+      .then(() => {
+        this.isLoggedIn = true;
+        return Object.assign({}, true);
+      })
   );
 
   logout = jasmine.createSpy('logout').and.callFake(
-    () => true
+    () => {
+      this.isLoggedIn = false;
+      return true;
+    }
   );
 }
 
@@ -90,13 +97,23 @@ function tests() {
     expect(comp).not.toBeNull();
   });
 
-  it(`should have as title 'My Split bills'`, async(() => {
+  it(`should have a title 'My Split bills'`, async(() => {
     const de = fixture.debugElement.query(By.css('h1'));
     const el = de.nativeElement;
     expect(el.textContent).toEqual('My Split bills');
   }));
 
-  it('should not have called `login`', () => {
-        expect(authSpy.login.calls.count()).toBe(0, 'login called once');
+  it('should display `login` link for not signed in users', () => {
+    authSpy.isLoggedIn = false;
+    fixture.detectChanges();
+    const link = fixture.debugElement.query(By.css('a')).nativeElement;
+    expect(link.attributes['routerLink'].value).toBe('/login');
+  });
+
+  it('should display `logout` button for signed in users', () => {
+    authSpy.isLoggedIn = true;
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    expect(button.textContent).toBe('Logout');
   });
 }
