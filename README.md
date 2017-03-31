@@ -1,8 +1,8 @@
 # SplitBills
 
-To run call in the split-bills-client folder:
+To run call in the split-bills-client-new folder:
 
-    npm start
+    Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
 
 Account for testing:
 
