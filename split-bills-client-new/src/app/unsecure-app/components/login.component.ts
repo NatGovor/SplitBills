@@ -5,22 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { DialogService } from '../../common/services/dialog.service';
 
 @Component({
-    template: `
-        <div class="col-sm-4">
-            <p>Enter Credentials to login:</p>
-            <div class="form-group">
-                <label>Email: </label>
-                <input [(ngModel)]="email" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Password: </label>
-                <input [(ngModel)]="password" type="password" class="form-control" />
-            </div>
-            <div class="form-group">
-                <button (click)="login()" type="submit">Login</button>
-            </div>
-        </div>
-    `
+    templateUrl: './login.component.html'
 })
 export class LoginComponent {
     email: string;
