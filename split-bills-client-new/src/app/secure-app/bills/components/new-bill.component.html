@@ -46,7 +46,7 @@
                         <span>{{ f.amount | currency:'USD':true:'1.2-2' }}</span>
                     </div>
                 </div>
-                <div *ngIf="model.splitType != 0">
+                <div *ngIf="model.splitType !== 0">
                     <div>Split by exact amounts</div>
                     <div *ngFor="let f of friendDebtors" class="form-group row">
                         <div class="col-xs-8"><label>{{f.name}}</label></div>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="model.splitType != 0" class="row">
+                <div *ngIf="model.splitType !== 0" class="row">
                     <div class="col-xs-8 text-uppercase"><b>Total </b></div>
                     <div class="col-xs-4 text-right" *ngIf="model.splitType == 1">
                         <div><b>{{ total | currency:'USD':true }}</b></div>

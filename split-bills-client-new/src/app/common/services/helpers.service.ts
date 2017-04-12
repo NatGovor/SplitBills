@@ -6,7 +6,7 @@ import { User } from '../models/user';
 export class HelpersService {
     // return user additional helper
     getStorageProperty(name): Object {
-        if (localStorage.getItem(name) != null) {
+        if (localStorage.getItem(name) !== null) {
             const value = localStorage.getItem(name);
 
             if (value[0] === '{' || value[0] === '[') {
@@ -28,7 +28,7 @@ export class HelpersService {
     }
 
     getUserFromStorage(): User {
-        if (localStorage.getItem('user') != null) {
+        if (localStorage.getItem('user') !== null) {
             const value = localStorage.getItem('user');
 
             if (value[0] === '{' || value[0] === '[') {
