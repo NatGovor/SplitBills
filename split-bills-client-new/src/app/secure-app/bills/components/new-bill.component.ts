@@ -6,7 +6,7 @@ import { Friend } from '../../../common/models/friend';
 import { Bill } from '../../../common/models/bill';
 import { Debtor } from '../../../common/models/debtor';
 import { FriendDebtor } from '../models/friend-debtor';
-import { SplitType } from '../../../common/models/split-type';
+import { SplitType } from '../../../common/enums/split-type';
 
 import { DialogService } from '../../../common/services/dialog.service';
 import { HelpersService } from '../../../common/services/helpers.service';

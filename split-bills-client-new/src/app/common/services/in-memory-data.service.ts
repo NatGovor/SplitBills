@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { SplitType } from '../models/split-type';
+import { SplitType } from '../enums/split-type';
 
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {

@@ -1,5 +1,5 @@
 import { Debtor } from './debtor';
-import { SplitType } from './split-type';
+import { SplitType } from '../enums/split-type';
 
 export class Bill {
     constructor(

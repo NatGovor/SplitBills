@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../common/models/user';
 import { Group } from '../../../common/models/group';
 import { Bill } from '../../../common/models/bill';
-import { SplitType } from '../../../common/models/split-type';
+import { SplitType } from '../../../common/enums/split-type';
 
 import { HelpersService } from '../../../common/services/helpers.service';
 import { BillService } from '../services/bill.service';

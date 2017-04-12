@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core
 import { User } from '../../../common/models/user';
 import { Bill } from '../../../common/models/bill';
 import { Debtor } from '../../../common/models/debtor';
-import { SplitType } from '../../../common/models/split-type';
+import { SplitType } from '../../../common/enums/split-type';
 import { Group } from '../../../common/models/group';
 
 import { HelpersService } from '../../../common/services/helpers.service';
