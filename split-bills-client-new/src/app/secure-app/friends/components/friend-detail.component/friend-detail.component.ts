@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { Friend } from '../../../common/models/friend';
+import { Friend } from '../../../../common/models/friend';
 
-import { UserService } from '../../../common/services/user.service';
-import { HistoryService } from '../../../common/services/history.service';
+import { UserService } from '../../../../common/services/user.service';
+import { HistoryService } from '../../../../common/services/history.service';
 
 @Component({
-    templateUrl: './/friend-detail.component.html'
+    templateUrl: './friend-detail.component.html',
+    styleUrls: ['./friend-detail.component.css']
 })
 export class FriendDetailComponent implements OnInit {
     friend: Friend;

@@ -2,19 +2,20 @@ import { animate, Component, OnInit, style,
          transition,  trigger } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { Friend } from '../../../common/models/friend';
-import { Bill } from '../../../common/models/bill';
-import { Debtor } from '../../../common/models/debtor';
-import { FriendDebtor } from '../models/friend-debtor';
-import { SplitType } from '../../../common/enums/split-type';
+import { Friend } from '../../../../common/models/friend';
+import { Bill } from '../../../../common/models/bill';
+import { Debtor } from '../../../../common/models/debtor';
+import { FriendDebtor } from '../../models/friend-debtor';
+import { SplitType } from '../../../../common/enums/split-type';
 
-import { DialogService } from '../../../common/services/dialog.service';
-import { HelpersService } from '../../../common/services/helpers.service';
-import { GroupService } from '../../groups/services/group.service';
-import { BillService } from '../services/bill.service';
+import { DialogService } from '../../../../common/services/dialog.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { GroupService } from '../../../groups/services/group.service';
+import { BillService } from '../../services/bill.service';
 
 @Component({
     templateUrl: './new-bill.component.html',
+    styleUrls: ['./new-bill.component.css'],
     animations: [
         trigger('animateSplitOptions', [
             transition(':enter', [

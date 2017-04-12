@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../common/shared.module';
 
-import { BillsComponent } from './components/bills.component';
-import { NewBillComponent } from './components/new-bill.component';
+import { BillsComponent } from './components/bills.component/bills.component';
+import { NewBillComponent } from './components/new-bill.component/new-bill.component';
 
 import { BillService } from './services/bill.service';
 

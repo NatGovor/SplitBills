@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { DashboardService } from '../services/dashboard.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { DashboardService } from '../../services/dashboard.service';
 
-import { User } from '../../../common/models/user';
-import { Balance } from '../../../common/models/balance';
-import { Group } from '../../../common/models/group';
+import { User } from '../../../../common/models/user';
+import { Balance } from '../../../../common/models/balance';
+import { Group } from '../../../../common/models/group';
 
 import { Subscription } from 'rxjs/Subscription';
-import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
+import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 
 @Component({
     templateUrl: './dashboard.component.html',

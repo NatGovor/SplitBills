@@ -1,19 +1,20 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 
-import { User } from '../../../common/models/user';
-import { Bill } from '../../../common/models/bill';
-import { Debtor } from '../../../common/models/debtor';
-import { SplitType } from '../../../common/enums/split-type';
-import { Group } from '../../../common/models/group';
+import { User } from '../../../../common/models/user';
+import { Bill } from '../../../../common/models/bill';
+import { Debtor } from '../../../../common/models/debtor';
+import { SplitType } from '../../../../common/enums/split-type';
+import { Group } from '../../../../common/models/group';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { BillService } from '../../bills/services/bill.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { BillService } from '../../../bills/services/bill.service';
 
-import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
+import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-settle-up',
-    templateUrl: './settle-up.component.html'
+    templateUrl: './settle-up.component.html',
+    styleUrls: ['./settle-up.component.css']
 })
 export class SettleUpComponent implements OnInit, OnChanges {
     @Input() public modal;

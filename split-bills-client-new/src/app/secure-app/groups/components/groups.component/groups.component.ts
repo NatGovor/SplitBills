@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Group } from '../../../common/models/group';
+import { Group } from '../../../../common/models/group';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { GroupService } from '../services/group.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { GroupService } from '../../services/group.service';
 
 @Component({
-    templateUrl: './groups.component.html'
+    templateUrl: './groups.component.html',
+    styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
     groups: Group[];

@@ -1,16 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User } from '../../../common/models/user';
-import { Group } from '../../../common/models/group';
-import { Bill } from '../../../common/models/bill';
-import { SplitType } from '../../../common/enums/split-type';
+import { User } from '../../../../common/models/user';
+import { Group } from '../../../../common/models/group';
+import { Bill } from '../../../../common/models/bill';
+import { SplitType } from '../../../../common/enums/split-type';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { BillService } from '../services/bill.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { BillService } from '../../services/bill.service';
 
 import { Subscription } from 'rxjs/Subscription';
-import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
+import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-bills-list',

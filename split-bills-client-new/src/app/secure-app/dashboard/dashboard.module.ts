@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../common/shared.module';
 
-import { DashboardComponent } from './components/dashboard.component';
+import { DashboardComponent } from './components/dashboard.component/dashboard.component';
 
 import { DashboardService } from './services/dashboard.service';
 

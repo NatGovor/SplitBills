@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../../../common/models/user';
+import { User } from '../../../../common/models/user';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { UserService } from '../../../common/services/user.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { UserService } from '../../../../common/services/user.service';
 
 @Component({
-    templateUrl: './profile.component.html'
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
     user: User;

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Group } from '../../../common/models/group';
+import { Group } from '../../../../common/models/group';
 
-import { GroupService } from '../services/group.service';
+import { GroupService } from '../../services/group.service';
 
 import { Subscription } from 'rxjs/Subscription';
-import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
+import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 
 @Component({
     templateUrl: './group-detail.component.html',

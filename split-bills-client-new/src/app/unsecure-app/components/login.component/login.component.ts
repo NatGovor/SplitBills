@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../services/auth.service';
-import { DialogService } from '../../common/services/dialog.service';
+import { AuthService } from '../../services/auth.service';
+import { DialogService } from '../../../common/services/dialog.service';
 
 @Component({
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
     email: string;

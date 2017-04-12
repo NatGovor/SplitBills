@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Friend } from '../../../common/models/friend';
-import { Balance } from '../../../common/models/balance';
-import { Group } from '../../../common/models/group';
+import { Friend } from '../../../../common/models/friend';
+import { Balance } from '../../../../common/models/balance';
+import { Group } from '../../../../common/models/group';
 
-import { GroupService } from '../services/group.service';
+import { GroupService } from '../../services/group.service';
 
 import { Subscription } from 'rxjs/Subscription';
-import { BillsRefreshInteraction } from '../../services/bills-refresh-interaction.service';
+import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 
 @Component({
     selector: 'app-group-balances',

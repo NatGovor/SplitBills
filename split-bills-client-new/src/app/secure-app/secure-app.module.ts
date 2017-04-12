@@ -7,7 +7,7 @@ import { GroupModule } from './groups/groups.module';
 import { SharedModule } from '../common/shared.module';
 
 import { SecureAppComponent } from './secure-app.component';
-import { ProfileComponent } from './profile/components/profile.component';
+import { ProfileComponent } from './profile/components/profile.component/profile.component';
 
 import { SecureAppRoutingModule } from './secure-app-routing.module';
 

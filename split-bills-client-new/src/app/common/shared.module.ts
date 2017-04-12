@@ -6,7 +6,7 @@ import { MakePositivePipe } from './pipes/make-positive.pipe';
 import { PaidByPipe } from './pipes/paid-by.pipe';
 
 import { ModalModule } from 'ng2-bootstrap';
-import { SettleUpComponent } from '../secure-app/settle-up/components/settle-up.component';
+import { SettleUpComponent } from '../secure-app/settle-up/components/settle-up.component/settle-up.component';
 
 @NgModule({
     imports: [

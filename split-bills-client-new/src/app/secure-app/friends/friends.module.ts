@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { FriendsComponent } from './components/friends.component';
-import { FriendDetailComponent } from './components/friend-detail.component';
-import { EditFriendComponent } from './components/edit-friend.component';
+import { FriendsComponent } from './components/friends.component/friends.component';
+import { FriendDetailComponent } from './components/friend-detail.component/friend-detail.component';
+import { EditFriendComponent } from './components/edit-friend.component/edit-friend.component';
 
 import { FriendService } from './services/friend.service';
 

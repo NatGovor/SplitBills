@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Friend } from '../../../common/models/friend';
-import { Group } from '../../../common/models/group';
+import { Friend } from '../../../../common/models/friend';
+import { Group } from '../../../../common/models/group';
 
-import { DialogService } from '../../../common/services/dialog.service';
-import { HelpersService } from '../../../common/services/helpers.service';
-import { FriendService } from '../../friends/services/friend.service';
-import { GroupService } from '../services/group.service';
+import { DialogService } from '../../../../common/services/dialog.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { FriendService } from '../../../friends/services/friend.service';
+import { GroupService } from '../../services/group.service';
 
 // Observable class extensions
 import 'rxjs/add/observable/of';

@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SecureAppModule } from './secure-app/secure-app.module';
-import { HomeComponent } from './unsecure-app/components/home.component';
-import { LoginComponent } from './unsecure-app/components/login.component';
+import { HomeComponent } from './unsecure-app/components/home.component/home.component';
+import { LoginComponent } from './unsecure-app/components/login.component/login.component';
 import { LoginRoutingModule } from './unsecure-app/login-routing.module';
 
 import { UserService } from './common/services/user.service';

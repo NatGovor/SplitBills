@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Friend } from '../../../common/models/friend';
+import { Friend } from '../../../../common/models/friend';
 
-import { HelpersService } from '../../../common/services/helpers.service';
-import { FriendService } from '../services/friend.service';
+import { HelpersService } from '../../../../common/services/helpers.service';
+import { FriendService } from '../../services/friend.service';
 
 @Component({
-    templateUrl: './friends.component.html'
+    templateUrl: './friends.component.html',
+    styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
     friends: Friend[];
