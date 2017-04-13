@@ -1,7 +1,11 @@
 export class Friend {
-    constructor(
-        public name: string,
-        public userId: number,
-        public email?: string
-    ) {}
+    name: string;
+    userId: number;
+    email: string;
+
+    constructor(name: string, userId: number, email?: string) {
+        this.name = name;
+        this.userId = userId;
+        this.email = email;
+    }
 }

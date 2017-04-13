@@ -1,5 +1,11 @@
 import { Friend } from './friend';
 
 export class Balance {
-    constructor(public friend: Friend, public amount: number) {}
+    friend: Friend;
+    amount: number;
+
+    constructor(friend: Friend, amount: number) {
+        this.friend = friend;
+        this.amount = amount;
+    }
 }

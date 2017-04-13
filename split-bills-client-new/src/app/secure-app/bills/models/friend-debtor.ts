@@ -1,8 +1,13 @@
 export class FriendDebtor {
-    constructor(
-        public userId: number,
-        public name: string,
-        public isActive: boolean,
-        public amount: number
-    ) {}
+    userId: number;
+    name: string;
+    isActive: boolean;
+    amount: number;
+
+    constructor(userId: number, name: string, isActive: boolean, amount: number) {
+        this.userId = userId;
+        this.name = name;
+        this.isActive = isActive;
+        this.amount = amount;
+    }
 }

@@ -1,6 +1,9 @@
 export class Debtor {
-    constructor(
-        public userId: number,
-        public amount: number
-    ) {}
+    userId: number;
+    amount: number;
+
+    constructor(userId: number, amount: number) {
+        this.userId = userId;
+        this.amount = amount;
+    }
 }
