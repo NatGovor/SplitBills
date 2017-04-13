@@ -19,6 +19,7 @@ import { BillsRefreshInteraction } from '../../../services/bills-refresh-interac
 })
 export class BillsComponent implements OnInit, OnDestroy {
     @Input() group: Group;
+    enumSplitType = SplitType;
 
     friendsNames = {};
 

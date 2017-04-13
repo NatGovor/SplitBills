@@ -31,11 +31,12 @@ import { BillService } from '../../services/bill.service';
 })
 export class NewBillComponent implements OnInit {
     submitted = false;
-    model = new Bill(0, '', null, 0, 0, 0, []);
+    model = new Bill(0, '', null, 0, 0, SplitType.Equal, []);
     splitTypes: SplitType[] = [SplitType.Equal, SplitType.ExactAmounts, SplitType.Percentage];
     friends: Friend[] = [];
     friendDebtors: FriendDebtor[] = [];
     showSplitOptions = false;
+    enumSplitType = SplitType;
     // values for unequal splitting
     total = 0;
     left = 0;
@@ -121,13 +122,13 @@ export class NewBillComponent implements OnInit {
         }
 
         this.total = this.friendDebtors.reduce(function (sum, friendDebtor) {
-            return sum + friendDebtor.amount; 
+            return sum + friendDebtor.amount;
         }, 0);
         this.left = this.model.amount - this.total;
     }
 
     changeSplitType(newValue): void {
-        this.model.splitType = newValue;
+        this.model.splitType = +newValue;
         if (this.model.splitType !== SplitType.Equal) {
             this.showSplitOptions = true;
         }
