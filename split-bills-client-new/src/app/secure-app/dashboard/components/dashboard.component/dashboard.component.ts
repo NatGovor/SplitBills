@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
      getGroupForSettleUp(id): void {
          this.groupId = id;
-         this.group = this.unsettledGroups.find((group) => group.id == this.groupId);
+         this.group = this.unsettledGroups.find((group) => group.id === this.groupId);
      }
 
      ngOnDestroy(): void {

@@ -11,7 +11,7 @@
         <div>
             <label>Group Members</label>
             <div *ngFor="let friend of model.friends; let i = index" class="form-group">
-                <div *ngIf="i == 0" class="form-group">{{ friend.name }}</div>
+                <div *ngIf="i === 0" class="form-group">{{ friend.name }}</div>
                 <div *ngIf="i > 0" class="row">
                     <div class="col-xs-6">
                         <input type="text" class="form-control" placeholder="Friend name"

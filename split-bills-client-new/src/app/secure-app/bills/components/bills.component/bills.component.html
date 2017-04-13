@@ -15,7 +15,7 @@
             <div [ngClass]="addClass(bill.paidBy)">
                 <strong *ngIf="getLentAmount(bill) !== 0">{{ getLentAmount(bill) | currency:'USD':true:'1.2-2' }}</strong>
             </div>
-            <div class="sub-info" *ngIf="getLentAmount(bill) == 0">not involved</div>
+            <div class="sub-info" *ngIf="getLentAmount(bill) === 0">not involved</div>
         </td>
     </tr>
 </table>
