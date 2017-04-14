@@ -30,7 +30,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const id = +params['id'];
-            this.groupService.getGroup(id).then((group) => this.group = group);
+            this.groupService.get(id).then((group) => this.group = group);
         });
     }
 

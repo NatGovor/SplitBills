@@ -23,7 +23,7 @@ export class EditFriendComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const id = +params['id'];
-            this.userService.getUser(id).then((user) => this.friend = new Friend(user.name, user.id, user.email));
+            this.userService.get(id).then((user) => this.friend = new Friend(user.name, user.id, user.email));
         });
     }
 

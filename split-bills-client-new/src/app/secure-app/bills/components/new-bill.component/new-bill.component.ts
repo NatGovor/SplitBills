@@ -55,7 +55,7 @@ export class NewBillComponent implements OnInit {
             this.model.groupId = +params['groupId'];
         });
 
-        this.groupService.getGroup(this.model.groupId)
+        this.groupService.get(this.model.groupId)
             .then((group) => {
                 this.friends = group.friends;
                 this.friendDebtors = this.friends.map((f) => new FriendDebtor(f.userId, f.name, true, 0));

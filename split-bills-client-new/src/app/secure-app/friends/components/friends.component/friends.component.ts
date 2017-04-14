@@ -20,7 +20,7 @@ export class FriendsComponent implements OnInit {
         private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.friendService.getFriends(this.helpers.getUserFromStorage().id)
+        this.friendService.getAllForUser(this.helpers.getUserFromStorage().id)
             .then((friends) => this.friends = friends);
     }
 

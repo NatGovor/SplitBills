@@ -44,7 +44,7 @@ export class GroupBalancesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.groupService.getBalances(this.group.id).then((balances) => {
+        this.groupService.getBalancesForGroup(this.group.id).then((balances) => {
             this.balances = balances;
         });
     }

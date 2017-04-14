@@ -12,7 +12,7 @@ export class BillService {
 
     constructor(private http: Http) { }
 
-    getBills(groupId: number): Promise<Bill[]> {
+    getAllForGroup(groupId: number): Promise<Bill[]> {
         return this.http.get(this.billsUrl)
                     .toPromise()
                     .then((response) => response.json().data as Bill[])

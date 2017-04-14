@@ -43,7 +43,7 @@ export class BillsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.billService.getBills(this.group.id)
+        this.billService.getAllForGroup(this.group.id)
             .then((bills) => this.bills = bills);
 
         this.group.friends.forEach((friend) => {

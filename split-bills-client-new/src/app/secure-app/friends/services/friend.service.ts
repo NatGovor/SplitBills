@@ -18,7 +18,7 @@ export class FriendService {
 
     constructor(private http: Http, private userService: UserService) { }
 
-    getFriends(userId: number): Promise<Friend[]> {
+    getAllForUser(userId: number): Promise<Friend[]> {
         return this.http.get(this.usersUrl)
                     .toPromise()
                     .then((response) => response.json().data as User[])
@@ -27,19 +27,19 @@ export class FriendService {
                     .catch(this.handleError);
     }
 
-    search(userId: number, term: string): Observable<Friend[]> {
+    searchForUser(userId: number, term: string): Observable<Friend[]> {
         return this.http
                     .get(this.usersUrl + `/?name=${term}`)
                     .map((response) => response.json().data.filter((f) => f.id !== userId) as Friend[]);
     }
 
-    addFriends(userId: number, potentialFriends: Friend[]): Promise<User> {
-        return Promise.resolve(this.getFriends(userId)
+    createForUser(userId: number, potentialFriends: Friend[]): Promise<User> {
+        return Promise.resolve(this.getAllForUser(userId)
             .then((friends) => {
                 const userFriendsIds = friends.map((f) => f.userId);
                 return potentialFriends.filter((friend) => userId !== friend.userId && !userFriendsIds.includes(friend.userId));
             })
-            .then((newFriends) => this.userService.getUser(userId)
+            .then((newFriends) => this.userService.get(userId)
                 .then((user) => {
                     user.friends = user.friends.concat(newFriends);
                     return this.userService.update(user);

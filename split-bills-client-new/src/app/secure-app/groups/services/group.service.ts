@@ -23,15 +23,15 @@ export class GroupService {
         private friendService: FriendService,
         private billService: BillService) { }
 
-    getGroups(): Promise<Group[]> {
+    getAll(): Promise<Group[]> {
         return this.http.get(this.groupsUrl)
                     .toPromise()
                     .then((response) => response.json().data as Group[])
                     .catch(this.handleError);
     }
 
-    getUserGroups(userId: number): Promise<Group[]> {
-        return this.getGroups().then((groups) => groups.filter(
+    getForUser(userId: number): Promise<Group[]> {
+        return this.getAll().then((groups) => groups.filter(
                     (group) => {
                         for (let i = 0; i < group.friends.length; i++) {
                             if (group.friends[i].userId === userId) {
@@ -41,8 +41,8 @@ export class GroupService {
                     }));
     }
 
-    getGroup(id: number): Promise<Group> {
-        return this.getGroups()
+    get(id: number): Promise<Group> {
+        return this.getAll()
             .then((groups) => groups.find((group) => group.id === id));
     }
 
@@ -65,7 +65,7 @@ export class GroupService {
 
         return Promise.all(group.friends.map(createUserFromFriend))
             .then((friends) => {
-                group.friends.forEach((friend) => this.friendService.addFriends(friend.userId, group.friends));
+                group.friends.forEach((friend) => this.friendService.createForUser(friend.userId, group.friends));
             })
             .then(() => {
                 return this.http
@@ -78,15 +78,15 @@ export class GroupService {
             });
     }
 
-    getBalances(groupId: number): Promise<Balance[]> {
+    getBalancesForGroup(groupId: number): Promise<Balance[]> {
         const balances: Balance[] = [];
-        Promise.resolve(this.getGroup(groupId).then((group) => {
+        Promise.resolve(this.get(groupId).then((group) => {
             group.friends.forEach((friend) => {
                 balances.push(new Balance(friend, 0));
             });
         }));
 
-        return this.billService.getBills(groupId)
+        return this.billService.getAllForGroup(groupId)
             .then((bills) => {
                 balances.forEach((balance) => {
                     let sum = 0;

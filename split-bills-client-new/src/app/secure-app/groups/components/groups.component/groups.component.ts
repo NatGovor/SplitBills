@@ -20,7 +20,7 @@ export class GroupsComponent implements OnInit {
         private helpers: HelpersService) {}
 
     ngOnInit(): void {
-        this.groupService.getUserGroups(this.helpers.getUserFromStorage().id)
+        this.groupService.getForUser(this.helpers.getUserFromStorage().id)
             .then((groups) => this.groups = groups);
     }
 

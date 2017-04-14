@@ -27,7 +27,7 @@ export class DashboardService {
         const unsettledGroups: Group[] = [];
 
         const getBillsOfUnsettledGroups = (group: Group): Promise<Bill[]> => {
-             return Promise.resolve(self.groupService.getBalances(group.id)
+             return Promise.resolve(self.groupService.getBalancesForGroup(group.id)
                 .then((balances) => {
                     const userBalance = balances.find((value, index, arr) => {
                         if (value.friend.userId === userId) {
@@ -37,19 +37,19 @@ export class DashboardService {
 
                     if (userBalance.amount !== 0) {
                         unsettledGroups.push(group);
-                        return Promise.resolve(self.billService.getBills(group.id));
+                        return Promise.resolve(self.billService.getAllForGroup(group.id));
                     }
                 }));
          };
 
-        return this.friendService.getFriends(userId)
+        return this.friendService.getAllForUser(userId)
             .then((friends) => {
                 // create dictionary of friends names for quick access by userId
                 friends.forEach((friend) => {
                     friendsNames[friend.userId] = friend.name;
                 });
 
-                return this.groupService.getUserGroups(userId)
+                return this.groupService.getForUser(userId)
                     .then((groups) => {
                         return Promise.all(groups.map(getBillsOfUnsettledGroups))
                             .then((groupBills) => {

@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
         private helpers: HelpersService) {}
 
     ngOnInit(): void {
-        this.userService.getUser(this.helpers.getUserFromStorage().id)
+        this.userService.get(this.helpers.getUserFromStorage().id)
             .then((user) => this.user = user);
     }
 }

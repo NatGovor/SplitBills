@@ -44,7 +44,7 @@ export class SettleUpComponent implements OnInit, OnChanges {
         this.model.paidBy = this.currentUser.id;
         this.creditor = this.group.friends.find((f) => f.userId !== this.currentUser.id).userId;
 
-        this.billService.getBills(groupId)
+        this.billService.getAllForGroup(groupId)
             .then((bills) => {
                 bills.forEach((bill) => {
                     bill.debtors.forEach((debtor) => {

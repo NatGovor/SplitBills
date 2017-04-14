@@ -12,20 +12,20 @@ export class UserService {
 
     constructor(private http: Http) { }
 
-    getUsers(): Promise<User[]> {
+    getAll(): Promise<User[]> {
         return this.http.get(this.usersUrl)
                     .toPromise()
                     .then((response) => response.json().data as User[])
                     .catch(this.handleError);
     }
 
-    getUser(id: number): Promise<User> {
-        return this.getUsers()
+    get(id: number): Promise<User> {
+        return this.getAll()
                     .then((users) => users.find((user) => user.id === id));
     }
 
-    getUserByEmail(email: string): Promise<User> {
-        return this.getUsers()
+    getByEmail(email: string): Promise<User> {
+        return this.getAll()
                     .then((users) => users.find((user) => user.email === email));
     }
 

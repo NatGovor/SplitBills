@@ -73,7 +73,7 @@ export class NewGroupComponent implements OnInit {
             .distinctUntilChanged()
             .switchMap((term) => {
                 return term
-                ? this.friendService.search(this.owner.id, term)
+                ? this.friendService.searchForUser(this.owner.id, term)
                 : Observable.of<Friend[]>([]);
             })
             .catch((error) => {

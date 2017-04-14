@@ -17,7 +17,7 @@ export class AuthService {
     }
 
     login(email: string, password: string): Promise<boolean> {
-        return this.userService.getUsers()
+        return this.userService.getAll()
             .then((users) => users.find((user) => user.email === email && user.password === password))
             .then((user) => {
                 if (user) {
