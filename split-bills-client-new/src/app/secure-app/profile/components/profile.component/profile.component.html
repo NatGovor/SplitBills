@@ -1,12 +1,12 @@
 <h2>Profile</h2>
 <div *ngIf="user">
-    <div>
-        <span>id: </span>{{user.id}}
+    <div class="id">
+        <span>id: </span><span class="value">{{user.id}}</span>
     </div>
-    <div>
-        <span>name: </span>{{user.name}}
+    <div class="name">
+        <span>name: </span><span class="value">{{user.name}}</span>
     </div>
-    <div>
-        <span>email: </span>{{user.email}}
+    <div class="email">
+        <span>email: </span><span class="value">{{user.email}}</span>
     </div>
 </div>
