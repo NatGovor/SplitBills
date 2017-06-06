@@ -1,11 +1,12 @@
-import { async, fakeAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { async, fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ProfileComponent } from './profile.component';
 import { HelpersService } from '../../../../common/services/helpers.service';
 
-import { FakeUserService, USERS, User, UserService } from '../../../../common/services/testing/fake-user.service';
+import { FakeUserService, User, UserService } from '../../../../common/services/testing/fake-user.service';
+import { USERS } from '../../../../common/services/testing/fake-users';
 
 const firstUser = USERS[0];
 class HelpersStub {

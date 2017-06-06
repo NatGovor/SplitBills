@@ -1,17 +1,12 @@
-
 export { User } from '../../models/user';
+export { Friend } from '../../models/friend';
 export { UserService } from '../user.service';
 
 import { User } from '../../models/user';
+import { Friend } from '../../models/friend';
 import { UserService } from '../user.service';
 
-export let USERS: User[] = [
-    new User(11, 'Nata', 'nata@test.com', 'testpwd1', true, []),
-    new User(12, 'Alex', 'alex@test.com', 'testpwd1', true, []),
-    new User(13, 'Test', 'test@test.com', 'testpwd1', true, []),
-    new User(14, 'Bob', 'bob@test.com', 'testpwd1', true, []),
-    new User(15, 'Chris', 'chris@test.com', 'testpwd1', true, [])
-];
+import { USERS } from './fake-users';
 
 export class FakeUserService {
     users = USERS.map(u => {
