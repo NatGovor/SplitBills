@@ -1,5 +1,5 @@
-import { User } from '../../models/user';
-import { Friend } from '../../models/friend';
+import { User } from '../../common/models/user';
+import { Friend } from '../../common/models/friend';
 
 export let USERS: User[] = [
     new User(11, 'Nata', 'nata@test.com', 'testpwd1', true, [
@@ -15,5 +15,5 @@ export let USERS: User[] = [
         new Friend('Nata', 11, 'nata@test.com')
     ]),
     new User(15, 'Chris', 'chris@test.com', 'testpwd1', true, []),
-    new User(16, 'Test', '', '', false, [])
+    new User(16, 'Unreal', '', '', false, [])
 ];

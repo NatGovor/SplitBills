@@ -1,12 +1,13 @@
-export { User } from '../../models/user';
-export { Friend } from '../../models/friend';
-export { UserService } from '../user.service';
+export { User } from '../../common/models/user';
+export { Friend } from '../../common/models/friend';
+export { UserService } from '../../common/services/user.service';
+export { USERS } from '../fake-data/fake-users';
 
-import { User } from '../../models/user';
-import { Friend } from '../../models/friend';
-import { UserService } from '../user.service';
+import { User } from '../../common/models/user';
+import { Friend } from '../../common/models/friend';
+import { UserService } from '../../common/services/user.service';
 
-import { USERS } from './fake-users';
+import { USERS } from '../fake-data/fake-users';
 
 export class FakeUserService {
     users = USERS.map(u => {

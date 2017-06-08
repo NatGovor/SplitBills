@@ -5,20 +5,19 @@ import { DebugElement } from '@angular/core';
 import { ProfileComponent } from './profile.component';
 import { HelpersService } from '../../../../common/services/helpers.service';
 
-import { FakeUserService, User, UserService } from '../../../../common/services/testing/fake-user.service';
-import { USERS } from '../../../../common/services/testing/fake-users';
-
-const firstUser = USERS[0];
-class HelpersStub {
-    getUserFromStorage() {
-        return firstUser;
-    }
-}
-
-let comp: ProfileComponent;
-let fixture: ComponentFixture<ProfileComponent>;
+import { FakeUserService, User, UserService, USERS } from '../../../../testing/fake-services/fake-user.service';
 
 describe('Profile Component', () => {
+    const firstUser = USERS[0];
+    class HelpersStub {
+        getUserFromStorage() {
+            return firstUser;
+        }
+    }
+
+    let comp: ProfileComponent;
+    let fixture: ComponentFixture<ProfileComponent>;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ ProfileComponent ],
@@ -27,11 +26,13 @@ describe('Profile Component', () => {
                 { provide: UserService, useClass: FakeUserService }
             ]
         })
-        .compileComponents().then(() => {
-            fixture = TestBed.createComponent(ProfileComponent);
-            comp = fixture.componentInstance;
-        });
+        .compileComponents();
     }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ProfileComponent);
+        comp = fixture.componentInstance;
+    });
 
     it('should have h2 title "Profile"', () => {
         const h2 = fixture.debugElement.query(By.css('h2')).nativeElement;

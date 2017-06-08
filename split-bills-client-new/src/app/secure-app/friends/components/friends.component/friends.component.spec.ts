@@ -10,21 +10,21 @@ import { FriendService } from '../../services/friend.service';
 import { HelpersService } from '../../../../common/services/helpers.service';
 import { User } from '../../../../common/models/user';
 
-import { USERS } from '../../../../common/services/testing/fake-users';
-import { FakeFriendService } from '../../services/testing/fake-friend.service';
-
-const firstUser = USERS[0];
-class HelpersStub {
-    getUserFromStorage() {
-        return firstUser;
-    }
-}
-
-let activatedRoute: ActivatedRouteStub;
-let comp: FriendsComponent;
-let fixture: ComponentFixture<FriendsComponent>;
+import { USERS } from '../../../../testing/fake-data/fake-users';
+import { FakeFriendService } from '../../../../testing/fake-services/fake-friend.service';
 
 describe('Friends Component', () => {
+    const firstUser = USERS[0];
+    class HelpersStub {
+        getUserFromStorage() {
+            return firstUser;
+        }
+    }
+
+    let activatedRoute: ActivatedRouteStub;
+    let comp: FriendsComponent;
+    let fixture: ComponentFixture<FriendsComponent>;
+
     let expectedUser: User;
 
     beforeEach(() => {
@@ -44,11 +44,11 @@ describe('Friends Component', () => {
         .compileComponents();
     }));
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         expectedUser = firstUser;
         fixture = TestBed.createComponent(FriendsComponent);
         comp = fixture.componentInstance;
-    }));
+    });
 
     beforeEach(async(() => {
         fixture.detectChanges();

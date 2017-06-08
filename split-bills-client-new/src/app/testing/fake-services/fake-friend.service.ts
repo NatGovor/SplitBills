@@ -1,6 +1,6 @@
-import { User } from '../../../../common/models/user';
-import { Friend } from '../../../../common/models/friend';
-import { USERS } from '../../../../common/services/testing/fake-users';
+import { User } from '../../common/models/user';
+import { Friend } from '../../common/models/friend';
+import { USERS } from '../fake-data/fake-users';
 
 export class FakeFriendService {
     users = USERS.map(u => {
