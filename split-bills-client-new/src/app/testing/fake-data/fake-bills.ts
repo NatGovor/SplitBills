@@ -14,12 +14,12 @@ export let BILLS: Bill[] = [
         new Debtor(12, 27),
         new Debtor(16, 28)
     ]),
-    new Bill(3, 'Museum', 15, 21, 16, SplitType.Equal, [
+    new Bill(3, 'Museum 1', 15, 21, 16, SplitType.Equal, [
         new Debtor(11, 5),
         new Debtor(12, 5),
         new Debtor(16, 5)
     ]),
-    new Bill(4, 'Museum', 20, 21, 12, SplitType.Equal, [
+    new Bill(4, 'Museum 2', 20, 21, 12, SplitType.ExactAmounts, [
         new Debtor(11, 0),
         new Debtor(12, 10),
         new Debtor(16, 10)
@@ -30,7 +30,6 @@ export let BILLS: Bill[] = [
         new Debtor(12, 25)
     ]),
     new Bill(6, 'Payment', 75, 22, 11, SplitType.Payment, [
-        new Debtor(11, 0),
         new Debtor(12, 25)
     ])
 ];

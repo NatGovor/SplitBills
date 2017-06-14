@@ -62,7 +62,7 @@ describe('Friends Component', () => {
         expect(friends.length).toBe(3);
     });
 
-    it('should tell ROUTER to navigate when friend clicked',
+    it('should tell ROUTER to navigate when friend is clicked',
         inject([Router], (router: Router) => {
             const spy = spyOn(router, 'navigate');
 
