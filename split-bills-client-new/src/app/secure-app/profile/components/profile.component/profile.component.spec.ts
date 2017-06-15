@@ -6,18 +6,14 @@ import { ProfileComponent } from './profile.component';
 import { HelpersService } from '../../../../common/services/helpers.service';
 
 import { FakeUserService, User, UserService, USERS } from '../../../../testing/fake-services/fake-user.service';
+import { HelpersStub } from '../../../../testing/fake-services/helpers-stub.service';
+
+const firstUser = USERS[0];
+
+let comp: ProfileComponent;
+let fixture: ComponentFixture<ProfileComponent>;
 
 describe('Profile Component', () => {
-    const firstUser = USERS[0];
-    class HelpersStub {
-        getUserFromStorage() {
-            return firstUser;
-        }
-    }
-
-    let comp: ProfileComponent;
-    let fixture: ComponentFixture<ProfileComponent>;
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ ProfileComponent ],

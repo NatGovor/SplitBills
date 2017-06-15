@@ -6,8 +6,8 @@ import { DebugElement } from '@angular/core';
 import { click } from '../../../../../testing';
 import { ActivatedRoute, ActivatedRouteStub, Router, RouterStub } from '../../../../../testing';
 import { Bill, BILLS, FakeBillService } from '../../../../testing/fake-services/fake-bill.service';
-import { USERS } from '../../../../testing/fake-data/fake-users';
 import { GROUPS } from '../../../../testing/fake-data/fake-groups';
+import { HelpersStub } from '../../../../testing/fake-services/helpers-stub.service';
 
 import { BillsComponent } from './bills.component';
 import { BillService } from '../../services/bill.service';
@@ -18,26 +18,19 @@ import { HelpersService } from '../../../../common/services/helpers.service';
 import { BillsRefreshInteraction } from '../../../services/bills-refresh-interaction.service';
 import { Subject } from 'rxjs/Subject';
 
+let comp: BillsComponent;
+let fixture: ComponentFixture<BillsComponent>;
+let activatedRoute: ActivatedRouteStub;
+
+const expectedGroup = GROUPS[0];
+
+class BillsRefreshInteractionStub {
+    private billRefreshedSource = new Subject<Bill>();
+
+    billRefreshed$ = this.billRefreshedSource.asObservable();
+}
+
 describe('BillsComponent', () => {
-    let comp: BillsComponent;
-    let fixture: ComponentFixture<BillsComponent>;
-    let activatedRoute: ActivatedRouteStub;
-
-    const expectedGroup = GROUPS[0];
-
-    const currentUser = USERS[0];
-    class HelpersStub {
-        getUserFromStorage() {
-            return currentUser;
-        }
-    }
-
-    class BillsRefreshInteractionStub {
-        private billRefreshedSource = new Subject<Bill>();
-
-        billRefreshed$ = this.billRefreshedSource.asObservable();
-    }
-
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
     });
@@ -109,7 +102,7 @@ describe('BillsComponent', () => {
         for (let i = 0; i < comp.bills.length; i++) {
             const paidSubInfo = bills[i].query(By.css('td:nth-child(2) .sub-info'));
             const lentSubInfo = bills[i].query(By.css('td:nth-child(3) .sub-info'));
-            if (comp.bills[i].paidBy === currentUser.id) {
+            if (comp.bills[i].paidBy === comp.currentUser.id) {
                 expect(paidSubInfo.nativeElement.textContent).toBe('you paid');
                 expect(lentSubInfo.nativeElement.textContent).toBe('you lent');
             } else {

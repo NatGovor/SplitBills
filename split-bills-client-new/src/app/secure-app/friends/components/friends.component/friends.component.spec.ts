@@ -12,21 +12,15 @@ import { User } from '../../../../common/models/user';
 
 import { USERS } from '../../../../testing/fake-data/fake-users';
 import { FakeFriendService } from '../../../../testing/fake-services/fake-friend.service';
+import { HelpersStub } from '../../../../testing/fake-services/helpers-stub.service';
+
+let activatedRoute: ActivatedRouteStub;
+let comp: FriendsComponent;
+let fixture: ComponentFixture<FriendsComponent>;
+
+const expectedUser = USERS[0];
 
 describe('Friends Component', () => {
-    const firstUser = USERS[0];
-    class HelpersStub {
-        getUserFromStorage() {
-            return firstUser;
-        }
-    }
-
-    let activatedRoute: ActivatedRouteStub;
-    let comp: FriendsComponent;
-    let fixture: ComponentFixture<FriendsComponent>;
-
-    let expectedUser: User;
-
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
     });
@@ -45,7 +39,6 @@ describe('Friends Component', () => {
     }));
 
     beforeEach(() => {
-        expectedUser = firstUser;
         fixture = TestBed.createComponent(FriendsComponent);
         comp = fixture.componentInstance;
     });
